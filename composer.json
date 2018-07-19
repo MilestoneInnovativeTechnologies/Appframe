@@ -1,0 +1,18 @@
+{
+    "name": "milestoneitnet/appframe",
+    "description": "A laravel package from Milestone Innovative Technologies for creating data management applications",
+    "type": "laravel-package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Milestone Innovative Technologies",
+            "email": "info@milestoneit.net"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Milestone\\Appframe\\": "src/"
+        }
+    }
+}
