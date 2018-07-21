@@ -1,71 +1,49 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Milestone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Login </title>
+    <meta property="og:title" content="Sign In">
+    <meta name="author" content="Milestone Innovative Technologies">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="">
+    <meta name="theme-color" content="#3063A0">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('appframe/css/theme.css') }}">
+
 </head>
 <body>
 <main class="auth">
-    <header id="auth-header" class="auth-header" style="background-image: url(assets/images/illustration/img-1.png);">
-        <h1>
-            <img src="assets/images/brand-inverse.png" alt="" height="72">
-            <span class="sr-only">Sign In</span>
-        </h1>
-        <p> Don't have a account?
-            <a href="auth-signup.html">Create One</a>
-        </p>
+    <header id="auth-header" class="auth-header">
+        <h1>Login</h1>
     </header>
-    <!-- form -->
-    <form class="auth-form">
-        <!-- .form-group -->
+    <form class="auth-form" method="post">
+        @csrf
         <div class="form-group">
             <div class="form-label-group">
-                <input type="text" id="inputUser" class="form-control" placeholder="Username" required="" autofocus="">
-                <label for="inputUser">Username</label>
+                <input type="text" id="inputEmail" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email" name="email" required="" value="{{ old('email','') }}">
+                <label for="inputEmail">Email</label>
+                @if ($errors->has('email')) <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('email') }}</strong></span> @endif
             </div>
         </div>
-        <!-- /.form-group -->
-        <!-- .form-group -->
         <div class="form-group">
             <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required="" value="{{ old('password','') }}">
                 <label for="inputPassword">Password</label>
+                @if ($errors->has('password'))<span class="invalid-feedback" role="alert"><strong>{{ $errors->first('password') }}</strong></span>@endif
             </div>
         </div>
-        <!-- /.form-group -->
-        <!-- .form-group -->
         <div class="form-group">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
         </div>
-        <!-- /.form-group -->
-        <!-- .form-group -->
-        <div class="form-group text-center">
-            <div class="custom-control custom-control-inline custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="remember-me">
-                <label class="custom-control-label" for="remember-me">Keep me sign in</label>
-            </div>
+        <div class="form-check text-center">
+            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+            <label class="form-check-label" for="remember">Remember</label>
         </div>
-        <!-- /.form-group -->
-        <!-- recovery links -->
-        <div class="text-center pt-3">
-            <a href="auth-recovery-username.html" class="link">Forgot Username?</a>
-            <span class="mx-2">·</span>
-            <a href="auth-recovery-password.html" class="link">Forgot Password?</a>
-        </div>
-        <!-- /recovery links -->
     </form>
-    <!-- /.auth-form -->
-    <!-- copyright -->
-    <footer class="auth-footer"> © 2018 All Rights Reserved.
-        <a href="#">Privacy</a> and
-        <a href="#">Terms</a>
-    </footer>
+    <footer class="auth-footer"> © 2018 All Rights Reserved. </footer>
 </main>
-
 </body>
 </html>
