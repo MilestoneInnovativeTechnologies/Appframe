@@ -3,14 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> Login </title>
-    <meta property="og:title" content="Sign In">
+    <title>{{ config('appframe.title') }}</title>
     <meta name="author" content="Milestone Innovative Technologies">
-    <meta property="og:locale" content="en_US">
-    <meta name="description" content="">
-    <meta name="theme-color" content="#3063A0">
+    {!! config('appframe.favicon_url')?'<link rel="shortcut icon" href="' . config("appframe.favicon_url") . '">':'' !!}
+    <meta name="description" content="{{ config('appframe.page_description') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
 
     <link rel="stylesheet" href="{{ asset('appframe/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('appframe/css/theme.css') }}">
@@ -22,10 +19,7 @@
     <header class="app-header">
         <div class="top-bar">
             <div class="top-bar-brand">
-                <a href="{{ route('root') }}">
-                    <!--<img src="assets/images/brand-inverse.png" height="32" alt="">-->
-                    IMAGE
-                </a>
+                <a href="{{ route('root') }}">{!! config('appframe.brand')?'<img src="'.config('appframe.brand').'" height="32" alt="'.config('appframe.brand_text').'">':config('appframe.brand_text') !!}</a>
             </div>
             <div class="top-bar-list">
                 <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
@@ -39,7 +33,6 @@
                 <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
                     <div class="dropdown">
                         <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!--<span class="user-avatar"><img src="assets/images/avatars/profile.jpg" alt=""></span>-->
                             <span class="account-summary pr-lg-4 d-none d-lg-block">
                                 <span class="account-name">{{ request()->user()->name }}</span>
                                 <span class="account-description">Top Role</span>
@@ -69,10 +62,7 @@
         <div class="aside-content">
             <header class="aside-header d-block d-md-none">
                 <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside">
-                    <!--<span class="user-avatar user-avatar-lg"><img src="assets/images/avatars/profile.jpg" alt=""></span>-->
-                    <span class="account-icon">
-                <span class="fa fa-caret-down fa-lg"></span>
-              </span>
+                    <span class="account-icon"><span class="fa fa-caret-down fa-lg"></span></span>
                     <span class="account-summary">
                 <span class="account-name">aside Name</span>
                 <span class="account-description">aside Role</span>
@@ -124,8 +114,12 @@ ul.menu
         </div>
     </main>
 </div>
-
-<script src="{{ asset('appframe/js/app.js') }}"></script>
+<script>
+    window.VuexStoreState = {
+        user:{!! request()->user() !!}
+    }
+</script>
+<script src="{{ asset('appframe/js/app.js') }}?_={{ mt_rand() }}"></script>
 <script src="{{ asset('appframe/js/stacked-menu.min.js') }}"></script>
 <script src="{{ asset('appframe/js/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('appframe/js/main.min.js') }}"></script>

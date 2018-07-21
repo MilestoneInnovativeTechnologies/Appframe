@@ -2,10 +2,11 @@
 
 namespace Milestone\Appframe;
 
-class User extends Model
+use App\User as NativeUser;
+
+class User extends NativeUser
 {
-    protected $guarded = [];
-    protected $table = 'users';
+
     protected $with = ['Groups'];
 
     public function setPasswordAttribute($value){
