@@ -33,24 +33,10 @@
                 <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
                     <div class="dropdown">
                         <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="account-summary pr-lg-4 d-none d-lg-block">
-                                <span class="account-name">{{ request()->user()->name }}</span>
-                                <span class="account-description">Top Role</span>
-                            </span>
+                            <account-summary class="pr-lg-4 d-none d-lg-block"></account-summary>
                         </button>
                         <div class="dropdown-arrow dropdown-arrow-left"></div>
-
-                        <div class="dropdown-menu">
-                            <h6 class="dropdown-header d-none d-md-block d-lg-none"> Beni Arisandi </h6>
-                            <a class="dropdown-item" href="user-profile.html">
-                                <span class="dropdown-icon oi oi-person"></span> Profile</a>
-                            <a class="dropdown-item" href="auth-signin-v1.html">
-                                <span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Help Center</a>
-                            <a class="dropdown-item" href="#">Ask Forum</a>
-                            <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
-                        </div>
+                        <account-options class="dropdown-menu"></account-options>
 
                     </div>
                 </div>
@@ -63,22 +49,10 @@
             <header class="aside-header d-block d-md-none">
                 <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside">
                     <span class="account-icon"><span class="fa fa-caret-down fa-lg"></span></span>
-                    <span class="account-summary">
-                <span class="account-name">aside Name</span>
-                <span class="account-description">aside Role</span>
-              </span>
+                    <account-summary></account-summary>
                 </button>
                 <div id="dropdown-aside" class="dropdown-aside collapse">
-                    <div class="pb-3">
-                        <a class="dropdown-item" href="user-profile.html">
-                            <span class="dropdown-icon oi oi-person"></span> Profile</a>
-                        <a class="dropdown-item" href="auth-signin-v1.html">
-                            <span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Help Center</a>
-                        <a class="dropdown-item" href="#">Ask Forum</a>
-                        <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
-                    </div>
+                    <account-options class="pb-3"></account-options>
                 </div>
             </header>
 
@@ -108,6 +82,7 @@ ul.menu
                     <header class="page-title-bar">
                     </header>
                     <div class="page-section">
+
                     </div>
                 </div>
             </div>
@@ -116,7 +91,8 @@ ul.menu
 </div>
 <script>
     window.VuexStoreState = {
-        user:{!! request()->user() !!}
+        user:{!! request()->user() !!},
+        logout_url:'{!! route('logout') !!}'
     }
 </script>
 <script src="{{ asset('appframe/js/app.js') }}?_={{ mt_rand() }}"></script>

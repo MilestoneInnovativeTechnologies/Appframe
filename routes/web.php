@@ -5,40 +5,35 @@ $namespace = 'Milestone\\Appframe\\Controllers';
 Route::group([
 
     'namespace' => $namespace,
-    'middleware' => 'web'
+    'middleware' => ['web','guest']
 
 ], function(){
 
-    Route::view('setup','Appframe::setup');
+    Route::get('setup','SetupController@index');
     Route::post('setup','SetupController@create');
-    Route::view('login','Appframe::login')->name('login');
-    Route::post('login','LoginController@login');
-    Route::get('logout','LoginController@logout');
-
-});
-
-
-Route::group([
-
-    'namespace' => $namespace,
-    'middleware' => 'web'
-
-], function(){
-
-    Route::view('login','Appframe::login')->name('login');
-    Route::post('login','LoginController@login');
-    Route::get('logout','LoginController@logout');
 
 });
 
 Route::group([
 
     'namespace' => $namespace,
-    'middleware' => 'web'
+    'middleware' => ['web',Milestone\Appframe\Middleware\RedirectIfLogged::class],
 
 ], function(){
 
-    Route::get('logout','LoginController@logout');
+    Route::view('login','Appframe::login')->name('login');
+    Route::post('login','LoginController@login');
+
+});
+
+Route::group([
+
+    'namespace' => $namespace,
+    'middleware' => ['web','auth'],
+
+], function(){
+
+    Route::get('logout','LoginController@logout')->name('logout');
 
 });
 
@@ -50,6 +45,7 @@ Route::group([
 
 ], function(){
 
+    Route::get('init','AppInitController@init')->name('init');
     Route::view('/','Appframe::root')->name('root');
 
 });
