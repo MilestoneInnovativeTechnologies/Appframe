@@ -19,10 +19,10 @@ class CreateResourceActionsTable extends Migration
             $table->string('name', 64)->index();
             $table->string('description', 1024)->nullable();
             $table->string('title', 128)->nullable();
-            $table->string('icon', 128)->nullable();
             $table->enum('type', ['primary','secondary','success','danger','warning','info','light','dark','link','outline-primary','outline-secondary','outline-success','outline-danger','outline-warning','outline-info','outline-light','outline-dark'])->default('outline-info');
-            $table->enum('size', ['md','sm','lg'])->default('md');
-            $table->string('icon_classes', 128)->nullable();
+            $table->string('menu', 128)->nullable();
+            $table->string('icon', 128)->nullable();
+            $table->enum('set', ['far','fas','fab'])->default('far');
             $table->string('on', 256)->nullable();
             $table->string('confirm', 256)->nullable();
             $table->string('handler', 128)->nullable();

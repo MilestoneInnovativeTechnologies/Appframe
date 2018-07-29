@@ -58,16 +58,7 @@
 
             <section class="aside-menu has-scrollable">
                 <nav id="stacked-menu" class="stacked-menu">
-                    <!--
-ul.menu
-	li.menu-header
-	li.menu-item | has-child, has-active, has-open
-		a.menu-link
-			span.menu-icon
-			span.menu-text
-			span.badge
-		ul.menu
-		            -->
+                    <app-navs></app-navs>
                 </nav>
             </section>
 
@@ -80,6 +71,8 @@ ul.menu
             <div class="page">
                 <div class="page-inner">
                     <header class="page-title-bar">
+                        <transition name="breadcrumb"><router-view name="breadcrumb" :key="$route.fullPath"></router-view></transition>
+                        <transition name="pagetitle"><router-view name="pagetitle" :key="$route.fullPath"></router-view></transition>
                     </header>
                     <div class="page-section">
 
@@ -88,12 +81,13 @@ ul.menu
             </div>
         </div>
     </main>
+    <router-view :key="$route.fullPath"></router-view>
 </div>
 <script>
     window.VuexStoreState = {
-        user:{!! request()->user() !!},
-        logout_url:'{!! route('logout') !!}'
-    }
+        data:{!! request()->user() !!},
+        logout_url:'{!! route('logout') !!}',
+    };
 </script>
 <script src="{{ asset('appframe/js/app.js') }}?_={{ mt_rand() }}"></script>
 <script src="{{ asset('appframe/js/stacked-menu.min.js') }}"></script>

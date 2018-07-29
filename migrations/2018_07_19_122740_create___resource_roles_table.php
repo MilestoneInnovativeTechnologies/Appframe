@@ -17,6 +17,8 @@ class CreateResourceRolesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('resource')->index();
             $table->unsignedInteger('role');
+            $table->enum('actions_availability', ['All','Only','Except'])->default('All');
+            $table->string('actions', 1024)->nullable();
             $table->timestamps();
             $table->foreign('resource')->references('id')->on('__resources')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('role')->references('id')->on('__roles')->onUpdate('cascade')->onDelete('cascade');

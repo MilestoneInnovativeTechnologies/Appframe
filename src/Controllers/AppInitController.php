@@ -3,6 +3,7 @@
 namespace Milestone\Appframe\Controllers;
 
 use Illuminate\Http\Request;
+use Milestone\Appframe\ResourceRole;
 use Milestone\Appframe\User;
 
 class AppInitController extends Controller
