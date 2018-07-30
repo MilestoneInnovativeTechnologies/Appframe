@@ -13,4 +13,8 @@ class Resource extends Model
     public function Actions(){
         return $this->hasMany(ResourceAction::class,'resource','id');
     }
+
+    public function Forms(){
+        return $this->hasMany(ResourceForm::class,'resource','id');
+    }
 }
