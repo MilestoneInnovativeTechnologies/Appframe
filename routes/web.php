@@ -28,9 +28,9 @@ Route::group([
         });
         Route::get('init','AppInitController@init')->name('init');
         Route::group([
-
+            'prefix' => 'server'
         ],function(){
-            Route::post('server','ServerController@serve')->name('server');
+            Route::post('/','ServerController@serve')->name('server');
         });
         Route::view('{slug?}','Appframe::root')->where('slug', '(.*)?')->name('root');
     });

@@ -16,6 +16,7 @@
 <body>
 
 <div class="app" id="app">
+    <app-loading></app-loading>
     <header class="app-header">
         <div class="top-bar">
             <div class="top-bar-brand">
@@ -81,7 +82,7 @@
             </div>
         </div>
     </main>
-    <router-view :key="$route.fullPath"></router-view>
+    <router-view :key="$route.fullPath" name="default"></router-view>
 </div>
 <script>
     window.VuexStoreState = {

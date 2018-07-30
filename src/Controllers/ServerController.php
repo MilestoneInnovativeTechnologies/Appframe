@@ -8,10 +8,10 @@ class ServerController extends Controller
 {
 
     public function serve(){
-        return [
+        return request()->merge([
             'controller' => 'ServerController',
             'method' => 'serve',
-        ];
+        ])->all();
     }
 
 }
