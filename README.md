@@ -13,6 +13,7 @@
 <li>... Config</li>
 <li>... Assets</li>
 <li>Change config variables</li>
+<li>Change config > session > encrypt to true</li>
 <li>Run artisan migration</li>
 
 </ol>
