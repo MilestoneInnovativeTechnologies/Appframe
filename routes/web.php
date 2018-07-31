@@ -32,7 +32,10 @@ Route::group([
         ],function(){
             Route::post('/','ServerController@serve')->name('server');
         });
-        Route::post('token','TokenController@fresh');
+        Route::prefix('token')->group(function(){
+            Route::post('fresh','TokenController@fresh');
+            Route::post('next','TokenController@next');
+        });
         Route::view('{slug?}','Appframe::root')->where('slug', '(.*)?')->name('root');
     });
 });

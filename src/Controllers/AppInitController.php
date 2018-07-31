@@ -16,6 +16,7 @@ class AppInitController extends Controller
 
     private function setSessions(){
         $this->setActions();
+        $this->setTokenSalt();
     }
 
     private function setActions(){
@@ -38,5 +39,12 @@ class AppInitController extends Controller
     public function extractMethods($Actions){
         return $Actions->mapWithKeys(function($Value){ return [$Value->id => $Value->Method->only(['type','method','idn1','idn2','idn3','idn4','idn5'])]; });
     }
+
+    public function setTokenSalt(){
+        $token_salt = implode('-',[request()->user()->id,str_random(8),time()]);
+        $token_sqno = random_int(111,333);
+        session(compact('token_salt','token_sqno'));
+    }
+
 
 }
