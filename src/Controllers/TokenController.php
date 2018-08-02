@@ -58,7 +58,7 @@ class TokenController extends Controller
     }
 
     private function getTokenParts($token){
-        $Salt = session('salt'); $eSalt = $this->eSalt($Salt);
+        $Salt = session('token_salt'); $eSalt = $this->eSalt($Salt);
         $Search = "/^(\\" . $this->padString .")*/";
         $bNum = $this->bdN(str_replace($Search,"",str_replace($eSalt,"",$token)));
         return [$eSalt,$bNum];

@@ -76,7 +76,7 @@
                         <transition name="pagetitle"><router-view name="pagetitle" :key="$route.fullPath"></router-view></transition>
                     </header>
                     <div class="page-section">
-
+                        <router-view name="test"></router-view>
                     </div>
                 </div>
             </div>
