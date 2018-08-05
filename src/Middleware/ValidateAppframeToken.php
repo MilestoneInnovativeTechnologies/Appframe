@@ -16,6 +16,6 @@ class ValidateAppframeToken
      */
     public function handle($request, Closure $next)
     {
-        return (TokenController::isValid($request->headers->get('x-appframe-token'))) ? $next($request) : response('Invalid Appframe Token!',401);
+        return ($request->headers->get('x-appframe-token') && TokenController::isValid($request->headers->get('x-appframe-token'))) ? $next($request) : response('Invalid Appframe Token!',401);
     }
 }

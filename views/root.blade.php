@@ -76,7 +76,17 @@
                         <transition name="pagetitle"><router-view name="pagetitle" :key="$route.fullPath"></router-view></transition>
                     </header>
                     <div class="page-section">
+                        <div id="slow_connection_page_loading" style="height: 10rem;">
+                            <style type="text/css">
+                                @-webkit-keyframes load-spinner { 0% {-webkit-transform: rotate(0deg);transform: rotate(0deg)} to {-webkit-transform: rotate(1turn);transform: rotate(1turn)} }
+                                @keyframes load-spinner { 0% {-webkit-transform: rotate(0deg);transform: rotate(0deg)} to {-webkit-transform: rotate(1turn);transform: rotate(1turn)} }
+                            </style>
+                            <div class="loading-container">
+                                <div class="app-loading" style="display: block;z-index: 1030; width: 10rem;height: 10rem;border: 3px solid transparent;border-top-color: #00a28a;border-bottom-color: #00a28a;border-radius: 10rem;-webkit-animation: load-spinner 2s linear infinite;animation: load-spinner 2s linear infinite; margin: auto"></div>
+                            </div>
+                        </div>
                         <router-view name="test"></router-view>
+                        <auth-warning></auth-warning>
                     </div>
                 </div>
             </div>
@@ -88,6 +98,7 @@
     window.VuexStoreState = {
         data:{!! request()->user() !!},
         logout_url:'{!! route('logout') !!}',
+        login_url:'{!! route('login') !!}',
     };
 </script>
 <script src="{{ asset('appframe/js/app.js') }}?_={{ mt_rand() }}"></script>

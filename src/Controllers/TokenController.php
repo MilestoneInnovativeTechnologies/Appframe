@@ -6,11 +6,10 @@ use Illuminate\Http\Request;
 
 class TokenController extends Controller
 {
-    private $Salt = 'IlLeGaL';
     private $delimiter = 3;
     private $padString = '=';
 
-    public function tokenRespond($token){return response("1",200, ['x-appframe-token' => $token]);}
+    public function tokenRespond($token){return response("1",200, ['X-Appframe-Token' => $token]);}
 
     public function fresh(){
         $token = $this->getCreateToken();
