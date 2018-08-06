@@ -5,7 +5,7 @@ namespace Milestone\Appframe\Middleware;
 use Closure;
 use Milestone\Appframe\Controllers\TokenController;
 
-class ValidateAppframeToken
+class RenewAppframeToken
 {
     /**
      * Handle an incoming request.
@@ -16,6 +16,9 @@ class ValidateAppframeToken
      */
     public function handle($request, Closure $next)
     {
-        return ($request->headers->get('x-appframe-token') && TokenController::isValid($request->headers->get('x-appframe-token'))) ? $next($request) : response('Invalid Appframe Token!',400);
+        $token = TokenController::next();
+        $response = $next($request);
+        $response->headers->set('X-Appframe-Token',$token);
+        return $response;
     }
 }

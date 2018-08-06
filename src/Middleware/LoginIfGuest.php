@@ -15,6 +15,10 @@ class LoginIfGuest
      */
     public function handle($request, Closure $next)
     {
-        return ($request->user()) ? $next($request) : redirect()->route('login');
+        return ($request->user())
+            ? $next($request)
+            : (($request->isXmlHttpRequest())
+                ? response('Session Expired, Please login to proceed!',401)
+                : redirect()->route('login'));
     }
 }

@@ -29,7 +29,10 @@ Route::group([
         Route::get('init','AppInitController@init')->name('init');
         Route::group([
             'prefix' => 'server',
-            'middleware' => [Milestone\Appframe\Middleware\ValidateAppframeToken::class],
+            'middleware' => [
+                Milestone\Appframe\Middleware\ValidateAppframeToken::class,
+                Milestone\Appframe\Middleware\RenewAppframeToken::class,
+            ],
         ],function(){
             Route::post('/','ServerController@serve')->name('server');
         });
