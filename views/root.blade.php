@@ -73,7 +73,7 @@
                 <div class="page-inner">
                     <header class="page-title-bar">
                         <transition name="breadcrumb"><router-view name="breadcrumb" :key="$route.fullPath"></router-view></transition>
-                        <transition name="pagetitle"><router-view name="pagetitle" :key="$route.fullPath"></router-view></transition>
+                        <transition name="pagetitle"><app-page-title :key="$store.state.page.title"></app-page-title></transition>
                     </header>
                     <div class="page-section">
                         <div id="slow_connection_page_loading" style="height: 10rem;">
@@ -85,14 +85,13 @@
                                 <div class="app-loading" style="display: block;z-index: 1030; width: 10rem;height: 10rem;border: 3px solid transparent;border-top-color: #00a28a;border-bottom-color: #00a28a;border-radius: 10rem;-webkit-animation: load-spinner 2s linear infinite;animation: load-spinner 2s linear infinite; margin: auto"></div>
                             </div>
                         </div>
-                        <router-view name="test"></router-view>
+                        <transition name="appcontent"><router-view :key="$route.fullPath" name="appcontent"></router-view></transition>
                         <auth-warning></auth-warning>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <router-view :key="$route.fullPath" name="default"></router-view>
 </div>
 <script>
     window.VuexStoreState = {
