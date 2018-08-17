@@ -31,6 +31,9 @@ class ResourceTableSeeder extends Seeder
             ->create([	'name' => 'ResourceFormField', 	'description' => 'Field details for a form', 	'title' => 'Form Fields', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_form_fields', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceFormFieldAttr', 	'description' => 'Additional attributes of a field', 	'title' => 'Field Attributes', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_form_field_attrs', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceFormFieldOption', 	'description' => 'Options for form fields', 	'title' => 'Field Options', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_form_field_options', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceFormFieldValidation', 	'description' => 'Validation details of the field', 	'title' => 'Field Validation', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_form_field_validations', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceFormDefault', 	'description' => 'Predefined field values for a form', 	'title' => 'Form Defaults', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_form_defaults', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceFormFieldData', 	'description' => 'Database bindings of a form field', 	'title' => 'Field Data', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_form_field_data', 	'key' => 'id', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

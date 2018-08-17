@@ -17,7 +17,7 @@ class FormSubmit extends Base
     static $on = [
         'item.type' => 'Form',
         'item.item' =>  '@isNotEmpty',
-        'data' =>  '@isNotEmpty',
+        'item.action' =>  'Submit',
     ];
 
     /*
@@ -30,6 +30,49 @@ class FormSubmit extends Base
      * $this->bag->get(name)
      */
     public function boot(){
-        $this->bag->store('FormSubmit','TEST','OKEY');
+        $Validator = $this->bag->get('Validator');
+        if($Validator === NULL || !$Validator->fails())
+            $this->SubmitForm();
     }
+
+    private function SubmitForm(){
+        $form = $this->bag->r('item.item');
+        $Form = ResourceForm::with('Resource','Defaults','Fields.Data')->find($form);
+        $RelationData = $this->getRelationData($Form);
+        $this->store(InsertRelationData::insert($RelationData));
+    }
+
+    private function store($data){
+        $this->bag->store('Submit','LOOK',$data);
+    }
+
+    private function getRelationData($Form){
+        $Resource = $Form->Resource->id; $Data[$Resource] = [];
+        $Form->Fields->each(function($Field) use($Resource, &$Data) {
+            $key = 'data.' . $Field->name; $value = $this->bag->r($key); $StoreTo = &$Data[$Resource];
+            foreach (['relation','relation1','relation2','relation3'] as $Rel) {
+                if($Field->Data->$Rel) {
+                    $NRelation = $Field->Data->$Rel;
+                    if(!array_key_exists($NRelation,$StoreTo)) $StoreTo[$NRelation] = [];
+                    $StoreTo = &$StoreTo[$NRelation];
+                } else break;
+            }
+            if($Field->Data->attribute) $StoreTo[$Field->Data->attribute] = $value;
+            else $StoreTo[] = $value;
+        });
+        $Form->Defaults->each(function ($Default) use($Resource, &$Data){
+            $value = $Default->value; $StoreTo = &$Data[$Resource];
+            foreach (['relation','relation1','relation2','relation3'] as $Rel) {
+                if($Default->$Rel) {
+                    $NRelation = $Default->$Rel;
+                    if(!array_key_exists($NRelation,$StoreTo)) $StoreTo[$NRelation] = [];
+                    $StoreTo = &$StoreTo[$NRelation];
+                }
+            }
+            if($Default->attribute) $StoreTo[$Default->attribute] = $value;
+            else $StoreTo[] = $value;
+        });
+        return $Data;
+    }
+
 }

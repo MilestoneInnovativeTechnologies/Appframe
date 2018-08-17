@@ -4,7 +4,7 @@ namespace Milestone\Appframe\Engine;
 
 use Milestone\Appframe\ResourceForm;
 
-class Form extends Base
+class GetForm extends Base
 {
     /*
      * This engine will be included once all the conditions
@@ -12,11 +12,12 @@ class Form extends Base
      * The key will be matched against request()->input() to value.
      * If value is plain text, string comparison performs
      * If value starting with @, predefined method check will performs
-     *
+     * If value starting with !, Not Equal comparison performs
      */
     static $on = [
         'item.type' => 'Form',
         'item.item' =>  '@isNotEmpty',
+        'item.action' =>  '!Submit',
     ];
 
     /*
@@ -29,7 +30,18 @@ class Form extends Base
      * $this->bag->get(name)
      */
     public function boot(){
-        $formId = request()->input('item.item');
-        $this->bag->store('Form',$formId,ResourceForm::with(['Fields' => function($Q){ $Q->with(['Attributes','Options']); }])->find($formId));
+        $formId = $this->bag->r('item.item');
+        $form = $this->form($formId); $validations = $this->validations($form)->toArray();
+        $this->bag->push('validation',$formId,$validations);
+        $this->bag->store('Form',$formId,$form);
     }
+
+    private function form($formId){
+        return ResourceForm::with(['Fields' => function($Q){ $Q->with(['Attributes','Options','Validations']); }])->find($formId);
+    }
+
+    private function validations($form){
+        return $form->Fields->mapWithKeys(function($field){ return [$field->name => $field->Validations]; });
+    }
+
 }

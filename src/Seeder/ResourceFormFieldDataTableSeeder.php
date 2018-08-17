@@ -18,7 +18,7 @@ class ResourceFormFieldDataTableSeeder extends Seeder
         \Milestone\Appframe\ResourceFormFieldData::truncate()
             ->create([	'form_field' => '1', 	'attribute' => 'name', 														])
             ->create([	'form_field' => '2', 	'attribute' => 'email', 														])
-            ->create([	'form_field' => '3', 	'attribute' => 'group', 	'relation' => '1', 													])
+            ->create([	'form_field' => '3', 		'relation' => '2', 													])
             ->create([	'form_field' => '4', 	'attribute' => 'name', 														])
             ->create([	'form_field' => '5', 	'attribute' => 'email', 														])
             ->create([	'form_field' => '6', 	'attribute' => 'name', 														])

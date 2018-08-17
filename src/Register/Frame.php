@@ -9,9 +9,10 @@ class Frame
 {
 
     protected $Engines = [];
-    private $SpecialCharacters = ['@'];
+    private $SpecialCharacters = ['@','!'];
     private $SpecialCharacterToMethod = [
-        '@' => 'performPredefinedMethodCheck'
+        '@' => 'performPredefinedMethodCheck',
+        '!' => 'performNotEqualCheck',
     ];
 
     public function __construct(){
@@ -50,6 +51,10 @@ class Frame
 
     private function performPredefinedMethodCheck($method, $data){
         return CM::{$method}($data);
+    }
+
+    private function performNotEqualCheck($method, $data){
+        return $method != $data;
     }
 
 }

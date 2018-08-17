@@ -13,4 +13,12 @@ class ResourceFormField extends Model
     public function Options(){
         return $this->hasOne(ResourceFormFieldOption::class, 'form_field', 'id');
     }
+
+    public function Validations(){
+        return $this->hasMany(ResourceFormFieldValidation::class, 'form_field', 'id');
+    }
+
+    public function Data(){
+        return $this->hasOne(ResourceFormFieldData::class,'form_field','id');
+    }
 }

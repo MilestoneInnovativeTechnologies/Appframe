@@ -10,10 +10,12 @@ class Bag
     private $request = null;
     private $store = [];
     private $keep = [];
+    private $session = null;
 
     public function __construct()
     {
-        $this->setRequest(request()->all());
+        $this->setRequests(request()->all());
+        $this->setSessions();
     }
 
     public function store($item, $key, $data, $merge = false){
@@ -32,8 +34,33 @@ class Bag
         return $this->keep[$item];
     }
 
-    public function setRequest($request){
+    public function setRequests($request){
         $this->request = $request;
+    }
+
+    public function setSessions(){
+        $this->session = session()->all();
+    }
+
+    public function r($key){
+        return array_get($this->request, $key);
+    }
+
+    public function session($key, $value = NULL){
+        return ($value || is_array($key)) ? $this->setSession($key, $value) : array_get($this->session,$key);
+    }
+
+    public function setSession($key, $value = NULL){
+        if(is_array($key)) session($key);
+        else session()->put($key, $value);
+        $this->setSessions();
+        return $value;
+    }
+
+    public function push($key, $id, $data){
+        $session = $this->session($key) ?: [];
+        $session[$id] = $data;
+        return $this->setSession($key,$session);
     }
 
     public function dump(){
