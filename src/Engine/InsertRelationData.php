@@ -10,13 +10,15 @@ class InsertRelationData
 {
     public $Temp = null;
 
-    protected $Resources = [];
+    protected $Resource = [];
+    protected $Model = null;
     protected $Data = [];
     protected $Relations = [];
 
     public function __construct($Data)
     {
         $this->init($Data);
+        $this->Temp = [$this->Resource,$this->Model,$this->Data,$this->Relations];
     }
 
     static function insert($Data){
@@ -25,11 +27,20 @@ class InsertRelationData
     }
 
     private function init($Data){
-        $resources = $this->getResources($Data);
-        $this->fetchResources($resources);
+        $this->fetchResource($Data);
+        $this->setModel();
         $this->extractData($Data);
         $this->extractRelations($Data);
-        $this->Temp = $this->Data;
+    }
+
+    private function fetchResource($Data){
+        $this->Resource = Resource::find(array_keys($Data)[0]);
+    }
+
+    private function setModel(){
+        $resource = $this->Resource;
+        $class = implode("\\",[$resource->namespace,$resource->name]);
+        $this->Model = new $class;
     }
 
     private function getResources($Data){

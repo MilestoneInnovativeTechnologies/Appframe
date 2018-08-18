@@ -95,7 +95,7 @@
 </div>
 <script>
     window.VuexStoreState = {
-        data:{!! request()->user() !!},
+        data:{!! request()->user()->load('Groups.Roles.Resources') !!},
         logout_url:'{!! route('logout') !!}',
         login_url:'{!! route('login') !!}',
     };

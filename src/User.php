@@ -7,8 +7,6 @@ use App\User as NativeUser;
 class User extends NativeUser
 {
 
-    protected $with = ['Groups.Roles.Resources'];
-
     public function setPasswordAttribute($value){
         $this->attributes['password'] = \Hash::make($value);
     }
