@@ -1,50 +1,39 @@
 <?php
 
-namespace Milestone\Appframe\Engine;
-
+namespace Milestone\Appframe\Engine\Database;
 
 use Milestone\Appframe\Resource;
 use Milestone\Appframe\ResourceRelation;
 
-class InsertRelationData
+class DatabaseBind
 {
-    public $Temp = null;
-
-    protected $Resource = [];
+    protected $DataInit = null;
+    protected $Resources = [];
     protected $Model = null;
     protected $Data = [];
     protected $Relations = [];
 
-    public function __construct($Data)
+    public function __construct($Data,$DataId = null)
     {
         $this->init($Data);
-        $this->Temp = [$this->Resource,$this->Model,$this->Data,$this->Relations];
-    }
-
-    static function insert($Data){
-        $Class = new self($Data);
-        return $Class->Temp;
+        $this->setModel($DataId);
     }
 
     private function init($Data){
-        $this->fetchResource($Data);
-        $this->setModel();
+        $this->fetchResources($Data);
         $this->extractData($Data);
         $this->extractRelations($Data);
     }
 
-    private function fetchResource($Data){
-        $this->Resource = Resource::find(array_keys($Data)[0]);
+    private function fetchResources($Data){
+        $this->DataInit = array_keys($Data)[0];
+        $resIds = $this->getIntKeys($Data);
+        $this->Resources = Resource::find($resIds)->keyBy('id');
     }
 
-    private function setModel(){
-        $resource = $this->Resource;
-        $class = implode("\\",[$resource->namespace,$resource->name]);
-        $this->Model = new $class;
-    }
-
-    private function getResources($Data){
-        return $this->getIntKeys($Data);
+    private function setModel($id){
+        $class = $this->getResModelClass($this->DataInit);
+        $this->Model = ($id) ? (new $class)->find($id) : new $class;
     }
 
     private function getIntKeys($Array){
@@ -56,10 +45,6 @@ class InsertRelationData
             }
         }
         return $Keys;
-    }
-
-    private function fetchResources($resources){
-        $this->Resources = Resource::find($resources)->keyBy('id');
     }
 
     private function extractData($Data){
@@ -100,4 +85,8 @@ class InsertRelationData
         return ['method' => $Data->method,'type' => $Data->type];
     }
 
+    protected function getResModelClass($id){
+        $resource = $this->Resources[$id];
+        return implode("\\",[$resource->namespace,$resource->name]);
+    }
 }

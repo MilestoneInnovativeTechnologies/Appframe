@@ -8,6 +8,6 @@ class Engine
         \Milestone\Appframe\Engine\GetForm::class,
         \Milestone\Appframe\Engine\ValidateFormSubmit::class,
         \Milestone\Appframe\Engine\FormSubmit::class,
-        \Milestone\Appframe\Engine\dList::class,
+        \Milestone\Appframe\Engine\GetList::class,
     ];
 }

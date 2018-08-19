@@ -41,7 +41,7 @@ class ValidateFormSubmit extends Base
     }
 
     private function isValidationExists($formId){
-        $Validation = $this->bag->session('validation');
+        $Validation = $this->bag->session('Validation');
         return ($Validation && array_key_exists($formId,$Validation));
     }
 
@@ -53,7 +53,7 @@ class ValidateFormSubmit extends Base
     }
 
     private function getValidationData($formId){
-        return $this->bag->session('validation')[$formId];
+        return $this->bag->session('Validation')[$formId];
     }
 
     private function getValidationRules($ValidateData){

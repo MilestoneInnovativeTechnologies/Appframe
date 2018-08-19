@@ -24,6 +24,10 @@ class ResourceFormFieldValidationTableSeeder extends Seeder
             ->create([	'form_field' => '7', 	'rule' => 'required', 	'message' => 'User email is mandarory', 													])
             ->create([	'form_field' => '7', 	'rule' => 'email', 	'message' => 'Email should be a valid email address', 													])
             ->create([	'form_field' => '7', 	'rule' => 'unique', 	'message' => 'This email is already taken, please choose a unique one', 	'arg1' => 'users', 	'arg2' => 'email', 											])
+            ->create([	'form_field' => '32', 	'rule' => 'required', 	'message' => 'Password cannot be empty', 													])
+            ->create([	'form_field' => '32', 	'rule' => 'min', 	'message' => 'Password length must be minimum of 3', 	'arg1' => '3', 												])
+            ->create([	'form_field' => '33', 	'rule' => 'required', 	'message' => 'Password cannot be empty', 													])
+            ->create([	'form_field' => '33', 	'rule' => 'min', 	'message' => 'Password length must be minimum of 3', 	'arg1' => '3', 												])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

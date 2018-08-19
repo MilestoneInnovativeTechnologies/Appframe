@@ -34,6 +34,10 @@ class ResourceTableSeeder extends Seeder
             ->create([	'name' => 'ResourceFormFieldValidation', 	'description' => 'Validation details of the field', 	'title' => 'Field Validation', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_form_field_validations', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceFormDefault', 	'description' => 'Predefined field values for a form', 	'title' => 'Form Defaults', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_form_defaults', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceFormFieldData', 	'description' => 'Database bindings of a form field', 	'title' => 'Field Data', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_form_field_data', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceList', 	'description' => 'List of data', 	'title' => 'Lists', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_lists', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceListRelation', 	'description' => 'Relations to be loaded on accessing list', 	'title' => 'List Relations', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_list_relations', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceScope', 	'description' => 'Scope to be applied on resource', 	'title' => 'Resource Scopes', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_scopes', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceListScope', 	'description' => 'Scope to be applied on list', 	'title' => 'List Scopes', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_list_scopes', 	'key' => 'id', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

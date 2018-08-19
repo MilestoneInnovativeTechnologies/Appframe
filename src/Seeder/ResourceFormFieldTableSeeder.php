@@ -44,9 +44,11 @@ class ResourceFormFieldTableSeeder extends Seeder
             ->create([	'resource_form' => '7', 	'name' => 'address_line2', 	'type' => 'textarea', 	'label' => 'Address Line 2', 												])
             ->create([	'resource_form' => '7', 	'name' => 'address_short', 	'type' => 'textarea', 	'label' => 'Short Address', 												])
             ->create([	'resource_form' => '7', 	'name' => 'address_long', 	'type' => 'textarea', 	'label' => 'Long Address', 												])
-            ->create([	'resource_form' => '7', 	'name' => 'type', 	'type' => 'select', 	'label' => 'Contact Type', 	'collection' => 'Contacts'											])
-            ->create([	'resource_form' => '7', 	'name' => 'type_name', 	'type' => 'text', 	'label' => 'Type Name', 	'collection' => 'Contacts'											])
-            ->create([	'resource_form' => '7', 	'name' => 'detail', 	'type' => 'textarea', 	'label' => 'Detail', 	'collection' => 'Contacts'											])
+            ->create([	'resource_form' => '7', 	'name' => 'type', 	'type' => 'select', 	'label' => 'Contact Type', 	'collection' => 'Contacts', 											])
+            ->create([	'resource_form' => '7', 	'name' => 'type_name', 	'type' => 'text', 	'label' => 'Type Name', 	'collection' => 'Contacts', 											])
+            ->create([	'resource_form' => '7', 	'name' => 'detail', 	'type' => 'textarea', 	'label' => 'Detail', 	'collection' => 'Contacts', 											])
+            ->create([	'resource_form' => '2', 	'name' => 'password', 	'type' => 'password', 	'label' => 'Password', 												])
+            ->create([	'resource_form' => '3', 	'name' => 'password', 	'type' => 'password', 	'label' => 'Password', 												])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

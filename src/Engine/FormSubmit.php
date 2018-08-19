@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Engine;
 
+use Milestone\Appframe\Engine\Database\BindData;
 use Milestone\Appframe\ResourceForm;
 
 class FormSubmit extends Base
@@ -39,7 +40,10 @@ class FormSubmit extends Base
         $form = $this->bag->r('item.item');
         $Form = ResourceForm::with('Resource','Defaults','Fields.Data')->find($form);
         $RelationData = $this->getRelationData($Form);
-        $this->store(InsertRelationData::insert($RelationData));
+        $Data = (new BindData($RelationData))->push();
+        $id = ($Data && $Data->id) ? $Data->id : '';
+        $this->bag->store('Data',$id,$Data);
+        $this->bag->store('SubmitForm',$form,(bool) $Data);
     }
 
     private function store($data){
@@ -49,6 +53,7 @@ class FormSubmit extends Base
     private function getRelationData($Form){
         $Resource = $Form->Resource->id; $Data[$Resource] = [];
         $Form->Fields->each(function($Field) use($Resource, &$Data) {
+            if(!$Field->Data) return;
             $key = 'data.' . $Field->name; $value = $this->bag->r($key); $StoreTo = &$Data[$Resource];
             foreach (['relation','relation1','relation2','relation3'] as $Rel) {
                 if($Field->Data->$Rel) {
@@ -74,5 +79,4 @@ class FormSubmit extends Base
         });
         return $Data;
     }
-
 }

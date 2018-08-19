@@ -1,7 +1,7 @@
 **App Frame**
 **Supported Fields**
 <ol>
-<li>Text, Email, Number</li>
+<li>Text, Email, Number, Password</li>
 <li>Textarea</li>
 <li>File</li>
 <li>Select</li>

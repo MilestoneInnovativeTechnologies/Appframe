@@ -39,6 +39,10 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'resource' => '4', 	'name' => 'Resource Relations', 	'description' => 'Relation of  a resource to another resource', 	'method' => 'Relations', 	'type' => 'belongsToMany', 	'relate_resource' => '4', 										])
             ->create([	'resource' => '18', 	'name' => 'Bind Data Resource', 	'description' => 'Resource to which the data to be bind', 	'method' => 'Relation', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
             ->create([	'resource' => '17', 	'name' => 'Default Data Resource', 	'description' => 'Resource to which the forms predefined data to be bind', 	'method' => 'Relation', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
+            ->create([	'resource' => '19', 	'name' => 'Resource Details', 	'description' => 'Resource details of a list', 	'method' => 'Resource', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
+            ->create([	'resource' => '19', 	'name' => 'List Relations', 	'description' => 'Relations to be loaded on accessing list', 	'method' => 'Relations', 	'type' => 'hasMany', 	'relate_resource' => '20', 										])
+            ->create([	'resource' => '4', 	'name' => 'Resource Scopes', 	'description' => 'Scopes available on a Resource', 	'method' => 'Scopes', 	'type' => 'hasMany', 	'relate_resource' => '21', 										])
+            ->create([	'resource' => '19', 	'name' => 'List Scopes', 	'description' => 'Scopes by which a list to be filtered', 	'method' => 'Scopes', 	'type' => 'belongsToMany', 	'relate_resource' => '21', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

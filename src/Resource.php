@@ -22,4 +22,8 @@ class Resource extends Model
     public function Relations(){
         return $this->belongsToMany(Resource::class,'__resource_relations','resource','relate_resource')->withPivot(['method','type']);
     }
+
+    public function Scopes(){
+        return $this->hasMany(ResourceScope::class,'resource_list','id');
+    }
 }

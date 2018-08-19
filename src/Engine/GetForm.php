@@ -32,7 +32,7 @@ class GetForm extends Base
     public function boot(){
         $formId = $this->bag->r('item.item');
         $form = $this->form($formId); $validations = $this->validations($form)->toArray();
-        $this->bag->push('validation',$formId,$validations);
+        $this->bag->push('Validation',$formId,$validations);
         $this->bag->store('Form',$formId,$form);
     }
 
