@@ -2,7 +2,6 @@
 
 namespace Milestone\Appframe\Engine;
 
-use Milestone\Appframe\Resource;
 use Milestone\Appframe\ResourceList;
 use Milestone\Appframe\ResourceRelation;
 
@@ -37,8 +36,10 @@ class GetList extends Base
         $this->store($id,$Data);
     }
 
+    private $RelationCache = [];
+
     private function getORMData($id){
-        return $this->hasInSession($id)
+        return ($this->hasInSession($id) && $this->bag->r('item.force') !== true)
             ? $this->getFromSession($id)
             : $this->getPreparedORM($id);
     }
@@ -55,28 +56,40 @@ class GetList extends Base
         $Data = ResourceList::with('Resource','Relations','Scopes')->find($id);
         $List = $this->getExtractData($Data);
         $this->bag->push('List',$id,$List);
-        $this->bag->store('ListData',$id,array_except($List,['orm']));
+        $this->bag->store('ListData',$id,array_except($List,['orm','layout']));
+        $this->bag->store('ListLayout',$id,$List['layout']);
         return $List;
     }
 
     private function getExtractData($Data){
-        $items = $Data->items_per_page;
-        $relations = $this->getRelations($Data->Relations);
+        $items = $Data->items_per_page; $title = $Data->title;
+        $relations = $this->getRelations($Data->Relations,$Data->resource);
+        $layout = $this->getLayout($Data->Layout);
         $last = 0;
         $orm = $this->getExtractORM($Data);
-        return compact('orm','relations','items','last');
+        return compact('orm','relations','items','last','title','layout');
     }
 
-    private function getRelations($Relations){
+    private function getRelations($Relations,$resId){
         if($Relations->isEmpty()) return null;
-        return $Relations->map(function ($item){
-            return collect($item)->only(['relation','relation1','relation2','relation3','relation4','relation5'])->filter()->implode('.');
+        return $Relations->map(function ($item) use($resId) {
+            $parent = $resId;
+            $relDeep = collect($item)->only(['relation','relation1','relation2','relation3','relation4','relation5'])->filter()->values();
+            return $this->getRelationDeep($relDeep,$parent);
         })->toArray();
+    }
+
+    private function getLayout($Layout){
+        return [
+            'ID' => 'id',
+            'Name' => 'name',
+            'Email' => 'email',
+        ];
     }
 
     private function getExtractORM($Data){
         $Class = $this->getResourceClass($Data->Resource);
-        $With = $this->getWithRelations($Data->Relations);
+        $With = $this->getWithRelations($Data->Relations,$Data->resource);
         $Scopes = $this->getScopes($Data->Scopes);
         return compact('Class','With','Scopes');
     }
@@ -85,12 +98,12 @@ class GetList extends Base
         return implode('\\',[$res->namespace,$res->name]);
     }
 
-    private function getWithRelations($Relations){
+    private function getWithRelations($Relations,$resId){
         if($Relations->isEmpty()) return [];
         $with = [];
-        $Relations->each(function ($item) use(&$with) {
+        $Relations->each(function ($item) use(&$with,$resId) {
             $RelDeep = collect($item)->only(['relation','relation1','relation2','relation3','relation4','relation5'])->values()->filter();
-            array_push($with, $this->getRelationDeep($RelDeep));
+            array_push($with, $this->getRelationDeep($RelDeep,$resId));
         });
         return $with;
     }
@@ -102,13 +115,13 @@ class GetList extends Base
         });
     }
 
-    private function getRelationDeep($Coll){
-        $relation = []; $parent = null;
+    private function getRelationDeep($Coll,$parent){
+        $relation = [];
         $Coll->each(function($item) use(&$relation,&$parent) {
-            $name = ($parent)
-                ? ResourceRelation::where('resource',$parent)->where('relate_resource',$item)->first()->method
-                : Resource::find($item)->name;
-            array_push($relation,$name); $parent = $item;
+            $name = ($this->RelationCache && array_key_exists($parent,$this->RelationCache) && array_key_exists($item,$this->RelationCache[$parent]))
+                ? $this->RelationCache[$parent][$item]
+                : ResourceRelation::where('resource',$parent)->where('relate_resource',$item)->first()->method;
+            array_push($relation,$name); $parent = $item; $this->RelationCache[$parent][$item] = $name;
         });
         return implode(".",$relation);
     }
