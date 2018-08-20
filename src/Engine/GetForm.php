@@ -41,7 +41,15 @@ class GetForm extends Base
     }
 
     private function validations($form){
-        return $form->Fields->mapWithKeys(function($field){ return [$field->name => $field->Validations]; });
+        return $form->Fields->mapWithKeys(function($field){ return $this->validation_data($field); });
+    }
+
+    private function validation_data($field){
+        $name = $field->name;
+        $prop = $field->Validations->map(function($validation){
+            return collect($validation)->only(['rule','message','arg1','arg2','arg3','arg4','arg5'])->filter();
+        })->toArray();
+        return [$name => $prop];
     }
 
 }

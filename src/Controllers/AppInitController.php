@@ -20,7 +20,7 @@ class AppInitController extends Controller
     }
 
     private function setActions(){
-        session($this->getActions()->toArray());
+        session(['actions' => $this->getActions()->toArray()]);
     }
 
     private function getActions(){
@@ -37,7 +37,7 @@ class AppInitController extends Controller
     }
 
     public function extractMethods($Actions){
-        return $Actions->mapWithKeys(function($Value){ return [$Value->id => $Value->Method->only(['type','method','idn1','idn2','idn3','idn4','idn5'])]; });
+        return $Actions->mapWithKeys(function($Value){ return [$Value->id => array_filter($Value->Method->only(['type','method','idn1','idn2','idn3','idn4','idn5']))]; });
     }
 
     public function setTokenSalt(){
