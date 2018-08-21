@@ -11,7 +11,7 @@ class ResourceRole extends Model
     public function getActionsAttribute($actions){
         $resource = $this->resource; $type = $this->actions_availability; $actions = $actions ?: '';
         $method = ($type === 'Only') ? 'whereIn' : 'whereNotIn';
-        $ORM = ResourceAction::with(['Lists','Data','Method'])->where('resource',$resource);
+        $ORM = ResourceAction::with(['Lists','Data'])->where('resource',$resource);
         return ($type === 'All')
             ? $ORM->get()
             : $ORM->{$method}('id',explode($this->actionsJoinedDelimiter,$actions))->get();

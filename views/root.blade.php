@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+@php dd(session()->all()) @endphp<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -73,7 +73,7 @@
                 <div class="page-inner">
                     <header class="page-title-bar">
                         <transition name="breadcrumb"><router-view name="breadcrumb" :key="$route.fullPath"></router-view></transition>
-                        <transition name="pagetitle"><app-page-title :key="$store.state.page.title"></app-page-title></transition>
+                        <transition name="pagetitle"><app-page-title :key="$store.state.PAGE.title"></app-page-title></transition>
                     </header>
                     <div class="page-section">
                         <div id="slow_connection_page_loading" style="height: 10rem;">
@@ -85,7 +85,7 @@
                                 <div class="app-loading" style="display: block;z-index: 1030; width: 10rem;height: 10rem;border: 3px solid transparent;border-top-color: #00a28a;border-bottom-color: #00a28a;border-radius: 10rem;-webkit-animation: load-spinner 2s linear infinite;animation: load-spinner 2s linear infinite; margin: auto"></div>
                             </div>
                         </div>
-                        <transition name="appcontent"><router-view :key="$route.fullPath" name="appcontent"></router-view></transition>
+                        <!--<transition name="appcontent"><router-view :key="$route.fullPath" name="appcontent"></router-view></transition>-->
                         <auth-warning></auth-warning>
                     </div>
                 </div>
