@@ -22,6 +22,8 @@ class ResourceActionTableSeeder extends Seeder
             ->create([	'resource' => '1', 	'name' => 'AllUsersList', 	'description' => 'List All Users', 	'title' => 'Users', 	'type' => 'outline-info', 	'menu' => 'All Users', 	'icon' => 'users', 	'set' => 'fas', 								])
             ->create([	'resource' => '1', 	'name' => 'AllAdministratorsList', 	'description' => 'List All Administrators', 	'title' => 'Administrators', 	'type' => 'outline-info', 	'menu' => 'Administrators', 	'icon' => 'user-shield', 	'set' => 'fas', 								])
             ->create([	'resource' => '1', 	'name' => 'AllDevelopersList', 	'description' => 'List All Developers', 	'title' => 'Developers', 	'type' => 'outline-info', 	'menu' => 'Developers', 	'icon' => 'user-graduate', 	'set' => 'fas', 								])
+            ->create([	'resource' => '1', 	'name' => 'ViewAdministrator', 	'description' => 'View details of administrators', 	'title' => 'View', 	'type' => 'outline-info', 		'icon' => 'user-check', 	'set' => 'fas', 								])
+            ->create([	'resource' => '1', 	'name' => 'ViewDeveloper', 	'description' => 'View details of developer', 	'title' => 'View', 	'type' => 'outline-info', 		'icon' => 'user-check', 	'set' => 'fas', 								])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

@@ -38,6 +38,8 @@ class ResourceTableSeeder extends Seeder
             ->create([	'name' => 'ResourceListRelation', 	'description' => 'Relations to be loaded on accessing list', 	'title' => 'List Relations', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_list_relations', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceScope', 	'description' => 'Scope to be applied on resource', 	'title' => 'Resource Scopes', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_scopes', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceListScope', 	'description' => 'Scope to be applied on list', 	'title' => 'List Scopes', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_list_scopes', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceData', 	'description' => 'A perticular record from database', 	'title' => 'Data', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_data', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceDataRelation', 	'description' => 'The relations to be loaded from resource data', 	'title' => 'Data Relations', 	'namespace' => 'Milestone\Appframe', 	'table' => '__resource_data_relations', 	'key' => 'id', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

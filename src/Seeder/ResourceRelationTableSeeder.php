@@ -43,6 +43,8 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'resource' => '19', 	'name' => 'List Relations', 	'description' => 'Relations to be loaded on accessing list', 	'method' => 'Relations', 	'type' => 'hasMany', 	'relate_resource' => '20', 										])
             ->create([	'resource' => '4', 	'name' => 'Resource Scopes', 	'description' => 'Scopes available on a Resource', 	'method' => 'Scopes', 	'type' => 'hasMany', 	'relate_resource' => '21', 										])
             ->create([	'resource' => '19', 	'name' => 'List Scopes', 	'description' => 'Scopes by which a list to be filtered', 	'method' => 'Scopes', 	'type' => 'belongsToMany', 	'relate_resource' => '21', 										])
+            ->create([	'resource' => '23', 	'name' => 'Data Relation', 	'description' => 'Relations to be loaded on a data view', 	'method' => 'Relations', 	'type' => 'hasMany', 	'relate_resource' => '24', 										])
+            ->create([	'resource' => '23', 	'name' => 'Resource Details', 	'description' => 'Details of resource of a record', 	'method' => 'Resource', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
