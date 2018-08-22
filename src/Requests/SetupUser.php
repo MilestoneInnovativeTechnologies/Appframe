@@ -3,8 +3,8 @@
 namespace Milestone\Appframe\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Milestone\Appframe\User;
-use Milestone\Appframe\Group;
+use Milestone\Appframe\Model\User;
+use Milestone\Appframe\Model\Group;
 
 class SetupUser extends FormRequest
 {

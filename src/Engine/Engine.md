@@ -1,12 +1,12 @@
-STATIC PROPERTY on &lt;ARRAY&gt;
+STATIC PROPERTY `on` &lt;ARRAY&gt;
 
       This engine will be included once all the conditions
       in this array succeeded
-      The key will be matched against request()->input() to value.
+      The key will be matched against resolved data generated from Resolve class.
       If value is plain text, string comparison performs
       If value starting with @, predefined method check will performs
 
-STATIC METHOD boot
+STATIC METHOD `boot`
 
       The things to be return with response are needed to be store into bag
       $this->bag->store(name,id,data)

@@ -2,7 +2,7 @@
 
 namespace Milestone\Appframe\Engine;
 
-use Milestone\Appframe\Register\Bag;
+use Milestone\Appframe\Bag;
 
 class Base
 {

@@ -3,12 +3,13 @@
 namespace Milestone\Appframe\Register;
 
 use Illuminate\Http\Request;
+use Milestone\Appframe\Bag;
 use Milestone\Appframe\Register\CompareMethods as CM;
 
 class Frame
 {
 
-    protected $Engines = [];
+    protected $Engines = [], $bag = null;
     private $SpecialCharacters = ['@','!'];
     private $SpecialCharacterToMethod = [
         '@' => 'performPredefinedMethodCheck',
@@ -16,6 +17,7 @@ class Frame
     ];
 
     public function __construct(){
+        $this->bag = resolve(Bag::class);
         foreach(Engine::$All as $Engine){
             $On = $Engine::$on;
             if($this->isEngineIn($On))
@@ -31,8 +33,8 @@ class Frame
         $Yes = true;
         foreach ($On as $input => $value){
             $Yes = ($this->isStringComparison($value))
-                ? request()->input($input) == $value
-                : $this->specialComparison(request()->input($input),$value);
+                ? $this->bag->r($input) == $value
+                : $this->specialComparison($this->bag->r($input),$value);
             if($Yes !== true) return false;
         }
         return $Yes;

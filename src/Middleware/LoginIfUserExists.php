@@ -3,7 +3,7 @@
 namespace Milestone\Appframe\Middleware;
 
 use Closure;
-use Milestone\Appframe\User;
+use Milestone\Appframe\Model\User;
 
 class LoginIfUserExists
 {

@@ -2,7 +2,7 @@
 
 namespace Milestone\Appframe\Engine;
 
-use Milestone\Appframe\ResourceForm;
+use Milestone\Appframe\Model\ResourceForm;
 
 class GetForm extends Base
 {
@@ -15,9 +15,8 @@ class GetForm extends Base
      * If value starting with !, Not Equal comparison performs
      */
     static $on = [
-        'item.type' => 'Form',
-        'item.item' =>  '@isNotEmpty',
-        'item.action' =>  '!Submit',
+        'type' => 'Form',
+        'item' =>  '@isNotEmpty',
     ];
 
     /*
@@ -30,7 +29,7 @@ class GetForm extends Base
      * $this->bag->get(name)
      */
     public function boot(){
-        $formId = $this->bag->r('item.item');
+        $formId = $this->bag->r('item');
         $form = $this->form($formId); $validations = $this->validations($form)->toArray();
         $this->bag->push('Validation',$formId,$validations);
         $this->bag->store('Form',$formId,$form);

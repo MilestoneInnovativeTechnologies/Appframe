@@ -2,8 +2,8 @@
 
 namespace Milestone\Appframe\Engine;
 
-use Milestone\Appframe\ResourceList;
-use Milestone\Appframe\ResourceRelation;
+use Milestone\Appframe\Model\ResourceList;
+use Milestone\Appframe\Model\ResourceRelation;
 
 class GetList extends Base
 {

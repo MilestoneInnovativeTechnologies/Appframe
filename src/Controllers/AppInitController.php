@@ -2,8 +2,7 @@
 
 namespace Milestone\Appframe\Controllers;
 
-use Milestone\Appframe\ResourceAction;
-use Milestone\Appframe\ResourceActionMethod;
+use Milestone\Appframe\Model\ResourceActionMethod;
 
 class AppInitController extends Controller
 {
@@ -36,8 +35,10 @@ class AppInitController extends Controller
     }
 
     public function extractMethods($Actions){
-        return ResourceActionMethod::whereIn('resource_action',$Actions->map->id->toArray())->get()->mapWithKeys(function($item){ return [$item->resource_action => collect($item)->only(['type','method','idn1','idn2','idn3','idn4','idn5'])->filter()]; });
-        //return $Actions->mapWithKeys(function($Value){ return [$Value->id => array_filter($Value->Method->only(['type','method','idn1','idn2','idn3','idn4','idn5']))]; });
+        $Actions = $Actions->map->id->toArray();
+        return ResourceActionMethod::whereIn('resource_action',$Actions)->get()->mapWithKeys(function($item){
+            return [$item->resource_action => collect($item)->only(['type','method','idn1','idn2','idn3','idn4','idn5'])->filter()];
+        });
     }
 
     public function setTokenSalt(){

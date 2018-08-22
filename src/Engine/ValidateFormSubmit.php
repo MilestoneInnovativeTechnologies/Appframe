@@ -3,7 +3,6 @@
 namespace Milestone\Appframe\Engine;
 
 use Illuminate\Support\Facades\Validator;
-use Milestone\Appframe\ResourceForm;
 
 class ValidateFormSubmit extends Base
 {

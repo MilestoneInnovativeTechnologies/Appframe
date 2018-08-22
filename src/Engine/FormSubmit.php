@@ -3,7 +3,7 @@
 namespace Milestone\Appframe\Engine;
 
 use Milestone\Appframe\Engine\Database\BindData;
-use Milestone\Appframe\ResourceForm;
+use Milestone\Appframe\Model\ResourceForm;
 
 class FormSubmit extends Base
 {
@@ -16,9 +16,7 @@ class FormSubmit extends Base
      *
      */
     static $on = [
-        'item.type' => 'Form',
-        'item.item' =>  '@isNotEmpty',
-        'item.action' =>  'Submit',
+        'submit' =>  'Submit',
     ];
 
     /*
