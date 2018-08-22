@@ -1,34 +1,13 @@
 <?php
 
-namespace Milestone\Appframe\Engine;
+namespace Milestone\Appframe\Controllers;
 
 use Milestone\Appframe\Model\ResourceForm;
 
-class GetForm extends Base
+class GetFormController extends Controller
 {
-    /*
-     * This engine will be included once all the conditions
-     * in this array succeeded
-     * The key will be matched against request()->input() to value.
-     * If value is plain text, string comparison performs
-     * If value starting with @, predefined method check will performs
-     * If value starting with !, Not Equal comparison performs
-     */
-    static $on = [
-        'type' => 'Form',
-        'item' =>  '@isNotEmpty',
-    ];
 
-    /*
-     * The things to be return with response are needed to be store into bag
-     * $this->bag->store(name,id,data)
-     * where name will be the root property name in response having data indexed by id
-     * The things to keep in bag are kept by calling
-     * $this->bag->keep(name,data)
-     * To get the kept data out of bag, call
-     * $this->bag->get(name)
-     */
-    public function boot(){
+    public function index(){
         $formId = $this->bag->r('item');
         $form = $this->form($formId); $validations = $this->validations($form)->toArray();
         $this->bag->push('Validation',$formId,$validations);

@@ -1,41 +1,19 @@
 <?php
 
-namespace Milestone\Appframe\Engine;
+namespace Milestone\Appframe\Controllers;
 
 use Milestone\Appframe\Model\ResourceList;
 use Milestone\Appframe\Model\ResourceRelation;
 
-class GetList extends Base
+class GetListController extends Controller
 {
-    /*
-     * This engine will be included once all the conditions
-     * in this array succeeded
-     * The key will be matched against request()->input() to value.
-     * If value is plain text, string comparison performs
-     * If value starting with @, predefined method check will performs
-     *
-     */
-    static $on = [
-        'item.type' => 'List',
-        'item.item' =>  '@isNotEmpty',
-    ];
 
-    /*
-     * The things to be return with response are needed to be store into bag
-     * $this->bag->store(name,id,data)
-     * where name will be the root property name in response having data indexed by id
-     * The things to keep in bag are kept by calling
-     * $this->bag->keep(name,data)
-     * To get the kept data out of bag, call
-     * $this->bag->get(name)
-     */
-    public function boot(){
+    public function index(){
         $id = $this->bag->r('item.item');
         $Data = $this->getORMData($id); $ORM = $this->getListORM($Data);
         $Data = $ORM->get();
         $this->store($id,$Data);
     }
-
     private $RelationCache = [];
 
     private function getORMData($id){

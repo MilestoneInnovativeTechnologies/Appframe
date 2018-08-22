@@ -3,8 +3,6 @@
 namespace Milestone\Appframe;
 
 use Illuminate\Support\ServiceProvider;
-use Milestone\Appframe\Register\Frame;
-use Milestone\Appframe\Engine\Base;
 
 class AppframeServiceProvider extends ServiceProvider
 {
@@ -39,11 +37,6 @@ class AppframeServiceProvider extends ServiceProvider
     {
         $this->app->singleton(Bag::class, function () {
             return new Bag;
-        });
-
-        $this->app->singleton(Base::class, function () {
-            $bag = resolve(Bag::class);
-            return new Base($bag);
         });
     }
 }

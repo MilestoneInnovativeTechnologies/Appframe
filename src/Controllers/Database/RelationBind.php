@@ -1,6 +1,6 @@
 <?php
 
-namespace Milestone\Appframe\Engine\Database;
+namespace Milestone\Appframe\Controllers\Database;
 
 class RelationBind
 {

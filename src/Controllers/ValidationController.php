@@ -1,35 +1,13 @@
 <?php
 
-namespace Milestone\Appframe\Engine;
+namespace Milestone\Appframe\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 
-class ValidateFormSubmit extends Base
+class ValidationController extends Controller
 {
-    /*
-     * This engine will be included once all the conditions
-     * in this array succeeded
-     * The key will be matched against request()->input() to value.
-     * If value is plain text, string comparison performs
-     * If value starting with @, predefined method check will performs
-     *
-     */
-    static $on = [
-        'item.type' => 'Form',
-        'item.item' =>  '@isNotEmpty',
-        'item.action' =>  'Submit',
-    ];
 
-    /*
-     * The things to be return with response are needed to be store into bag
-     * $this->bag->store(name,id,data)
-     * where name will be the root property name in response having data indexed by id
-     * The things to keep in bag are kept by calling
-     * $this->bag->keep(name,data)
-     * To get the kept data out of bag, call
-     * $this->bag->get(name)
-     */
-    public function boot(){
+    public function index(){
         $formId = $this->bag->r('item.item');
         $Validator = ($this->isValidationExists($formId)) ? $this->getValidator($formId) : NULL;
         $this->bag->keep('Validator',$Validator);

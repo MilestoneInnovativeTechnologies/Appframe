@@ -2,17 +2,8 @@
 
 namespace Milestone\Appframe\Resolve;
 
-use Milestone\Appframe\Bag;
-
-class Form
+class Form extends Resolve
 {
-    private $bag;
-
-    public function __construct()
-    {
-        $this->bag = resolve(Bag::class);
-    }
-
     public function yes(){
         return empty($this->bag->req('data'));
     }
@@ -24,5 +15,32 @@ class Form
     public function prepare(){
         $idn1 = $this->bag->r('idns')['idn1'];
         $this->bag->r('item',$idn1);
+    }
+
+    protected $on = [
+        'GetFormController' => [
+            'type' => 'Form',
+            'item' =>  '@isNotEmpty',
+        ]
+    ];
+
+    public function controllers(){
+        $Controllers = [];
+        if($this->isGetFormController()) $Controllers[] = 'GetFormController';
+        if($this->isValidationController()) $Controllers[] = 'ValidationController';
+        if($this->isFormSubmitController()) $Controllers[] = 'FormSubmitController';
+        return array_map(function($controller){ return 'Milestone\\Appframe\\Controllers\\' . $controller; },$Controllers);
+    }
+
+    private function isGetFormController(){
+        return empty($this->bag->req('data'));
+    }
+
+    private function isValidationController(){
+        return !empty($this->bag->req('data'));
+    }
+
+    private function isFormSubmitController(){
+        return !empty($this->bag->req('data'));
     }
 }

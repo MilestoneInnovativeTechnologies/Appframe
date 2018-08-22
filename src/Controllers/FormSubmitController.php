@@ -1,34 +1,13 @@
 <?php
 
-namespace Milestone\Appframe\Engine;
+namespace Milestone\Appframe\Controllers;
 
-use Milestone\Appframe\Engine\Database\BindData;
 use Milestone\Appframe\Model\ResourceForm;
 
-class FormSubmit extends Base
+class FormSubmitController extends Controller
 {
-    /*
-     * This engine will be included once all the conditions
-     * in this array succeeded
-     * The key will be matched against request()->input() to value.
-     * If value is plain text, string comparison performs
-     * If value starting with @, predefined method check will performs
-     *
-     */
-    static $on = [
-        'submit' =>  'Submit',
-    ];
 
-    /*
-     * The things to be return with response are needed to be store into bag
-     * $this->bag->store(name,id,data)
-     * where name will be the root property name in response having data indexed by id
-     * The things to keep in bag are kept by calling
-     * $this->bag->keep(name,data)
-     * To get the kept data out of bag, call
-     * $this->bag->get(name)
-     */
-    public function boot(){
+    public function index(){
         $Validator = $this->bag->get('Validator');
         if($Validator === NULL || !$Validator->fails())
             $this->SubmitForm();
@@ -42,10 +21,6 @@ class FormSubmit extends Base
         $id = ($Data && $Data->id) ? $Data->id : '';
         $this->bag->store('Data',$id,$Data);
         $this->bag->store('SubmitForm',$form,(bool) $Data);
-    }
-
-    private function store($data){
-        $this->bag->store('Submit','LOOK',$data);
     }
 
     private function getRelationData($Form){
@@ -77,4 +52,5 @@ class FormSubmit extends Base
         });
         return $Data;
     }
+
 }

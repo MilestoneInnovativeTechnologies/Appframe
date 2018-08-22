@@ -3,7 +3,7 @@
 namespace Milestone\Appframe\Middleware;
 
 use Closure;
-use Milestone\Appframe\Resolve\Resolve;
+use Milestone\Appframe\Resolve\Resolver;
 
 class ResolveAction
 {
@@ -18,7 +18,7 @@ class ResolveAction
     {
         $AvailableActions = $request->session()->get('actions');
         $RequestedAction = $request->get('action');
-        if(array_key_exists($RequestedAction,$AvailableActions)) Resolve::Resolve($AvailableActions[$RequestedAction]);
+        if(array_key_exists($RequestedAction,$AvailableActions)) Resolver::Resolve($AvailableActions[$RequestedAction]);
         else return response('Not Acceptable',406);
         return $next($request);
     }

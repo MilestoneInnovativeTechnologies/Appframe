@@ -1,9 +1,9 @@
 <?php
 
-namespace Milestone\Appframe\Engine\Database;
+namespace Milestone\Appframe\Controllers\Database;
 
-use Milestone\Appframe\Resource;
-use Milestone\Appframe\ResourceRelation;
+use Milestone\Appframe\Model\Resource;
+use Milestone\Appframe\Model\ResourceRelation;
 
 class DatabaseBind
 {
