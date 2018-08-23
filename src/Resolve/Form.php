@@ -17,13 +17,6 @@ class Form extends Resolve
         $this->bag->r('item',$idn1);
     }
 
-    protected $on = [
-        'GetFormController' => [
-            'type' => 'Form',
-            'item' =>  '@isNotEmpty',
-        ]
-    ];
-
     public function controllers(){
         $Controllers = [];
         if($this->isGetFormController()) $Controllers[] = 'GetFormController';

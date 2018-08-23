@@ -7,5 +7,8 @@ Ex:  return ['idn1'];
 
 <h3>prepare</h3>
 This method will be called then.<br>
-Remaining activities goes here.<br>
-Prepare and keep data in bag for further resolution
+Prepare and keep data in bag which are required by further controllers to complete actions
+
+<h3>controllers</h3>
+This function should return a n array or controllers name, which all will run before dumbing the response<br>
+return ['Milestone\\Appframe\\Controllers\\GetFormController'];
