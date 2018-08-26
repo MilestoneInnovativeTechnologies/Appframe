@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Controllers;
 
+use Milestone\Appframe\Controllers\Database\BindData;
 use Milestone\Appframe\Model\ResourceForm;
 
 class FormSubmitController extends Controller
@@ -14,7 +15,7 @@ class FormSubmitController extends Controller
     }
 
     private function SubmitForm(){
-        $form = $this->bag->r('item.item');
+        $form = $this->bag->r('item');
         $Form = ResourceForm::with('Resource','Defaults','Fields.Data')->find($form);
         $RelationData = $this->getRelationData($Form);
         $Data = (new BindData($RelationData))->push();
@@ -27,7 +28,7 @@ class FormSubmitController extends Controller
         $Resource = $Form->Resource->id; $Data[$Resource] = [];
         $Form->Fields->each(function($Field) use($Resource, &$Data) {
             if(!$Field->Data) return;
-            $key = 'data.' . $Field->name; $value = $this->bag->r($key); $StoreTo = &$Data[$Resource];
+            $key = 'data.' . $Field->name; $value = $this->bag->req($key); $StoreTo = &$Data[$Resource];
             foreach (['relation','relation1','relation2','relation3'] as $Rel) {
                 if($Field->Data->$Rel) {
                     $NRelation = $Field->Data->$Rel;

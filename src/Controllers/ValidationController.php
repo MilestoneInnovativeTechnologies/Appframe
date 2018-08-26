@@ -8,12 +8,12 @@ class ValidationController extends Controller
 {
 
     public function index(){
-        $formId = $this->bag->r('item.item');
+        $formId = $this->bag->r('item');
         $Validator = ($this->isValidationExists($formId)) ? $this->getValidator($formId) : NULL;
         $this->bag->keep('Validator',$Validator);
         if($Validator !== NULL){
-            $this->bag->store('Validation','status', !$Validator->fails());
-            $this->bag->store('Validation','errors', $Validator->errors());
+            $status = !$Validator->fails(); $errors = $Validator->errors();
+            $this->bag->store('Validation',$formId,compact('status','errors'));
         }
     }
 
@@ -26,7 +26,7 @@ class ValidationController extends Controller
         $ValidateData = $this->getValidationData($formId);
         $Rules = $this->getValidationRules($ValidateData);
         $Messages = $this->getValidationMessages($ValidateData);
-        return Validator::make($this->bag->r('data'),$Rules,$Messages);
+        return Validator::make($this->bag->req('data'),$Rules,$Messages);
     }
 
     private function getValidationData($formId){

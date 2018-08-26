@@ -32,6 +32,7 @@ Route::group([
             'middleware' => [
                 Milestone\Appframe\Middleware\ValidateAppframeToken::class,
                 Milestone\Appframe\Middleware\RenewAppframeToken::class,
+                Milestone\Appframe\Middleware\FillBagWithSession::class,
                 Milestone\Appframe\Middleware\ResolveAction::class,
             ],
         ],function(){

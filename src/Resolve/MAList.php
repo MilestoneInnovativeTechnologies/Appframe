@@ -15,6 +15,7 @@ class MAList extends Resolve
     public function prepare(){
         $idn1 = $this->bag->r('idns')['idn1'];
         $this->bag->r('item',$idn1);
+        $this->bag->r('update',!empty($this->bag->req('update')));
     }
 
     public function controllers(){

@@ -9,7 +9,7 @@ class GetListController extends Controller
 {
 
     public function index(){
-        $id = $this->bag->r('item.item');
+        $id = $this->bag->r('item');
         $Data = $this->getORMData($id); $ORM = $this->getListORM($Data);
         $Data = $ORM->get();
         $this->store($id,$Data);
@@ -17,7 +17,7 @@ class GetListController extends Controller
     private $RelationCache = [];
 
     private function getORMData($id){
-        return ($this->hasInSession($id) && $this->bag->r('item.force') !== true)
+        return ($this->hasInSession($id) && $this->bag->r('update') === true)
             ? $this->getFromSession($id)
             : $this->getPreparedORM($id);
     }
