@@ -40,8 +40,12 @@ class Resolver extends Resolve
     }
 
     private function initTypeClass(){
-        $Class = 'Milestone\\Appframe\\Resolve\\' . $this->getPrefixedPreserveWords($this->type);
+        $Class = 'Milestone\\Appframe\\Resolve\\' . $this->getResolverName($this->type);
         $this->res = new $Class;
+    }
+
+    private function getResolverName($keyword){
+        return $keyword . 'Resolver';
     }
 
     private function getPrefixedPreserveWords($keyword){

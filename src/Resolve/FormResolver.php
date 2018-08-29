@@ -2,7 +2,7 @@
 
 namespace Milestone\Appframe\Resolve;
 
-class Form extends Resolve
+class FormResolver extends Resolve
 {
     public function yes(){
         return empty($this->bag->req('data'));

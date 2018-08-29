@@ -2,10 +2,10 @@
 
 namespace Milestone\Appframe\Resolve;
 
-class MAList extends Resolve
+class DataResolver extends Resolve
 {
     public function yes(){
-        return empty($this->bag->req('update'));
+        return true;
     }
 
     public function idns(){
@@ -14,12 +14,12 @@ class MAList extends Resolve
 
     public function prepare(){
         $idn1 = $this->bag->r('idns')['idn1'];
-        $this->bag->r('item',$idn1);
-        $this->bag->r('update',!empty($this->bag->req('update')));
+        $this->bag->r('data_id',$idn1);
+        $this->bag->r('record_id',$this->bag->req('id'));
     }
 
     public function controllers(){
-        $Controllers = ['GetListController'];
+        $Controllers = ['GetDataController'];
         return array_map(function($controller){ return 'Milestone\\Appframe\\Controllers\\' . $controller; },$Controllers);
     }
 
