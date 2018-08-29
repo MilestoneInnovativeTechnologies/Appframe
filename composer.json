@@ -1,5 +1,5 @@
 {
-    "name": "Milestone/Appframe",
+    "name": "milestone/appframe",
     "description": "A laravel package from Milestone Innovative Technologies for creating data management applications",
     "type": "laravel-package",
     "license": "MIT",
