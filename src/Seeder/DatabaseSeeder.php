@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             GroupRoleTableSeeder::class,
             ResourceTableSeeder::class,
-            ResourceRoleTableSeeder::class,
             ResourceScopeTableSeeder::class,
             ResourceRelationTableSeeder::class,
             ResourceDataTableSeeder::class,
@@ -28,6 +27,7 @@ class DatabaseSeeder extends Seeder
             ResourceListTableSeeder::class,
             ResourceListRelationTableSeeder::class,
             ResourceListScopeTableSeeder::class,
+            ResourceListLayoutTableSeeder::class,
             ResourceFormTableSeeder::class,
             ResourceFormDefaultTableSeeder::class,
             ResourceDefaultTableSeeder::class,
@@ -36,12 +36,14 @@ class DatabaseSeeder extends Seeder
             ResourceActionMethodTableSeeder::class,
             ResourceActionListTableSeeder::class,
             ResourceActionDataTableSeeder::class,
+            ResourceRoleTableSeeder::class,
             ResourceFormFieldTableSeeder::class,
             ResourceFormFieldAttrTableSeeder::class,
             ResourceFormFieldDataTableSeeder::class,
             ResourceFormFieldValidationTableSeeder::class,
+            ResourceFormFieldOptionTableSeeder::class,
             OrganisationTableSeeder::class,
-            OrganisationContactTableSeeder::class
+            OrganisationContactTableSeeder::class,
         ]);
     }
 }

@@ -15,7 +15,7 @@ class ResourceRelationTableSeeder extends Seeder
     {
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
-        \Milestone\Appframe\ResourceRelation::truncate()
+        \Milestone\Appframe\Model\ResourceRelation::truncate()
             ->create([	'resource' => '1', 	'name' => 'User Groups', 	'description' => 'Which groups this user belongs to', 	'method' => 'Groups', 	'type' => 'belongsToMany', 	'relate_resource' => '2', 										])
             ->create([	'resource' => '2', 	'name' => 'Group Users', 	'description' => 'List of users belongs to this group', 	'method' => 'Users', 	'type' => 'belongsToMany', 	'relate_resource' => '1', 										])
             ->create([	'resource' => '2', 	'name' => 'Group Roles', 	'description' => 'Roles assigneed to this group', 	'method' => 'Roles', 	'type' => 'belongsToMany', 	'relate_resource' => '3', 										])
@@ -45,6 +45,7 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'resource' => '19', 	'name' => 'List Scopes', 	'description' => 'Scopes by which a list to be filtered', 	'method' => 'Scopes', 	'type' => 'belongsToMany', 	'relate_resource' => '21', 										])
             ->create([	'resource' => '23', 	'name' => 'Data Relation', 	'description' => 'Relations to be loaded on a data view', 	'method' => 'Relations', 	'type' => 'hasMany', 	'relate_resource' => '24', 										])
             ->create([	'resource' => '23', 	'name' => 'Resource Details', 	'description' => 'Details of resource of a record', 	'method' => 'Resource', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
+            ->create([	'resource' => '19', 	'name' => 'List Layout', 	'description' => 'Layout of a list', 	'method' => 'Layout', 	'type' => 'hasMany', 	'relate_resource' => '25', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

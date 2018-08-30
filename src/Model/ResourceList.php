@@ -14,6 +14,10 @@ class ResourceList extends Model
         return $this->hasMany(ResourceListRelation::class,'resource_list','id');
     }
 
+    public function Layout(){
+        return $this->hasMany(ResourceListLayout::class,'resource_list','id');
+    }
+
     public function Scopes(){
         return $this->belongsToMany(ResourceScope::class,'__resource_list_scopes','resource_list','scope')->withTimestamps();
     }

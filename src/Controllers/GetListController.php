@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Controllers;
 
+use Illuminate\Support\Str;
 use Milestone\Appframe\Model\ResourceList;
 use Milestone\Appframe\Model\ResourceRelation;
 
@@ -31,7 +32,7 @@ class GetListController extends Controller
     }
 
     private function getPreparedORM($id){
-        $Data = ResourceList::with('Resource','Relations','Scopes')->find($id);
+        $Data = ResourceList::with('Resource','Relations','Scopes','Layout')->find($id);
         $List = $this->getExtractData($Data);
         $this->bag->push('List',$id,$List);
         $this->bag->store('ListData',$id,array_except($List,['orm','layout']));
@@ -42,7 +43,7 @@ class GetListController extends Controller
     private function getExtractData($Data){
         $items = $Data->items_per_page; $title = $Data->title;
         $relations = $this->getRelations($Data->Relations,$Data->resource);
-        $layout = $this->getLayout($Data->Layout);
+        $layout = $this->getLayout($Data->Layout,$Data->resource);
         $last = 0;
         $orm = $this->getExtractORM($Data);
         return compact('orm','relations','items','last','title','layout');
@@ -57,12 +58,17 @@ class GetListController extends Controller
         })->toArray();
     }
 
-    private function getLayout($Layout){
-        return [
-            'ID' => 'id',
-            'Name' => 'name',
-            'Email' => 'email',
-        ];
+    private function getLayout($Layout,$resId){
+        return ($Layout->isEmpty()) ? ['ID' => 'id'] : $Layout->mapWithKeys(function($layout) use($resId){
+            return [$layout->label => $this->getLayoutProps($layout,$resId)];
+        });
+    }
+
+    private function getLayoutProps($layout,$resId){
+        $With = $this->getWithRelations(collect([$layout]),$resId)[0];
+        $path = ($With) ? $With = implode(".",array_map(function($rel){ return Str::snake($rel); },explode(".",$With))) : $With;
+        $field = $layout->field;
+        return ['field' => $field, 'path' => $path];
     }
 
     private function getExtractORM($Data){
