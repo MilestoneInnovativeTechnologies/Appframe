@@ -2,91 +2,94 @@
 
 namespace Milestone\Appframe\Controllers\Database;
 
+use Milestone\Appframe\Bag;
 use Milestone\Appframe\Model\Resource;
 use Milestone\Appframe\Model\ResourceRelation;
 
 class DatabaseBind
 {
-    protected $DataInit = null;
-    protected $Resources = [];
+    protected $bag = null;
+    protected $ResId = null;
+    protected $Resource = null;
     protected $Model = null;
     protected $Data = [];
     protected $Relations = [];
+    protected $RelationCache = [];
+    protected $RelationId = [];
 
-    public function __construct($Data,$DataId = null)
+    public function __construct($ResId,$Form,$DataId = null)
     {
-        $this->init($Data);
+        $this->bag = resolve(Bag::class);
+        $this->setResource($ResId);
         $this->setModel($DataId);
+        $this->init($Form);
     }
 
-    private function init($Data){
-        $this->fetchResources($Data);
-        $this->extractData($Data);
-        $this->extractRelations($Data);
-    }
-
-    private function fetchResources($Data){
-        $this->DataInit = array_keys($Data)[0];
-        $resIds = $this->getIntKeys($Data);
-        $this->Resources = Resource::find($resIds)->keyBy('id');
+    private function setResource($ResId){
+        $this->ResId = $ResId;
+        $this->Resource = Resource::find($ResId);
     }
 
     private function setModel($id){
-        $class = $this->getResModelClass($this->DataInit);
+        $class = $this->getResModelClass($this->Resource);
         $this->Model = ($id) ? (new $class)->find($id) : new $class;
     }
 
-    private function getIntKeys($Array){
-        $Keys = [];
-        foreach($Array as $Key => $Data){
-            if(is_numeric($Key)) $Keys[] = $Key;
-            if(is_array($Data) && !isset($Data[0])){
-                $Keys = array_merge($Keys,$this->getIntKeys($Data));
-            }
-        }
-        return $Keys;
-    }
-
-    private function extractData($Data){
-        foreach($Data as $Key => $data){
-            $this->extractResourceData($Key,$data);
-        }
-    }
-
-    private function extractResourceData($Key,$data){
-        $this->Data[$Key] = [];
-        if(isset($data[0])) $this->Data[$Key] = $data;
-        else {
-            foreach($data as $attribute => $value){
-                if(is_numeric($attribute)) $this->extractResourceData($attribute,$value);
-                else $this->Data[$Key][$attribute] = $value;
-            }
-        }
-    }
-
-    private function extractRelations($Data){
-        foreach($Data as $resource => $data){
-            $this->extractResourceRelations($resource,$data);
-        }
-    }
-
-    private function extractResourceRelations($resource, $data){
-        if(isset($data[0])) return; $this->Relations[$resource] = [];
-        foreach($data as $attribute => $value){
-            if(is_numeric($attribute) && is_array($value)){
-                $this->Relations[$resource][$attribute] = $this->getResourceRelationDetails($resource,$attribute);
-                $this->extractResourceRelations($attribute,$value);
-            }
-        }
-    }
-
-    private function getResourceRelationDetails($resource,$resource2){
-        $Data = ResourceRelation::where('resource',$resource)->where('relate_resource',$resource2)->first();
-        return ['method' => $Data->method,'type' => $Data->type];
-    }
-
-    protected function getResModelClass($id){
-        $resource = $this->Resources[$id];
+    private function getResModelClass($resource){
         return implode("\\",[$resource->namespace,$resource->name]);
+    }
+
+    private function init($Form){
+        $Data = []; $Relations = [];
+        extract($this->getDataAndRelations($Form));
+        $this->Data = $Data; $this->Relations = $Relations;
+    }
+
+    private function getDataAndRelations($Form){
+        $Data = []; $Relations = [];
+        $Form->Fields->each(function($Field) use(&$Data, &$Relations) {
+            if(!$Field->Data) return;
+            $key = 'data.' . $Field->name; $value = $this->bag->req($key); $StoreTo = &$Data;
+            $RelationKey = $this->getNestRelationKey($Field->Data);
+            if($RelationKey){
+                if(!array_key_exists($RelationKey,$Relations)) $Relations[$RelationKey] = [];
+                $StoreTo = &$Relations[$RelationKey];
+            }
+            if($Field->Data->attribute) $StoreTo[$Field->Data->attribute] = $value;
+            else $StoreTo[] = $value;
+        });
+        $Form->Defaults->each(function ($Default) use(&$Data, &$Relations){
+            $value = $Default->value; $StoreTo = &$Data;
+            $RelationKey = $this->getNestRelationKey($Default);
+            if($RelationKey){
+                if(!array_key_exists($RelationKey,$Relations)) $Relations[$RelationKey] = [];
+                $StoreTo = &$Relations[$RelationKey];
+            }
+            if($Default->attribute) $StoreTo[$Default->attribute] = $value;
+            else $StoreTo[] = $value;
+        });
+        return ['Data' => $Data,'Relations' => $Relations];
+    }
+
+    private function getNestRelationKey($Data){
+        $Key = []; $Id = null;
+        foreach (['relation','nest_relation1','nest_relation2','nest_relation3'] as $Rel){
+            if($Data->$Rel) { $RelationDetails = $this->getRelationDetails($Data->$Rel); $Key[] = $RelationDetails['method']; $Id = $Data->$Rel; }
+            else break;
+        }
+        if(empty($Key)) return [];
+        $KeyString = implode('.',$Key); $this->RelationId[$KeyString] = $Id;
+        return $KeyString;
+    }
+
+    private function getRelationDetails($relation){
+        if(array_key_exists($relation,$this->RelationCache)) return $this->RelationCache[$relation];
+        return $this->storeRelation($relation);
+    }
+
+    private function storeRelation($relation){
+        $ResRelation = ResourceRelation::with('Resource')->find($relation);
+        $class = $this->getResModelClass($ResRelation->Resource);
+        return $this->RelationCache[$relation] = ['class' => $class,'method' => $ResRelation->method,'type' => $ResRelation->type];
     }
 }

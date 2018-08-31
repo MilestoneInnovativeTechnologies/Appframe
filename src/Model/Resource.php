@@ -20,7 +20,7 @@ class Resource extends Model
     }
 
     public function Relations(){
-        return $this->belongsToMany(Resource::class,'__resource_relations','resource','relate_resource')->withPivot(['method','type']);
+        return $this->hasMany(ResourceRelation::class,'resource','id');
     }
 
     public function Scopes(){

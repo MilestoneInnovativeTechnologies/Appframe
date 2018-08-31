@@ -13,4 +13,9 @@ class ResourceData extends Model
     public function Resource(){
         return $this->belongsTo(ResourceDataRelation::class, 'resource','id');
     }
+
+    public function Scopes(){
+        return $this->hasMany(ResourceDataScope::class, 'resource_data','id');
+    }
+
 }

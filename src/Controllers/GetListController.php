@@ -42,19 +42,18 @@ class GetListController extends Controller
 
     private function getExtractData($Data){
         $items = $Data->items_per_page; $title = $Data->title;
-        $relations = $this->getRelations($Data->Relations,$Data->resource);
+        $relations = $this->getRelations($Data->Relations);
         $layout = $this->getLayout($Data->Layout,$Data->resource);
         $last = 0;
         $orm = $this->getExtractORM($Data);
         return compact('orm','relations','items','last','title','layout');
     }
 
-    private function getRelations($Relations,$resId){
+    private function getRelations($Relations){
         if($Relations->isEmpty()) return null;
-        return $Relations->map(function ($item) use($resId) {
-            $parent = $resId;
-            $relDeep = collect($item)->only(['relation','relation1','relation2','relation3','relation4','relation5'])->filter()->values();
-            return $this->getRelationDeep($relDeep,$parent);
+        return $Relations->map(function ($item){
+            $relDeep = collect($item)->only(['relation','nest_relation1','nest_relation2','nest_relation3','nest_relation4','nest_relation5'])->filter()->values();
+            return $this->getRelationDeep($relDeep);
         })->toArray();
     }
 
@@ -73,7 +72,7 @@ class GetListController extends Controller
 
     private function getExtractORM($Data){
         $Class = $this->getResourceClass($Data->Resource);
-        $With = $this->getWithRelations($Data->Relations,$Data->resource);
+        $With = $this->getWithRelations($Data->Relations);
         $Scopes = $this->getScopes($Data->Scopes);
         return compact('Class','With','Scopes');
     }
@@ -82,12 +81,12 @@ class GetListController extends Controller
         return implode('\\',[$res->namespace,$res->name]);
     }
 
-    private function getWithRelations($Relations,$resId){
+    private function getWithRelations($Relations){
         if($Relations->isEmpty()) return [];
         $with = [];
-        $Relations->each(function ($item) use(&$with,$resId) {
-            $RelDeep = collect($item)->only(['relation','relation1','relation2','relation3','relation4','relation5'])->values()->filter();
-            array_push($with, $this->getRelationDeep($RelDeep,$resId));
+        $Relations->each(function ($item) use(&$with) {
+            $RelDeep = collect($item)->only(['relation','nest_relation1','nest_relation2','nest_relation3','nest_relation4','nest_relation5'])->values()->filter();
+            array_push($with, $this->getRelationDeep($RelDeep));
         });
         return $with;
     }
@@ -99,13 +98,13 @@ class GetListController extends Controller
         });
     }
 
-    private function getRelationDeep($Coll,$parent){
+    private function getRelationDeep($Coll){
         $relation = [];
-        $Coll->each(function($item) use(&$relation,&$parent) {
-            $name = ($this->RelationCache && array_key_exists($parent,$this->RelationCache) && array_key_exists($item,$this->RelationCache[$parent]))
-                ? $this->RelationCache[$parent][$item]
-                : ResourceRelation::where('resource',$parent)->where('relate_resource',$item)->first()->method;
-            array_push($relation,$name); $parent = $item; $this->RelationCache[$parent][$item] = $name;
+        $Coll->each(function($item) use(&$relation) {
+            $name = ($this->RelationCache && array_key_exists($item,$this->RelationCache))
+                ? $this->RelationCache[$item]
+                : ResourceRelation::find($item)->method;
+            array_push($relation,$name); $this->RelationCache[$item] = $name;
         });
         return implode(".",$relation);
     }

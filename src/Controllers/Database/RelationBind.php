@@ -11,15 +11,15 @@ class RelationBind
         'belongsToMany' => 'attach',
     ];
 
-    protected $baseModel, $Data, $relMethod, $relType;
+    protected $baseModel, $Data, $relPath, $relType;
     protected $relClass;
-    protected $method, $attribute;
+    protected $model, $method, $attribute;
 
-    public function __construct($baseModel, $data, $relMethod, $relType, $relClass = null)
+    public function __construct($baseModel, $data, $relPath, $relType, $relClass = null)
     {
         $this->baseModel = $baseModel;
         $this->Data = $data;
-        $this->relMethod = $relMethod;
+        $this->relPath = $relPath;
         $this->relType = $relType;
         $this->relClass = $relClass;
         $this->setUp();
@@ -27,8 +27,17 @@ class RelationBind
     }
 
     private function setUp(){
+        $this->setModel();
         $this->setMethod();
         $this->setAttribute();
+    }
+
+    private function setModel(){
+        $baseModel = $this->baseModel;
+        $relPath = $this->relPath;
+        $this->model = array_reduce(explode(".",$relPath),function($base,$current){
+            return $base->$current();
+        },$baseModel);
     }
 
     private function setMethod($method = null){
@@ -75,12 +84,11 @@ class RelationBind
     }
 
     public function go(){
-        $base = $this->baseModel;
-        $relation = $this->relMethod;
+        $model = $this->model;
         $method = $this->method;
         $attribute = $this->attribute;
-        $base->$relation()->$method($attribute);
-        return $base;
+        $model->$method($attribute);
+        return $model;
     }
 
 

@@ -36,7 +36,7 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'resource' => '12', 	'name' => 'From Resource', 	'description' => 'Resource this form belongs to', 	'method' => 'Resource', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
             ->create([	'resource' => '12', 	'name' => 'Form Defaults', 	'description' => 'Predefined values for a form', 	'method' => 'Defaults', 	'type' => 'hasMany', 	'relate_resource' => '17', 										])
             ->create([	'resource' => '13', 	'name' => 'Field Data', 	'description' => 'Fields Database binding details', 	'method' => 'Data', 	'type' => 'hasOne', 	'relate_resource' => '18', 										])
-            ->create([	'resource' => '4', 	'name' => 'Resource Relations', 	'description' => 'Relation of  a resource to another resource', 	'method' => 'Relations', 	'type' => 'belongsToMany', 	'relate_resource' => '4', 										])
+            ->create([	'resource' => '4', 	'name' => 'Resource Relations', 	'description' => 'Relation of  a resource to another resource', 	'method' => 'Relations', 	'type' => 'hasMany', 	'relate_resource' => '26', 										])
             ->create([	'resource' => '18', 	'name' => 'Bind Data Resource', 	'description' => 'Resource to which the data to be bind', 	'method' => 'Relation', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
             ->create([	'resource' => '17', 	'name' => 'Default Data Resource', 	'description' => 'Resource to which the forms predefined data to be bind', 	'method' => 'Relation', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
             ->create([	'resource' => '19', 	'name' => 'Resource Details', 	'description' => 'Resource details of a list', 	'method' => 'Resource', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
@@ -46,6 +46,8 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'resource' => '23', 	'name' => 'Data Relation', 	'description' => 'Relations to be loaded on a data view', 	'method' => 'Relations', 	'type' => 'hasMany', 	'relate_resource' => '24', 										])
             ->create([	'resource' => '23', 	'name' => 'Resource Details', 	'description' => 'Details of resource of a record', 	'method' => 'Resource', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
             ->create([	'resource' => '19', 	'name' => 'List Layout', 	'description' => 'Layout of a list', 	'method' => 'Layout', 	'type' => 'hasMany', 	'relate_resource' => '25', 										])
+            ->create([	'resource' => '26', 	'name' => 'Nested Relation', 	'description' => 'Nested Relation', 	'method' => 'Nest', 	'type' => 'hasMany', 	'relate_resource' => '26', 										])
+            ->create([	'resource' => '26', 	'name' => 'Related Resource', 	'description' => 'Related Resource Details', 	'method' => 'Relation', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
