@@ -16,10 +16,10 @@ class FormSubmitController extends Controller
     private function SubmitForm(){
         $form = $this->bag->r('item');
         $Form = ResourceForm::with('Resource','Defaults','Fields.Data')->find($form);
-        $Data = (new Database\BindData($Form->Resource->id, $Form))->push();
-        $id = ($Data && $Data->id) ? $Data->id : '';
-        $this->bag->store('Data',$id,$Data);
-        $this->bag->store('SubmitForm',$form,(bool) $Data);
+        $FieldExtractClass = new Database\FormFieldExtract($Form);
+        $RelationGrouped = $FieldExtractClass->relationGrouped;
+        $Data = (new Database\Push($RelationGrouped->toArray(),$FieldExtractClass->resourceModel))->Model;
+        $this->bag->store('SubmitForm',$form,$Data);
     }
 
 }
