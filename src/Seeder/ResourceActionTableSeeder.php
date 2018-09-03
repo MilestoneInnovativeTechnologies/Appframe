@@ -15,7 +15,7 @@ class ResourceActionTableSeeder extends Seeder
     {
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
-        \Milestone\Appframe\ResourceAction::truncate()
+        \Milestone\Appframe\Model\ResourceAction::truncate()
             ->create([	'resource' => '1', 	'name' => 'CreateUser', 	'description' => 'Create a new user', 	'title' => 'Create a new user', 	'type' => 'outline-info', 	'menu' => 'New User', 	'icon' => 'user-plus', 	'set' => 'fas', 								])
             ->create([	'resource' => '1', 	'name' => 'CreateAdministrator', 	'description' => 'Create a new Administrator User', 	'title' => 'New Administrator', 	'type' => 'outline-info', 	'menu' => 'New Administrator', 	'icon' => 'user-graduate', 	'set' => 'fas', 								])
             ->create([	'resource' => '1', 	'name' => 'CreateDeveloper', 	'description' => 'Create a new Developer User', 	'title' => 'New Developer', 	'type' => 'outline-info', 	'menu' => 'New Developer', 	'icon' => 'user-cog', 	'set' => 'fas', 								])

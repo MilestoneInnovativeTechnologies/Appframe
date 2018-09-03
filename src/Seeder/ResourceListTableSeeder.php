@@ -15,7 +15,7 @@ class ResourceListTableSeeder extends Seeder
     {
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
-        \Milestone\Appframe\ResourceList::truncate()
+        \Milestone\Appframe\Model\ResourceList::truncate()
             ->create([	'resource' => '1',	'name' => 'AllUsers',	'description' => 'Lists all users',	'title' => 'Users',												])
             ->create([	'resource' => '1',	'name' => 'AllAdministrators',	'description' => 'List all users of  administrator group',	'title' => 'Administrators',												])
             ->create([	'resource' => '1',	'name' => 'AllDevelopers',	'description' => 'List all users of  developer group',	'title' => 'Developers',												])

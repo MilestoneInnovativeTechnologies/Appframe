@@ -15,7 +15,7 @@ class ResourceFormFieldValidationTableSeeder extends Seeder
     {
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
-        \Milestone\Appframe\ResourceFormFieldValidation::truncate()
+        \Milestone\Appframe\Model\ResourceFormFieldValidation::truncate()
             ->create([	'form_field' => '4', 	'rule' => 'required', 	'message' => 'User name is mandatory', 													])
             ->create([	'form_field' => '5', 	'rule' => 'required', 	'message' => 'User email is mandarory', 													])
             ->create([	'form_field' => '5', 	'rule' => 'email', 	'message' => 'Email should be a valid email address', 													])

@@ -15,7 +15,7 @@ class GroupTableSeeder extends Seeder
     {
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
-        \Milestone\Appframe\Group::truncate()
+        \Milestone\Appframe\Model\Group::truncate()
             ->create([	'name' => 'setup_user',	'description' => 'Users created initially to setup Module',	'title' => 'Setup Users',													])
             ->create([	'name' => 'developers',	'description' => 'Users in this group are responsible to build this module',	'title' => 'Developers',													])
             ->create([	'name' => 'administrators',	'description' => 'Administrators are responsible for managing users, groups, roles and their resources',	'title' => 'Administrators',													])

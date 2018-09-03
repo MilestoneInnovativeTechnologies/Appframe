@@ -15,7 +15,7 @@ class ResourceFormFieldTableSeeder extends Seeder
     {
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
-        \Milestone\Appframe\ResourceFormField::truncate()
+        \Milestone\Appframe\Model\ResourceFormField::truncate()
             ->create([	'resource_form' => '1', 	'name' => 'name', 	'type' => 'text', 	'label' => 'Name', 												])
             ->create([	'resource_form' => '1', 	'name' => 'email', 	'type' => 'text', 	'label' => 'Email', 												])
             ->create([	'resource_form' => '1', 	'name' => 'group', 	'type' => 'select', 	'label' => 'Group', 												])
