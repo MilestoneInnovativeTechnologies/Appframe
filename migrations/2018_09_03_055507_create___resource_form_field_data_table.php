@@ -15,18 +15,18 @@ class CreateResourceFormFieldDataTable extends Migration
     {
         Schema::create('__resource_form_field_data', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('form_field');
+            $table->unsignedInteger('form_field')->index();
             $table->unsignedInteger('relation')->index()->nullable();
-            $table->unsignedInteger('deep1')->index()->nullable();
-            $table->unsignedInteger('deep2')->index()->nullable();
-            $table->unsignedInteger('deep3')->index()->nullable();
+            $table->unsignedInteger('nest_relation1')->index()->nullable();
+            $table->unsignedInteger('nest_relation2')->index()->nullable();
+            $table->unsignedInteger('nest_relation3')->index()->nullable();
             $table->string('attribute', 64)->nullable();
             $table->timestamps();
             $table->foreign('form_field')->references('id')->on('__resource_form_fields')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('relation')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('deep1')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');
-            $table->foreign('deep2')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');
-            $table->foreign('deep3')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('relation')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('nest_relation1')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('nest_relation2')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('nest_relation3')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

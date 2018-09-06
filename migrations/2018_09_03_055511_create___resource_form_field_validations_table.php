@@ -15,7 +15,7 @@ class CreateResourceFormFieldValidationsTable extends Migration
     {
         Schema::create('__resource_form_field_validations', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('form_field');
+            $table->unsignedInteger('form_field')->index();
             $table->string('rule', 512)->nullable();
             $table->string('message', 1024)->nullable();
             $table->string('arg1', 64)->nullable();

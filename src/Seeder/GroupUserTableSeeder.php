@@ -15,7 +15,7 @@ class GroupUserTableSeeder extends Seeder
     {
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
-        \Milestone\Appframe\GroupUser::truncate()
+        \Milestone\Appframe\Model\GroupUser::truncate()
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

@@ -15,7 +15,7 @@ class ResourceListScopeTableSeeder extends Seeder
     {
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
-        \Milestone\Appframe\ResourceListScope::truncate()
+        \Milestone\Appframe\Model\ResourceListScope::truncate()
             ->create([	'resource_list' => '2',	'scope' => '1',														])
             ->create([	'resource_list' => '3',	'scope' => '2',														])
         ;

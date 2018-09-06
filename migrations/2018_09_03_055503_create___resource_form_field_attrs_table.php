@@ -15,7 +15,7 @@ class CreateResourceFormFieldAttrsTable extends Migration
     {
         Schema::create('__resource_form_field_attrs', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('form_field');
+            $table->unsignedInteger('form_field')->index();
             $table->string('name', 64)->nullable();
             $table->string('value', 128)->nullable();
             $table->timestamps();

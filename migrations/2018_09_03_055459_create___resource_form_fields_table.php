@@ -15,7 +15,7 @@ class CreateResourceFormFieldsTable extends Migration
     {
         Schema::create('__resource_form_fields', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('resource_form');
+            $table->unsignedInteger('resource_form')->index();
             $table->string('name', 64)->index();
             $table->string('type', 128)->nullable();
             $table->string('label', 256)->nullable();

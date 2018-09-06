@@ -15,7 +15,7 @@ class ResourceFormTableSeeder extends Seeder
     {
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
-        \Milestone\Appframe\ResourceForm::truncate()
+        \Milestone\Appframe\Model\ResourceForm::truncate()
             ->create([	'resource' => '1', 	'name' => 'CreateUser', 	'description' => 'Create a User with already created group', 	'title' => 'Create User', 	'action_text' => 'Create User', 											])
             ->create([	'resource' => '1', 	'name' => 'CreateUserAdministrator', 	'description' => 'Create a User belongs to Administrator Group', 	'title' => 'Create Administrator', 	'action_text' => 'Create Administrator', 											])
             ->create([	'resource' => '1', 	'name' => 'CreateUserDeveloper', 	'description' => 'Create a User belongs to Developer Group', 	'title' => 'Create Developer', 	'action_text' => 'Create Developer', 											])

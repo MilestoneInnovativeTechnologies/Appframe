@@ -15,7 +15,7 @@ class ResourceActionMethodTableSeeder extends Seeder
     {
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
-        \Milestone\Appframe\ResourceActionMethod::truncate()
+        \Milestone\Appframe\Model\ResourceActionMethod::truncate()
             ->create([	'resource_action' => '1', 	'type' => 'Form', 		'idn1' => '1', 												])
             ->create([	'resource_action' => '2', 	'type' => 'Form', 		'idn1' => '2', 												])
             ->create([	'resource_action' => '3', 	'type' => 'Form', 		'idn1' => '3', 												])

@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
         $this->call([
             GroupTableSeeder::class,
             GroupUserTableSeeder::class,
@@ -24,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ResourceRelationTableSeeder::class,
             ResourceDataTableSeeder::class,
             ResourceDataRelationTableSeeder::class,
+            ResourceDataScopeTableSeeder::class,
             ResourceListTableSeeder::class,
             ResourceListRelationTableSeeder::class,
             ResourceListScopeTableSeeder::class,

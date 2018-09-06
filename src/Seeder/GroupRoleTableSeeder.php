@@ -15,7 +15,7 @@ class GroupRoleTableSeeder extends Seeder
     {
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
-        \Milestone\Appframe\GroupRole::truncate()
+        \Milestone\Appframe\Model\GroupRole::truncate()
             ->create([	'group' => '1',	'role' => '1',														])
             ->create([	'group' => '2',	'role' => '2',														])
             ->create([	'group' => '3',	'role' => '3',														])

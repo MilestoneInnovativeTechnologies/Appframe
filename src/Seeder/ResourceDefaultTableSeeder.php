@@ -15,7 +15,7 @@ class ResourceDefaultTableSeeder extends Seeder
     {
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
-        \Milestone\Appframe\ResourceDefault::truncate()
+        \Milestone\Appframe\Model\ResourceDefault::truncate()
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
