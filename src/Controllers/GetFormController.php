@@ -15,7 +15,7 @@ class GetFormController extends Controller
     }
 
     private function form($formId){
-        return ResourceForm::with(['Fields' => function($Q){ $Q->with(['Attributes','Options','Validations']); }])->find($formId);
+        return ResourceForm::with(['Fields' => function($Q){ $Q->with(['Attributes','Options','Validations']); },'Layout'])->find($formId);
     }
 
     private function validations($form){

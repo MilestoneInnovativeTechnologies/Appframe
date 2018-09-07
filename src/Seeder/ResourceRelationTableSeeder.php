@@ -48,6 +48,7 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'resource' => '19', 	'name' => 'List Layout', 	'description' => 'Layout of a list', 	'method' => 'Layout', 	'type' => 'hasMany', 	'relate_resource' => '25', 										])
             ->create([	'resource' => '26', 	'name' => 'Nested Relation', 	'description' => 'Nested Relation', 	'method' => 'Nest', 	'type' => 'hasMany', 	'relate_resource' => '26', 										])
             ->create([	'resource' => '26', 	'name' => 'Related Resource', 	'description' => 'Related Resource Details', 	'method' => 'Relation', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
+            ->create([	'resource' => '26', 	'name' => 'Form Layout', 	'description' => 'Layout details', 	'method' => 'Layout', 	'type' => 'hasMany', 	'relate_resource' => '27', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

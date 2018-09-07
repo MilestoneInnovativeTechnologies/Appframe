@@ -42,6 +42,7 @@ class ResourceTableSeeder extends Seeder
             ->create([	'name' => 'ResourceDataRelation', 	'description' => 'The relations to be loaded from resource data', 	'title' => 'Data Relations', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_data_relations', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceListLayout', 	'description' => 'Layout of a list', 	'title' => 'List Layout', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_list_layout', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceRelation', 	'description' => 'Relation details of a resource', 	'title' => 'Resource Relations', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_relations', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceFormLayout', 	'description' => 'Form field layout details', 	'title' => 'Form Layout', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_form_layout', 	'key' => 'id', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
