@@ -13,7 +13,8 @@ class GetDataController extends Controller
         $ResData = ResourceData::find($ResDataId);
         $Res = Resource::find($ResData->resource);
         $Class = implode('\\',[$Res->namespace,$Res->name]);
-        $Data = (new $Class)->find($RecId);
+        $updatedAt = $this->bag->req('last_updated') ?: 0;
+        $Data = (new $Class)->where('updated_at','>',$updatedAt)->with('Groups')->find($RecId);
         $this->bag->store('Data',$ResDataId,$Data);
     }
 

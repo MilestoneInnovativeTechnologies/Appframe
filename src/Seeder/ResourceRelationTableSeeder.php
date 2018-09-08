@@ -51,6 +51,8 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'resource' => '26', 	'name' => 'Form Layout', 	'description' => 'Layout details', 	'method' => 'Layout', 	'type' => 'hasMany', 	'relate_resource' => '27', 										])
             ->create([	'resource' => '23', 	'name' => 'Data View Section', 	'description' => 'Section details of data view', 	'method' => 'Sections', 	'type' => 'hasMany', 	'relate_resource' => '28', 										])
             ->create([	'resource' => '26', 	'name' => 'Data View Section Items', 	'description' => 'Items of a data view section', 	'method' => 'Items', 	'type' => 'hasMany', 	'relate_resource' => '29', 										])
+            ->create([	'resource' => '28', 	'name' => 'Data Relation', 	'description' => 'View relation of a data', 	'method' => 'Relation', 	'type' => 'belongsTo', 	'relate_resource' => '26', 										])
+            ->create([	'resource' => '29', 	'name' => 'Data item relation', 	'description' => 'View relation of a data item', 	'method' => 'Relation', 	'type' => 'belongsTo', 	'relate_resource' => '26', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

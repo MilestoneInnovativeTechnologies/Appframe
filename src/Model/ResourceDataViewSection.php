@@ -9,4 +9,8 @@ class ResourceDataViewSection extends Model
     public function Items(){
         return $this->hasMany(ResourceDataViewSectionItem::class, 'section','id');
     }
+
+    public function Relation(){
+        return $this->belongsTo(ResourceRelation::class, 'relation','id');
+    }
 }
