@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             ResourceDataTableSeeder::class,
             ResourceDataRelationTableSeeder::class,
             ResourceDataScopeTableSeeder::class,
+            ResourceDataViewSectionTableSeeder::class,
+            ResourceDataViewSectionItemTableSeeder::class,
             ResourceListTableSeeder::class,
             ResourceListRelationTableSeeder::class,
             ResourceListScopeTableSeeder::class,

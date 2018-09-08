@@ -18,4 +18,8 @@ class ResourceData extends Model
         return $this->hasMany(ResourceDataScope::class, 'resource_data','id');
     }
 
+    public function Sections(){
+        return $this->hasMany(ResourceDataViewSection::class, 'resource_data','id');
+    }
+
 }
