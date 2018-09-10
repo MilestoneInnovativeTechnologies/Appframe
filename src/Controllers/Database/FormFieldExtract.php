@@ -18,7 +18,11 @@ class FormFieldExtract
         $this->resource = $Form->Resource;
         $this->formFields = $this->getExtractFields($Form->Fields);
         $this->formDefaults = $this->getExtractDefaults($Form->Defaults);
-        $this->initialize();
+    }
+
+    public function process($Record = null){
+        $this->initialize($Record);
+        return $this;
     }
 
     private function getExtractFields($Fields){
@@ -77,12 +81,12 @@ class FormFieldExtract
         return implode("\\",[$resource->namespace,$resource->name]);
     }
 
-    private function getClassModel($Class,$Id = null){
-        return ($Id) ? (new $Class)->find($Id) : new $Class;
+    private function getClassModel($Class,$Record){
+        return ($Record) ? (new $Class)->find($Record) : new $Class;
     }
 
-    private function initialize(){
-        $this->resourceModel = $this->getClassModel($this->getResourceClass($this->resource));
+    private function initialize($Record){
+        $this->resourceModel = $this->getClassModel($this->getResourceClass($this->resource),$Record);
         $this->fields = $this->formFields->union($this->formDefaults);
         $this->relationGrouped = $this->getRelationGroupedFields();
     }
