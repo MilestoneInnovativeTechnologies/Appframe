@@ -7,9 +7,6 @@ class Resolver extends Resolve
     protected $type, $idns, $method;
     protected $res;
 
-    private $preservedWords = ['List'];
-    private $prefixPreservedWord = 'MA';
-
     public function __construct($type,$idns = [],$method = null)
     {
         parent::__construct();
@@ -46,11 +43,6 @@ class Resolver extends Resolve
 
     private function getResolverName($keyword){
         return $keyword . 'Resolver';
-    }
-
-    private function getPrefixedPreserveWords($keyword){
-        if(!in_array($keyword,$this->preservedWords)) return $keyword;
-        return $this->prefixPreservedWord . $keyword;
     }
 
     private function responseResolveData(){
