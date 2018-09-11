@@ -73,7 +73,10 @@
                 <div class="page-inner">
                     <header class="page-title-bar">
                         <!--<transition name="breadcrumb"><router-view name="breadcrumb" :key="$route.fullPath"></router-view></transition>-->
-                        <transition name="pagetitle"><app-page-title :key="$store.state.PAGE.title"></app-page-title></transition>
+                        <div class="d-md-flex align-items-md-start">
+                            <transition name="pagetitle"><app-page-title :key="$store.state.PAGE.title"></app-page-title></transition>
+                            <app-content-action></app-content-action>
+                        </div>
                     </header>
                     <div class="page-section">
                         <div id="slow_connection_page_loading" style="height: 10rem;">
