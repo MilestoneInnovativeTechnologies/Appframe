@@ -41,7 +41,7 @@ class ValidationController extends Controller
 
     private function getRuleAndArgs($ValidateCollection){
         return array_map(function($Ary){
-            $Args = implode(',',array_filter(array_only($Ary,['arg1','arg2','arg3','arg4','arg5'])));
+            $Args = implode(',',$this->getArgumentsArray($Ary));
             return ($Args) ? implode(':',[$Ary['rule'],$Args]) : $Ary['rule'];
         },$ValidateCollection);
     }
@@ -52,6 +52,17 @@ class ValidationController extends Controller
                 return ["$Field.{$ValidateArray['rule']}" => $ValidateArray['message']];
             });
         })->toArray();
+    }
+
+    private function getArgumentsArray($Ary){
+        return array_map(function($arg){
+            return (mb_substr($arg,0,1) !== "-") ? $arg : $this->getDynamicRuleArg($arg);
+        },array_filter(array_only($Ary,['arg1','arg2','arg3','arg4','arg5'])));
+    }
+
+    private function getDynamicRuleArg($arg){
+        list($Item,$Name) = explode(':',mb_substr($arg,1));
+        return $this->bag->$Item($Name);
     }
 
 }
