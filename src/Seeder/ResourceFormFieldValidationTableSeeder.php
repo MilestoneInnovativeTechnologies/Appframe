@@ -28,6 +28,14 @@ class ResourceFormFieldValidationTableSeeder extends Seeder
             ->create([	'form_field' => '32', 	'rule' => 'min', 	'message' => 'Password length must be minimum of 3', 	'arg1' => '3', 												])
             ->create([	'form_field' => '33', 	'rule' => 'required', 	'message' => 'Password cannot be empty', 													])
             ->create([	'form_field' => '33', 	'rule' => 'min', 	'message' => 'Password length must be minimum of 3', 	'arg1' => '3', 												])
+            ->create([	'form_field' => '34', 	'rule' => 'required', 	'message' => 'Name cannot be empty', 													])
+            ->create([	'form_field' => '35', 	'rule' => 'required', 	'message' => 'Email address is mandatory', 													])
+            ->create([	'form_field' => '35', 	'rule' => 'email', 	'message' => 'Email is not valid', 													])
+            ->create([	'form_field' => '35', 	'rule' => 'unique', 	'message' => 'This email is already taken, please choose a unique one', 	'arg1' => 'users', 	'arg2' => 'email', 	'arg3' => '-r:update', 										])
+            ->create([	'form_field' => '36', 	'rule' => 'required', 	'message' => 'Name cannot be empty', 													])
+            ->create([	'form_field' => '37', 	'rule' => 'required', 	'message' => 'Email address is mandatory', 													])
+            ->create([	'form_field' => '37', 	'rule' => 'email', 	'message' => 'Email is not valid', 													])
+            ->create([	'form_field' => '37', 	'rule' => 'unique', 	'message' => 'This email is already taken, please choose a unique one', 	'arg1' => 'users', 	'arg2' => 'email', 	'arg3' => '-r:update', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

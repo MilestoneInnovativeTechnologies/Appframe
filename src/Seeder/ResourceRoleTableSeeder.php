@@ -16,7 +16,7 @@ class ResourceRoleTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceRole::truncate()
-            ->create([	'resource' => '1', 	'role' => '1', 	'actions_availability' => 'Only', 	'actions' => '2,3,5,6,7,8', 												])
+            ->create([	'resource' => '1', 	'role' => '1', 	'actions_availability' => 'Only', 	'actions' => '2,3,5,6,7,8,9,10', 												])
             ->create([	'resource' => '1', 	'role' => '3', 														])
             ->create([	'resource' => '2', 	'role' => '3', 														])
             ->create([	'resource' => '3', 	'role' => '3', 														])
