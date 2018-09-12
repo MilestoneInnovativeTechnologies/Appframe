@@ -42,6 +42,7 @@ Route::group([
             Route::post('fresh','TokenController@fresh');
             Route::post('next','TokenController@next');
         });
+        Route::view('dump-server','dump-server');
         Route::view('{slug?}','Appframe::root')->where('slug', '(.*)?')->name('root');
     });
 });
