@@ -14,26 +14,18 @@ class FormResolver extends Resolve
 
     public function prepare(){
         $idn1 = $this->bag->r('idns')['idn1'];
-        $this->bag->r('item',$idn1);
+        $this->bag->r('form',$idn1);
     }
 
     public function controllers(){
         $Controllers = [];
-        if($this->isGetFormController()) $Controllers[] = 'GetFormController';
-        if($this->isValidationController()) $Controllers[] = 'ValidationController';
-        if($this->isFormSubmitController()) $Controllers[] = 'FormSubmitController';
+        if($this->isFormSubmit()) array_push($Controllers,'ValidationController','FormSubmitController','FormSubmitDataController');
+        else array_push($Controllers,'GetFormController');
         return array_map(function($controller){ return 'Milestone\\Appframe\\Controllers\\' . $controller; },$Controllers);
     }
 
-    private function isGetFormController(){
-        return empty($this->bag->req('data'));
-    }
-
-    private function isValidationController(){
+    private function isFormSubmit(){
         return !empty($this->bag->req('data'));
     }
 
-    private function isFormSubmitController(){
-        return !empty($this->bag->req('data'));
-    }
 }
