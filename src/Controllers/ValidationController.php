@@ -8,7 +8,7 @@ class ValidationController extends Controller
 {
 
     public function index(){
-        $formId = $this->bag->r('item');
+        $formId = $this->bag->r('form');
         $Validator = ($this->isValidationExists($formId)) ? $this->getValidator($formId) : NULL;
         $this->bag->keep('Validator',$Validator);
         if($Validator !== NULL){
