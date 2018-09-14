@@ -11,7 +11,6 @@ class GetDataDetailsController extends Controller
         $ResDataId = $this->bag->r('data_id');
         $ResData = ResourceData::with(['Sections' => function($Q){ $Q->with(['Relation','Items.Relation']); }])->find($ResDataId);
         $this->bag->store('DataDetails',$ResDataId,$ResData);
-        //$this->bag->store('DataViewSection',$ResDataId,$ResData->Sections);
     }
 
 }
