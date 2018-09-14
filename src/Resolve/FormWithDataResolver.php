@@ -14,14 +14,14 @@ class FormWithDataResolver extends Resolve
 
     public function prepare(){
         $form = $this->bag->r('idns')['idn1']; $this->bag->r('item',$form); $this->bag->r('form',$form);
-        $data = $this->bag->r('idns')['idn2']; $this->bag->r('data',$data);
+        $data = $this->bag->r('idns')['idn2']; $this->bag->r('data',$data); $this->bag->r('data_id',$data);
         $this->bag->r('record',$this->bag->req('id')); $this->bag->r('update',$this->bag->req('record'));
     }
 
     public function controllers(){
-        $Controllers = []; if($this->yes()) $Controllers[] = 'GetFormController';
+        $Controllers = []; if($this->yes()) array_push($Controllers,'GetFormController','GetDataDetailsController');
         if($this->bag->r('update')) array_push($Controllers,'ValidationController','FormSubmitController','FormSubmitDataController');
-        else $Controllers[] = 'GetFormDataController';
+        else array_push($Controllers,'GetFormDataController');
         return array_map(function($controller){ return 'Milestone\\Appframe\\Controllers\\' . $controller; },$Controllers);
     }
 }
