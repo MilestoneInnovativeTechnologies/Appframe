@@ -15,7 +15,7 @@ class GetDataController extends Controller
         $Class = implode('\\',[$Res->namespace,$Res->name]);
         $updatedAt = $this->bag->req('last_updated') ?: 0;
         $Data = (new $Class)->where('updated_at','>',$updatedAt)->find($RecId);
-        $this->bag->store('Data',$ResDataId,$Data); $this->bag->store('DataDetails',$ResDataId,$ResData);
+        $this->bag->store('Data',$ResDataId,$Data);
     }
 
 }
