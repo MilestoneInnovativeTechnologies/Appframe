@@ -9,7 +9,7 @@ class GetFormDataController extends Controller
 {
 
     public function index(){
-        $DataId = $this->bag->r('data'); $RecId = $this->bag->r('record');
+        $DataId = $this->bag->r('data_id'); $RecId = $this->bag->r('record');
         $ResData = ResourceData::find($DataId);
         $Res = Resource::find($ResData->resource);
         $Class = implode('\\',[$Res->namespace,$Res->name]);
