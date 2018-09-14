@@ -21,7 +21,7 @@ class DataResolver extends Resolve
 
     public function controllers(){
         $Controllers = ['GetDataController'];
-        if($this->yes()) $Controllers[] = 'GetDataViewSectionController';
+        if($this->yes()) $Controllers[] = 'GetDataDetailsController';
         return array_map(function($controller){ return 'Milestone\\Appframe\\Controllers\\' . $controller; },$Controllers);
     }
 
