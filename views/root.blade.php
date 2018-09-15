@@ -72,7 +72,7 @@
             <div class="page">
                 <div class="page-inner">
                     <header class="page-title-bar">
-                        <transition name="breadcrumb"><breadcrumb :key="$route.fullPath"></breadcrumb></transition>-->
+                        <transition name="breadcrumb"><app-breadcrumb :key="$route.fullPath"></app-breadcrumb></transition>-->
                         <div class="d-md-flex align-items-md-start">
                             <transition name="pagetitle"><app-page-title :key="$store.getters['PTTL/title']($route.params.action)"></app-page-title></transition>
                             <app-content-action></app-content-action>
