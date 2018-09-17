@@ -16,8 +16,6 @@ class ResourceActionDataTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceActionData::truncate()
-            ->create([	'resource_action' => '7', 	'resource_data' => '1', 														])
-            ->create([	'resource_action' => '8', 	'resource_data' => '2', 														])
             ->create([	'resource_action' => '9', 	'resource_data' => '1', 														])
             ->create([	'resource_action' => '10', 	'resource_data' => '2', 														])
         ;

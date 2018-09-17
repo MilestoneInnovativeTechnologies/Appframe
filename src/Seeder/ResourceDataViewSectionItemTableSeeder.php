@@ -18,11 +18,8 @@ class ResourceDataViewSectionItemTableSeeder extends Seeder
         \Milestone\Appframe\Model\ResourceDataViewSectionItem::truncate()
             ->create([	'section' => '1', 	'label' => 'Name', 	'attribute' => 'name', 													])
             ->create([	'section' => '1', 	'label' => 'Email', 	'attribute' => 'email', 													])
-            ->create([	'section' => '1', 	'label' => 'Groups', 	'attribute' => 'title', 	'relation' => '1', 												])
             ->create([	'section' => '2', 	'label' => 'Name', 	'attribute' => 'name', 													])
             ->create([	'section' => '2', 	'label' => 'Email', 	'attribute' => 'email', 													])
-            ->create([	'section' => '3', 	'label' => 'Group', 	'attribute' => 'title', 													])
-            ->create([	'section' => '3', 	'label' => 'Description', 	'attribute' => 'description', 													])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
