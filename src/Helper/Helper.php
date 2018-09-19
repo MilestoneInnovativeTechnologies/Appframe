@@ -33,7 +33,7 @@ class Helper
         $Object = (new self($item))->setPrimaryAttribute($id);
         if($attrs && is_array($attrs) && !empty($attrs)){
             foreach($attrs as $prop => $val)
-                $Object = $Object->setAttribute($prop,$val);
+                $Object->setAttribute($prop,$val);
         }
         return $Object->get();
     }
