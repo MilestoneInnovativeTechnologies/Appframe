@@ -13,4 +13,8 @@ class ResourceRelation extends Model
     public function Resource(){
         return $this->belongsTo(Resource::class,'relate_resource', 'id');
     }
+
+    public function Owner(){
+        return $this->belongsTo(Resource::class,'resource', 'id');
+    }
 }
