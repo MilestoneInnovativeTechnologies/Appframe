@@ -10,7 +10,7 @@ class GetListController extends Controller
 {
 
     public function index(){
-        $id = $this->bag->r('item');
+        $id = $this->bag->r('list_id');
         $Data = $this->getORMData($id); $ORM = $this->getListORM($Data);
         $Data = $ORM->get();
         $this->store($id,$Data);
