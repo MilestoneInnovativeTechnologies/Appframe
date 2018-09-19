@@ -29,7 +29,7 @@ class Helper
         return $this->Object->get();
     }
 
-    public static function Helper($item,$id,$attrs = []){
+    public static function Help($item,$id,$attrs = []){
         $Object = (new self($item))->setPrimaryAttribute($id);
         if($attrs && is_array($attrs) && !empty($attrs)){
             foreach($attrs as $prop => $val)
