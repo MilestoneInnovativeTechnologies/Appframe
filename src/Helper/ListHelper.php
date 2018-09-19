@@ -14,7 +14,7 @@ class ListHelper
     }
 
     public function get(){
-        $List = ResourceList::with('Resource','Relations','Scopes','Layout')->find($this->id);
+        $List = ResourceList::with('Resource','Relations','Scopes')->find($this->id);
         return $this->getListExtracts($List);
     }
 
