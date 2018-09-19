@@ -4,7 +4,7 @@ namespace Milestone\Appframe\Helper;
 
 class Helper
 {
-    private $Class, $Id, $Object;
+    private $Class, $PrimaryArgument, $Object;
 
     public function __construct($item)
     {
@@ -14,7 +14,7 @@ class Helper
     }
 
     public function setPrimaryAttribute($id){
-        $this->Id = $id;
+        $this->PrimaryArgument = $id;
         $this->setObject();
         return $this;
     }
@@ -48,7 +48,7 @@ class Helper
 
     private function setObject(){
         $Class = $this->Class;
-        $Id = $this->Id;
+        $Id = $this->PrimaryArgument;
         $this->Object = new $Class($Id);
     }
 
