@@ -8,4 +8,4 @@ It should contains 2 public functions
 
 And optional functions named 
 
-1. ```set```, public method, which should accepts an associative array. This is used to set other arguments. So associative array should be Property => Value pair. And must return the class itself.
+1. ```set```, public method, which should accepts an associative array. This is used to set other arguments. So associative array should be Property => Value pair.
