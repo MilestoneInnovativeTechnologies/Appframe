@@ -43,7 +43,7 @@ class GetListController extends Controller
     private function getExtractData($Data){
         $items = $Data->items_per_page; $title = $Data->title;
         $relations = $this->getRelations($Data->Relations);
-        $layout = $this->getLayout($Data->Layout,$Data->resource);
+        $layout = $this->getLayout($Data->Layout);
         $last = 0;
         $orm = $this->getExtractORM($Data);
         return compact('orm','relations','items','last','title','layout');
@@ -57,14 +57,14 @@ class GetListController extends Controller
         })->toArray();
     }
 
-    private function getLayout($Layout,$resId){
-        return ($Layout->isEmpty()) ? ['ID' => 'id'] : $Layout->mapWithKeys(function($layout) use($resId){
-            return [$layout->label => $this->getLayoutProps($layout,$resId)];
+    private function getLayout($Layout){
+        return ($Layout->isEmpty()) ? ['ID' => 'id'] : $Layout->mapWithKeys(function($layout){
+            return [$layout->label => $this->getLayoutProps($layout)];
         });
     }
 
-    private function getLayoutProps($layout,$resId){
-        $With = $this->getWithRelations(collect([$layout]),$resId)[0];
+    private function getLayoutProps($layout){
+        $With = $this->getWithRelations(collect([$layout]))[0];
         $path = ($With) ? $With = implode(".",array_map(function($rel){ return Str::snake($rel); },explode(".",$With))) : $With;
         $field = $layout->field;
         return ['field' => $field, 'path' => $path];
