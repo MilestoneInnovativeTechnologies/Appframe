@@ -64,7 +64,7 @@ class GetListRelationDataController extends Controller
 
     private function store($list,$record,$data){
         $this->bag->store('List',$list,$data);
-        $this->bag->store('ListRelations',$list,[ $record => $data->pluck('id') ]);
+        $this->bag->store('ListRelation',$list,[ $record => $data->pluck('id') ]);
     }
 
 }
