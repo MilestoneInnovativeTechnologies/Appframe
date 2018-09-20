@@ -20,7 +20,6 @@ class PushRelation
         $this->baseModel = $baseModel;
         $this->setDetails($details);
         $this->initiate();
-        return $this;
     }
 
     private function setDetails($details){
