@@ -8,7 +8,7 @@ class GetFormController extends Controller
 {
 
     public function index(){
-        $formId = $this->bag->r('form');
+        $formId = $this->bag->r('form_id');
         $form = Helper::Help('Form',$formId);
         $validations = Helper::Help('Validation',$form);
         $this->bag->push('Validation',$formId,$validations);

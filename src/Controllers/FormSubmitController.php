@@ -14,7 +14,7 @@ class FormSubmitController extends Controller
     }
 
     private function SubmitForm(){
-        $form = $this->bag->r('form'); $update = $this->bag->r('update');
+        $form = $this->bag->r('form_id'); $update = $this->bag->r('update');
         $Form = ResourceForm::with('Resource','Defaults','Fields.Data')->find($form);
         $FieldExtractClass = (new Database\FormFieldExtract($Form))->process($update);
         $RelationGrouped = $FieldExtractClass->relationGrouped;

@@ -10,7 +10,7 @@ class FormSubmitDataController extends Controller
         $Data = ($this->bag->r('submit_relations') && !empty($this->bag->r('submit_relations')))
             ? ($this->bag->r('submit_model'))->load($this->bag->r('submit_relations'))
             : $this->bag->r('submit_model');
-        $this->bag->store('FormSubmitData',$this->bag->r('form'),$Data);
+        $this->bag->store('FormSubmitData',$this->bag->r('form_id'),$Data);
     }
 
 }
