@@ -20,9 +20,7 @@ class Helper
     }
 
     public function setAttribute($name, $value){
-        $Attributes = [$name => $value];
-        $this->Object->set($Attributes);
-        return $this;
+        $this->Object->$name = $value;
     }
 
     public function get(){

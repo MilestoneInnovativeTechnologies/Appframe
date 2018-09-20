@@ -4,7 +4,8 @@ namespace Milestone\Appframe\Helper;
 
 class ChainRelationHelper
 {
-    private $relations, $snakecase = true;
+    private $relations;
+    public $snakecase = true;
 
     public function __construct($relations)
     {
