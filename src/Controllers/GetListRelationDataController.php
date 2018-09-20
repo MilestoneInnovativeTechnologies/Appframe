@@ -8,9 +8,10 @@ class GetListRelationDataController extends Controller
 {
 
     public function index(){
-        $relation_id = $this->bag->r('relation_id'); $record_id = $this->bag->r('record_id'); $list_id = $this->bag->r('list_id');
+        $relation_id = $this->bag->r('relation_id'); $list_id = $this->bag->r('list_id');
+        $record_id = $this->bag->r('record_id'); $updated = $this->bag->r('updated') ?: 0;
         $Keys = $this->getRelationKeys($relation_id,$record_id);
-        $data = ($Keys) ? $this->getListData($list_id,$Keys) : null;
+        $data = ($Keys) ? $this->getListData($list_id,$Keys,$updated) : null;
         $this->store($list_id,$record_id,$data);
     }
 
