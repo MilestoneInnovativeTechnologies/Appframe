@@ -73,7 +73,13 @@ class PushRelation
 
     private function getMany2Data($data){
         $value = $data[0]['value'];
-        return (mb_stripos($value,',') === false) ? [trim($value)] : array_map(function($id){ return trim($id); },explode(',',$value));
+        return is_array($value)
+            ? $value
+            : ((mb_stripos($value, ',') === false)
+                ? [trim($value)]
+                : array_map(function ($id) {
+                    return trim($id);
+                }, explode(',', $value)));
     }
 
     private function getOne2OneData($data){
