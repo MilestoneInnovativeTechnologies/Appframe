@@ -20,6 +20,7 @@ class ListResolver extends Resolve
 
     public function controllers(){
         $Controllers = ['GetListController'];
+        if($this->yes()) array_unshift($Controllers,'GetListDetailsController');
         return array_map(function($controller){ return 'Milestone\\Appframe\\Controllers\\' . $controller; },$Controllers);
     }
 
