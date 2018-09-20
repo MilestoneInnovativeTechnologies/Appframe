@@ -15,7 +15,7 @@ class GetFormDataController extends Controller
         $Class = implode('\\',[$Res->namespace,$Res->name]);
         $updatedAt = $this->bag->req('last_updated') ?: 0;
         $Data = (new $Class)->where('updated_at','>',$updatedAt)->find($RecId);
-        $this->bag->store('Data',$DataId,$Data); $this->bag->store('FormData',$this->bag->r('form'),[$DataId => $RecId]);
+        $this->bag->store('Data',$DataId,$Data); $this->bag->store('FormData',$this->bag->r('form_id'),[$DataId => $RecId]);
     }
 
 }
