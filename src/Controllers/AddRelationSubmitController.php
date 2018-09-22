@@ -4,7 +4,7 @@ namespace Milestone\Appframe\Controllers;
 
 use Milestone\Appframe\Model\ResourceForm;
 
-class RelationFormSubmitController extends Controller
+class AddRelationSubmitController extends Controller
 {
 
     public function index(){
@@ -14,11 +14,11 @@ class RelationFormSubmitController extends Controller
     }
 
     private function SubmitForm(){
-        $form = $this->bag->r('form_id'); $update = $this->bag->r('update');
+        $form = $this->bag->r('form_id'); $record = $this->bag->r('record');
         $Form = ResourceForm::with('Resource','Defaults','Fields.Data')->find($form);
-        $FieldExtractClass = (new Database\FormFieldExtract($Form))->process($update);
+        $FieldExtractClass = (new Database\FormFieldExtract($Form))->process($record);
         $RelationGrouped = $FieldExtractClass->relationGrouped;
-        dd($RelationGrouped->toArray());
+        dd($RelationGrouped->toArray(),$FieldExtractClass->resourceModel);
         $this->bag->r('submit_relations',$RelationGrouped->keys()->filter()->values()->toArray());
         $Submit = new Database\Push($RelationGrouped->toArray(),$FieldExtractClass->resourceModel);
         $this->bag->store('FormSubmit',$form,!!$Submit); $this->bag->r('submit_model',$Submit->Model);
