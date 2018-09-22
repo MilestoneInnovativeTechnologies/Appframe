@@ -2,8 +2,6 @@
 
 namespace Milestone\Appframe\Controllers;
 
-use Milestone\Appframe\Helper\Helper;
-
 class GetListController extends Controller
 {
 
