@@ -12,7 +12,7 @@ class Push
     public function __construct($Array, $Model)
     {
         $this->Group = $Array; $this->baseModel = $Model;
-        $this->Native = $Array[""]; $this->Relation = array_except($Array,"");
+        $this->Native = array_key_exists("",$Array) ? $Array[""] : null; $this->Relation = array_except($Array,"");
         $this->push();
     }
 
@@ -24,7 +24,7 @@ class Push
 
     private function updateNative(){
         $Model = $this->baseModel; $Native = $this->Native;
-        if(empty($Native) || empty($Native['data'])) return $this->Model = $this->baseModel;
+        if(!$Native || empty($Native) || empty($Native['data'])) return $this->Model = $this->baseModel;
         foreach($Native['data'] as $Ary) $Model->{$Ary['attribute']} = $Ary['value'];
         $Model->save(); return $this->Model = $Model;
     }
