@@ -9,16 +9,17 @@ class AddRelationResolver extends Resolve
     }
 
     public function idns(){
-        return ['idn1','idn2'];
+        return ['idn1'];
     }
 
     public function prepare(){
-        $idn2 = $this->bag->r('idns')['idn2']; $this->bag->r('form_id',$idn2);
+        $this->bag->r('form_id',$this->bag->r('idns')['idn1']);
+        $this->bag->r('record',$this->bag->req('record'));
     }
 
     public function controllers(){
         $Controllers = [];
-        if($this->isFormSubmit()) array_push($Controllers,'ValidationController','RelationFormSubmitController','FormSubmitDataController');
+        if($this->isFormSubmit()) array_push($Controllers,'ValidationController','AddRelationSubmitController','FormSubmitDataController');
         else array_push($Controllers,'GetFormController');
         return $this->namespacedControllers($Controllers);
     }
