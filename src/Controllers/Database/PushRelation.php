@@ -14,6 +14,7 @@ class PushRelation
     ];
     private $many2ManyMethods = ['associate', 'sync', 'attach'];
     private $one2OneMethods = ['save'];
+    private $one2ManyMethods = ['saveMany'];
 
     public function __construct($baseModel, $details)
     {
@@ -68,7 +69,7 @@ class PushRelation
             ? $this->getMany2Data($data)
             : ((in_array($method,$this->one2OneMethods))
                 ? $this->getOne2OneData($data)
-                : null);
+                : $this->getOne2ManyData($data));
     }
 
     private function getMany2Data($data){
@@ -85,6 +86,12 @@ class PushRelation
     private function getOne2OneData($data){
         $relateModel = $this->getRelateModel();
         return $this->fillModelWithData($relateModel,$data);
+    }
+
+    private function getOne2ManyData($data){
+        $relateModel = $this->getRelateModel();
+        //Temporary Fix
+        return [$this->fillModelWithData($relateModel,$data)];
     }
 
     private function getRelateModel(){
