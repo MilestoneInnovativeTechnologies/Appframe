@@ -14,8 +14,9 @@ class FormWithDataResolver extends Resolve
 
     public function prepare(){
         $form = $this->bag->r('idns')['idn1']; $this->bag->r('form_id',$form);
-        $data = $this->bag->r('idns')['idn2']; $this->bag->r('data',$data); $this->bag->r('data_id',$data);
-        $this->bag->r('record',$this->bag->req('id')); $this->bag->r('update',$this->bag->req('record'));
+        $data = $this->bag->r('idns')['idn2']; $this->bag->r('data_id',$data);
+        $this->bag->r('record',$this->bag->req('id'));
+        $this->bag->r('update',$this->bag->req('record'));
     }
 
     public function controllers(){
