@@ -18,7 +18,7 @@ class AddRelationSubmitController extends Controller
         $Form = ResourceForm::with('Resource','Defaults','Fields.Data')->find($form);
         $FieldExtractClass = (new Database\FormFieldExtract($Form))->process($record);
         $RelationGrouped = $FieldExtractClass->relationGrouped;
-        dd($RelationGrouped->toArray(),$FieldExtractClass->resourceModel);
+        //dd($RelationGrouped->toArray(),$FieldExtractClass->resourceModel);
         $this->bag->r('submit_relations',$RelationGrouped->keys()->filter()->values()->toArray());
         $Submit = new Database\Push($RelationGrouped->toArray(),$FieldExtractClass->resourceModel);
         $this->bag->store('FormSubmit',$form,!!$Submit); $this->bag->r('submit_model',$Submit->Model);
