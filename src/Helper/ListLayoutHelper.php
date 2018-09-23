@@ -33,7 +33,7 @@ class ListLayoutHelper
 
     private function getRelationPath($layout){
         $relations =  Helper::Help('DeepRelation',$layout);
-        return Helper::Help('ChainRelation',$relations,['snakecase' => true]);
+        return Helper::Help('ChainRelation',$relations,['json' => true]);
     }
 
 }

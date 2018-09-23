@@ -35,7 +35,7 @@ class GetDataHelper
         if(!$Relations || $Relations->isEmpty()) return null;
         return $Relations->map(function ($item){
             $relations = Helper::Help('DeepRelation',$item);
-            return Helper::Help('ChainRelation',$relations,['snakecase' => false]);
+            return Helper::Help('ChainRelation',$relations,['json' => false]);
         })->toArray();
     }
 

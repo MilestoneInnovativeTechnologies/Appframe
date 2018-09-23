@@ -31,7 +31,7 @@ class ListHelper
         if($Relations->isEmpty()) return null;
         return $Relations->map(function ($item){
             $relations = Helper::Help('DeepRelation',$item);
-            return Helper::Help('ChainRelation',$relations,['snakecase' => false]);
+            return Helper::Help('ChainRelation',$relations,['json' => false]);
         })->toArray();
     }
 
@@ -51,7 +51,7 @@ class ListHelper
         $with = [];
         $Relations->each(function ($item) use(&$with) {
             $relations = Helper::Help('DeepRelation',$item);
-            $chained = Helper::Help('ChainRelation',$relations,['snakecase' => false]);
+            $chained = Helper::Help('ChainRelation',$relations,['json' => false]);
             array_push($with, $chained);
         });
         return $with;
