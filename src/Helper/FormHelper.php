@@ -14,7 +14,15 @@ class FormHelper
     }
 
     public function get(){
-        return ResourceForm::with(['Fields' => function($Q){ $Q->with(['Attributes','Options','Validations']); },'Layout'])->find($this->id);
+        return ResourceForm::with([
+            'Fields' => function($Q){ $Q->with(['Attributes','Options','Validations']); },
+            'Layout',
+            'Collections' => function($Q){ $Q->with([
+                'Form' => function($Q){ $Q->with([
+                    'Fields' => function($Q){ $Q->with(['Attributes','Options','Validations']); },
+                    'Layout']); },
+                'Relation']); }])
+            ->find($this->id);
     }
 
 
