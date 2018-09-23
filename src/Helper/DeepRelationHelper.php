@@ -22,7 +22,7 @@ class DeepRelationHelper
         return collect($record)
             ->only(['relation','nest_relation1','nest_relation2','nest_relation3','nest_relation4','nest_relation5'])
             ->filter()->map(function($relation_id){
-                return $this->getRelationDetails($relation_id);
+                return (is_object($relation_id) || is_array($relation_id)) ? $this->getRelationDetails($relation_id['id']) : $this->getRelationDetails($relation_id);
             });
     }
 
