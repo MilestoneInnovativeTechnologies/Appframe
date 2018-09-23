@@ -56,6 +56,7 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'resource' => '26', 	'name' => 'Owner Relation', 	'description' => 'View the owner resource', 	'method' => 'Owner', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
             ->create([	'resource' => '12', 	'name' => 'Collections', 	'description' => 'Collection/Detail form', 	'method' => 'Collections', 	'type' => 'hasMany', 	'relate_resource' => '30', 										])
             ->create([	'resource' => '30', 	'name' => 'Collection Form', 	'description' => 'Collection Form', 	'method' => 'Form', 	'type' => 'belongsTo', 	'relate_resource' => '12', 										])
+            ->create([	'resource' => '30', 	'name' => 'Relation', 	'description' => 'Details of Relation', 	'method' => 'Relation', 	'type' => 'belongsTo', 	'relate_resource' => '26', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
