@@ -21,4 +21,8 @@ class ResourceForm extends Model
     public function Layout(){
         return $this->hasMany(ResourceFormLayout::class, 'resource_form', 'id');
     }
+
+    public function Collections(){
+        return $this->hasMany(ResourceFormCollection::class, 'resource_form', 'id');
+    }
 }
