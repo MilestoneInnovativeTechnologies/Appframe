@@ -5,7 +5,7 @@ namespace Milestone\Appframe\Helper;
 class ChainRelationHelper
 {
     private $relations;
-    public $snakecase = true;
+    public $json = false;
 
     public function __construct($relations)
     {
@@ -23,7 +23,7 @@ class ChainRelationHelper
     }
 
     private function modifier($text){
-        return ($this->snakecase) ? snake_case($text) : $text;
+        return ($this->json) ? snake_case($text) : $text;
     }
 
 }
