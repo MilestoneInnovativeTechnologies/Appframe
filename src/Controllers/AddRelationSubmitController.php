@@ -14,6 +14,7 @@ class AddRelationSubmitController extends Controller
     }
 
     private function SubmitForm(){
+        dd('Need changes as per incoming data');
         $form = $this->bag->r('form_id'); $record = $this->bag->r('record');
         $Form = ResourceForm::with('Resource','Defaults','Fields.Data')->find($form);
         $FieldExtractClass = (new Database\FormFieldExtract($Form))->process($record);
