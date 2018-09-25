@@ -25,7 +25,7 @@ class Push
     private function updateNative(){
         $Model = $this->baseModel; $Native = $this->Native;
         if(!$Native || empty($Native) || empty($Native['data'])) return $this->Model = $this->baseModel;
-        foreach($Native['data'] as $Ary) $Model->{$Ary['attribute']} = $Ary['value'];
+        foreach(array_shift($Native['data']) as $attribute => $value) $Model->$attribute = $value;
         $Model->save(); return $this->Model = $Model;
     }
 

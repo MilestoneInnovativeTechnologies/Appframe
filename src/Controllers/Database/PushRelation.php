@@ -73,25 +73,23 @@ class PushRelation
     }
 
     private function getMany2Data($data){
-        $value = $data[0]['value'];
-        return is_array($value)
-            ? $value
-            : ((mb_stripos($value, ',') === false)
-                ? [trim($value)]
-                : array_map(function ($id) {
-                    return trim($id);
-                }, explode(',', $value)));
+        $value = [];
+        foreach($data as $key => $saveData){
+            if(array_key_exists("",$saveData)) $value[$saveData[""]] = array_except($saveData,"");
+            else $value[$key] = $saveData;
+        }
+        return $value;
     }
 
     private function getOne2OneData($data){
         $relateModel = $this->getRelateModel();
-        return $this->fillModelWithData($relateModel,$data);
+        return $this->fillModelWithData($relateModel,array_shift($data));
     }
 
     private function getOne2ManyData($data){
-        $relateModel = $this->getRelateModel();
-        //Temporary Fix
-        return [$this->fillModelWithData($relateModel,$data)];
+        return array_map(function($data1){
+            return $this->fillModelWithData($this->getRelateModel(),$data1);
+        },array_values($data));
     }
 
     private function getRelateModel(){
@@ -100,13 +98,7 @@ class PushRelation
     }
 
     private function fillModelWithData($relateModel,$data){
-        $data = $this->getAssociateArray($data);
-        $relateModel->forceFill($data);
-        return $relateModel;
-    }
-
-    private function getAssociateArray($array,$key = 'attribute', $value = 'value'){
-        return collect($array)->pluck($value,$key)->toArray();
+        return $relateModel->forceFill($data);
     }
 
 }
