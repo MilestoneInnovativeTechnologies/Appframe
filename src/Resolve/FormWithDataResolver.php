@@ -17,6 +17,7 @@ class FormWithDataResolver extends Resolve
         $data = $this->bag->r('idns')['idn2']; $this->bag->r('data_id',$data);
         $this->bag->r('record',$this->bag->req('id'));
         $this->bag->r('update',$this->bag->req('record'));
+        $this->bag->r('data',$this->bag->req('data'));
     }
 
     public function controllers(){
