@@ -21,4 +21,8 @@ class ResourceFormField extends Model
     public function Data(){
         return $this->hasOne(ResourceFormFieldData::class,'form_field','id');
     }
+
+    public function Form(){
+        return $this->belongsTo(ResourceForm::class,'resource_form','id');
+    }
 }
