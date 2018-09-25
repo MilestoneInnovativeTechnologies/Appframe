@@ -12,7 +12,6 @@ class Resolver extends Resolve
         parent::__construct();
         $this->type = $type; $this->idns = $idns; $this->method = $method;
         $this->init();
-        return $this;
     }
 
     static public function Resolve($array){
