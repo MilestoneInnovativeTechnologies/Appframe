@@ -32,7 +32,7 @@ class Bag
     }
 
     public function get($item){
-        return $this->keep[$item];
+        return (array_key_exists($item,$this->keep)) ? $this->keep[$item] : null;
     }
 
     public function setRequests($request){
