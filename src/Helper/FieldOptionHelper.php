@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Helper;
 
+use Milestone\Appframe\Model\Resource;
 use Milestone\Appframe\Model\ResourceFormFieldOption;
 
 class FieldOptionHelper
@@ -34,6 +35,17 @@ class FieldOptionHelper
         $model = $this->Model;
         $list = Helper::Help('ListData',$model->resource_list, [ 'limit' => 0 ]);
         return $list->pluck($model->label_attr,$model->value_attr);
+    }
+
+    private function getForeignOptions(){
+        $model = $this->Model->load(['Field.Data','Field.Form.Resource']);
+        $deepRelations = Helper::Help('DeepRelation',$model->Field->Data);
+        $table = (empty($deepRelations)) ? $model->Field->Form->Resource->table : Resource::find(end($deepRelations)['relate_resource'])->table;
+        $field = $model->Field->Data->attribute;
+        $Foreign = Helper::Help('ForeignTableField',$table, [ 'field' => $field ]);
+        $resource = Resource::where('table',$Foreign['table'])->first();
+        $Class = implode("\\",[$resource->namespace,$resource->name]);
+        return (new $Class)->get()->pluck($model->label_attr,$model->$Foreign['field']);
     }
 
 }
