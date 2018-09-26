@@ -8,6 +8,6 @@ class ResourceFormFieldData extends Model
     protected $with = ['Relation'];
 
     public function Relation(){
-        return $this->belongsTo(Resource::class,'relation','id');
+        return $this->belongsTo(ResourceRelation::class,'relation','id');
     }
 }
