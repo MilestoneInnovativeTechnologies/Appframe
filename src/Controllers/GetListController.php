@@ -8,7 +8,8 @@ class GetListController extends Controller
     public function index(){
         $id = $this->bag->r('list_id');
         $ORM = $this->getListORM($this->getListDetails($id));
-        $Data = $ORM->get(); $this->store($id,$Data);
+        $FilterKeys = $this->bag->get('ListIds');
+        $Data = ($FilterKeys && !empty($FilterKeys)) ? $ORM->find($FilterKeys) : $ORM->get(); $this->store($id,$Data);
     }
 
     private function getListDetails($id){
