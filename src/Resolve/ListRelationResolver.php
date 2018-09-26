@@ -20,9 +20,8 @@ class ListRelationResolver extends Resolve
     }
 
     public function controllers(){
-        $Controllers = ['GetListController'];
+        $Controllers = ['GetListRelationDataController','GetListController'];
         if($this->needDetails()) array_unshift($Controllers,'GetListDetailsController');
-        $Controllers[] = 'GetListRelationDataController';
         return $this->namespacedControllers($Controllers);
     }
 
