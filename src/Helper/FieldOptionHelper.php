@@ -8,6 +8,7 @@ use Milestone\Appframe\Model\ResourceFormFieldOption;
 class FieldOptionHelper
 {
     private $id, $Model;
+    public $latest = 0;
 
 
     public function __construct($id)
@@ -27,13 +28,13 @@ class FieldOptionHelper
         $resource_id = (empty($deepRelations)) ? $this->Model->Field->Form->resource : end($deepRelations)['relate_resource'];
         $attribute = $this->Model->Field->Data->attribute;
         $enum_options = Helper::Help('ResourceFieldEnum',$resource_id,[ 'field' => $attribute ]);
-        return array_combine($enum_options,$enum_options);
+        return [ 'options' => array_combine($enum_options,$enum_options), 'latest' => 0 ];
     }
 
     private function getListOptions(){
-        $model = $this->Model;
-        $list = Helper::Help('ListData',$model->detail, [ 'limit' => 0 ]);
-        return $list->pluck($model->label_attr,$model->value_attr);
+        $model = $this->Model; $limit = 0; $latest = $this->latest;
+        $list = Helper::Help('ListData',$model->detail, compact('limit','latest'));
+        return [ 'options' => $list->pluck($model->label_attr,$model->value_attr), 'latest' => $list->max('updated_at') ] ;
     }
 
     private function getForeignOptions(){
@@ -44,11 +45,13 @@ class FieldOptionHelper
         $Foreign = Helper::Help('ForeignTableField',$table, [ 'field' => $field ]);
         $resource = Resource::where('table',$Foreign['table'])->first();
         $Class = implode("\\",[$resource->namespace,$resource->name]);
-        return (new $Class)->get()->pluck($model->label_attr,$Foreign['field']);
+        $Latest = $this->latest;
+        $List = (new $Class)->where('updated_at','>',$Latest)->get();
+        return [ 'options' => $List->pluck($model->label_attr,$Foreign['field']), 'latest' => $List->max('updated_at') ];
     }
 
     private function getMethodOptions(){
-        return [];
+        return [ 'options' => [],'latest' => 0 ];
     }
 
 }
