@@ -17,12 +17,11 @@ class FieldOptionHelper
     }
 
     public function get(){
-        if($this->Model->enum == 'Yes') return $this->getEnumeratedOptions();
-        elseif ($this->Model->resource_list) return $this->getListOptions();
-        else return [];
+        $method = implode("",['get',$this->Model->type,'Options']);
+        return $this->$method();
     }
 
-    private function getEnumeratedOptions(){
+    private function getEnumOptions(){
         $this->Model->load(['Field.Data','Field.Form']);
         $deepRelations = Helper::Help('DeepRelation',$this->Model->Field->Data);
         $resource_id = (empty($deepRelations)) ? $this->Model->Field->Form->resource : end($deepRelations)['relate_resource'];
@@ -33,7 +32,7 @@ class FieldOptionHelper
 
     private function getListOptions(){
         $model = $this->Model;
-        $list = Helper::Help('ListData',$model->resource_list, [ 'limit' => 0 ]);
+        $list = Helper::Help('ListData',$model->detail, [ 'limit' => 0 ]);
         return $list->pluck($model->label_attr,$model->value_attr);
     }
 
@@ -45,7 +44,11 @@ class FieldOptionHelper
         $Foreign = Helper::Help('ForeignTableField',$table, [ 'field' => $field ]);
         $resource = Resource::where('table',$Foreign['table'])->first();
         $Class = implode("\\",[$resource->namespace,$resource->name]);
-        return (new $Class)->get()->pluck($model->label_attr,$model->$Foreign['field']);
+        return (new $Class)->get()->pluck($model->label_attr,$Foreign['field']);
+    }
+
+    private function getMethodOptions(){
+        return [];
     }
 
 }
