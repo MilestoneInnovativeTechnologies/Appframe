@@ -3,7 +3,6 @@
 namespace Milestone\Appframe\Controllers;
 
 use Milestone\Appframe\Helper\Helper;
-use Milestone\Appframe\Model\ResourceForm;
 
 class FormSubmitController extends Controller
 {
@@ -15,18 +14,16 @@ class FormSubmitController extends Controller
     }
 
     private function SubmitForm(){
-        $form = $this->bag->r('form_id'); $update = $this->bag->r('update'); $data = $this->bag->r('data');
-        $Model = $this->getFormResourceModel($form,$update);
-        $Data = Helper::Help('FormFieldRelationExtract',$form,[ 'input' => $data ]);
-        $this->bag->r('submit_relations',array_filter(array_column($Data,'path')));
-        $Submit = new Database\Push($Data,$Model);
-        $this->bag->store('FormSubmit',$form,!!$Submit); $this->bag->r('submit_model',$Submit->Model);
+        $form = $this->bag->r('form_id'); $id = $this->bag->r('update'); $input = $this->bag->r('data');
+        $relation_data = Helper::Help('FormSubmitRelation',$form,compact('id','input'));
+        $this->bag->r('submit_relations',$this->getRelations($relation_data));
+        $response = (new Database\Bind($relation_data))->store();
+        $this->bag->store('FormSubmit',$form,!!$response); $this->bag->r('submit_model',$response[0]);
     }
 
-    private function getFormResourceModel($form,$update){
-        $Res = ResourceForm::find($form)->Resource;
-        $Class = implode("\\",[$Res->namespace,$Res->name]);
-        return ($update) ? (new $Class)->find($update) : new $Class;
+    private function getRelations($relation_data){
+        $relations = array_column($relation_data[0]['records'],'relations');
+        return (empty($relations) || !isset($relations[0]) || empty($relations[0])) ? [] : array_map(function($relation){ return $relation[0]['method']; },$relations);
     }
 
 }
