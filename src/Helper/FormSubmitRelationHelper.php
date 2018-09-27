@@ -87,15 +87,19 @@ class FormSubmitRelationHelper
     }
 
     private function getRecords($fields){
-        $records = [[ 'data' => [], 'relations' => [] ]];
+        $records = [[ 'data' => [], 'relations' => [] ]]; $relation_details = [];
         foreach ($fields as $field){
             $base = &$records;
             foreach(['relation','nest_relation1','nest_relation2','nest_relation3'] as $deep => $rel){
                 if($field[$rel]) {
+                    if(!isset($relation_details[$deep])) $relation_details[$deep] = [];
                     $relation_id = (is_object($field[$rel]) || is_array($field[$rel])) ? $field[$rel]['id'] : $field[$rel];
-                    $properties = $this->getProperties($relation_id);
-                    $new_relations_index = array_push($base[0]['relations'],$properties)-1;
-                    $base = &$base[0]['relations'][$new_relations_index]['records'];
+                    if(!isset($relation_details[$deep][$relation_id])){
+                        $properties = $this->getProperties($relation_id);
+                        $relations_index = array_push($base[0]['relations'],$properties)-1;
+                        $relation_details[$deep][$relation_id] = $relations_index;
+                    } else $relations_index = $relation_details[$deep][$relation_id];
+                    $base = &$base[0]['relations'][$relations_index]['records'];
                 } else{
                     $values = $field['value'] ? $this->getFormDefaultValue($field['value']) : $this->getInputValue($field['name']);
                     foreach ((array) $values as $record => $value){
