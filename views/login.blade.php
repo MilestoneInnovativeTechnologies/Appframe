@@ -39,7 +39,7 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
         </div>
         <div class="form-check text-center">
-            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : 'checked' }}>
             <label class="form-check-label" for="remember">Remember</label>
         </div>
     </form>
