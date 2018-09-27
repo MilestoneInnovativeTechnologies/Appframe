@@ -14,6 +14,7 @@ class OptionResolver extends Resolve
 
     public function prepare(){
         $this->bag->r('option_id',$this->bag->req('id'));
+        $this->bag->r('latest',$this->bag->req('latest'));
     }
 
     public function controllers(){
