@@ -8,15 +8,27 @@ use Milestone\Appframe\Model\ResourceRelation;
 class FormSubmitRelationHelper
 {
     private $form_id, $form, $fields;
-    public $input = [], $id, $collection = false;
+    public $input = [], $id, $collection = false, $skip = null;
     protected $relations = [];
 
     public function __construct($form_id)
     {
         $this->form_id = $form_id;
         $this->form = $form = ResourceForm::with(['Resource','Defaults','Fields.Data','Collections.Relation'])->find($form_id);
-        $this->fields = $fields = collect($form->Defaults->toArray())->concat($this->getMergeFormFields($form->Fields));
+        $this->setFields();
         $this->relations = [$this->getProperties(null,$form->Resource)];
+    }
+
+    private function setFields(){
+        $form = $this->form; $skip = $this->skip;
+        $fields = collect($form->Defaults->toArray())->concat($this->getMergeFormFields($form->Fields));
+        $this->fields = ($skip) ? $fields->reject(function($field) use($skip){ $form_field = $field->form_field; return in_array($form_field,(array) $skip); }) : $fields;
+    }
+
+    private function getMergeFormFields($fields){
+        return $fields->map(function($field){
+            return collect($field->Data)->merge(['name' => $field->name, 'value' => null]);
+        });
     }
 
     private function getProperties($relation,$resource = null){
@@ -64,15 +76,8 @@ class FormSubmitRelationHelper
             ? $resource
             : Resource::find($resource);
     }
-
     private function getResourceClass($res){
         return implode("\\",[$res->namespace,$res->name]);
-    }
-
-    private function getMergeFormFields($fields){
-        return $fields->map(function($field){
-            return collect($field->Data)->merge(['name' => $field->name, 'value' => null]);
-        });
     }
 
     public function get(){
@@ -151,8 +156,8 @@ class FormSubmitRelationHelper
         foreach($Collections as $Collection){
             $relation_index = array_push($relations,$this->getProperties($Collection->relation))-1;
             $method = $Collection->Relation->method;
-            $input = $this->getInputValue(snake_case($method)); $collection = true;
-            $collection_relations = Helper::Help('FormSubmitRelation',$Collection->collection_form,compact('input','collection'));
+            $input = $this->getInputValue(snake_case($method)); $collection = true; $skip = $Collection->foreign_field;
+            $collection_relations = Helper::Help('FormSubmitRelation',$Collection->collection_form,compact('input','collection','skip'));
             $relations[$relation_index]['records'] = $collection_relations[0]['records'];
         }
     }
