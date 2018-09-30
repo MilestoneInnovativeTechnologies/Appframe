@@ -7,7 +7,7 @@ use Milestone\Appframe\Model\ResourceList;
 class ListLayoutHelper
 {
     private $id;
-    private $defaultLayout = ['ID' => 'id'];
+    private $defaultLayout = [];
 
     public function __construct($id)
     {
@@ -22,7 +22,7 @@ class ListLayoutHelper
     private function getLayout($Layout){
         return ($Layout->isEmpty()) ? $this->defaultLayout : $Layout->mapWithKeys(function($layout){
             return [$layout->label => $this->getLayoutProps($layout)];
-        });
+        })->toArray();
     }
 
     private function getLayoutProps($layout){
