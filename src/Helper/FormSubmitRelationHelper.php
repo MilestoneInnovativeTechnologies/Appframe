@@ -7,7 +7,7 @@ use Milestone\Appframe\Model\ResourceRelation;
 
 class FormSubmitRelationHelper
 {
-    private $form_id, $form, $fields;
+    private $form_id, $form, $fields, $relation_cache = [];
     public $input = [], $id, $collection = false, $skip = null;
     protected $relations = [];
 
@@ -15,14 +15,13 @@ class FormSubmitRelationHelper
     {
         $this->form_id = $form_id;
         $this->form = $form = ResourceForm::with(['Resource','Defaults','Fields.Data','Collections.Relation'])->find($form_id);
-        $this->setFields();
         $this->relations = [$this->getProperties(null,$form->Resource)];
     }
 
     private function setFields(){
         $form = $this->form; $skip = $this->skip;
         $fields = collect($form->Defaults->toArray())->concat($this->getMergeFormFields($form->Fields));
-        $this->fields = ($skip) ? $fields->reject(function($field) use($skip){ $form_field = $field->form_field; return in_array($form_field,(array) $skip); }) : $fields;
+        $this->fields = ($skip) ? $fields->reject(function($field) use($skip){ $form_field = $field['form_field']; return in_array($form_field,(array) $skip); }) : $fields;
     }
 
     private function getMergeFormFields($fields){
@@ -52,11 +51,12 @@ class FormSubmitRelationHelper
     }
 
     private function getRelationProperties($relation){
+        if(array_key_exists($relation,$this->relation_cache)) return $this->relation_cache[$relation];
         $Relation = $this->getRelationObject($relation);
         $type = $Relation->type;
         $method = $Relation->method;
         $class = $this->getResourceClass($Relation->Resource);
-        return compact('type','method','class');
+        return $this->relation_cache[$relation] = compact('type','method','class');
     }
 
     private function getResourceProperties($resource){
@@ -81,41 +81,73 @@ class FormSubmitRelationHelper
     }
 
     public function get(){
-        if($this->id) $this->relations[0]['id'] = $this->id;
+        $this->setFields(); if($this->id) $this->relations[0]['id'] = $this->id;
         $this->setBaseRecords();
         $this->handleCollections();
         return $this->relations;
     }
 
     private function setBaseRecords(){
-        $this->relations[0]['records'] = $this->getRecords($this->fields);
+        $input = ($this->collection) ? $this->input : [$this->input];
+        $this->relations[0]['records'] = $this->getRecords($input,$this->fields);
     }
 
-    private function getRecords($fields){
-        $records = [[ 'data' => [], 'relations' => [] ]]; $relation_details = [];
-        foreach ($fields as $field){
-            $base = &$records;
-            foreach(['relation','nest_relation1','nest_relation2','nest_relation3'] as $deep => $rel){
-                if($field[$rel]) {
-                    if(!isset($relation_details[$deep])) $relation_details[$deep] = [];
-                    $relation_id = (is_object($field[$rel]) || is_array($field[$rel])) ? $field[$rel]['id'] : $field[$rel];
-                    if(!isset($relation_details[$deep][$relation_id])){
-                        $properties = $this->getProperties($relation_id);
-                        $relations_index = array_push($base[0]['relations'],$properties)-1;
-                        $relation_details[$deep][$relation_id] = $relations_index;
-                    } else $relations_index = $relation_details[$deep][$relation_id];
-                    $base = &$base[0]['relations'][$relations_index]['records'];
-                } else{
-                    $values = $field['value'] ? $this->getFormDefaultValue($field['value']) : $this->getInputValue($field['name']);
-                    foreach ((array) $values as $record => $value){
-                        $base[$record]['data'][$field['attribute']] = $value;
-                        if($records) $base[$record]['relations'] = $base[0]['relations'];
+//    private function getRecords($fields){
+//        $records = [[ 'data' => [], 'relations' => [] ]]; $relation_details = [];
+//        foreach ($fields as $field){
+//            $base = &$records;
+//            foreach(['relation','nest_relation1','nest_relation2','nest_relation3'] as $deep => $rel){
+//                if($field[$rel]) {
+//                    if(!isset($relation_details[$deep])) $relation_details[$deep] = [];
+//                    $relation_id = (is_object($field[$rel]) || is_array($field[$rel])) ? $field[$rel]['id'] : $field[$rel];
+//                    if(!isset($relation_details[$deep][$relation_id])){
+//                        $properties = $this->getProperties($relation_id);
+//                        $relations_index = array_push($base[0]['relations'],$properties)-1;
+//                        $relation_details[$deep][$relation_id] = $relations_index;
+//                    } else $relations_index = $relation_details[$deep][$relation_id];
+//                    $base = &$base[0]['relations'][$relations_index]['records'];
+//                } else {
+//                    $values = $field['value'] ? $this->getFormDefaultValue($field['value']) : $this->getInputValue($field['name']);
+//                    foreach ((array) $values as $record => $value){
+//                        $base[$record]['data'][$field['attribute']] = $value;
+//                        if($record !== 0) $base[$record]['relations'] = $base[0]['relations'];
+//                    }
+//                    break;
+//                }
+//            }
+//        }
+//        return $records;
+//    }
+
+    private function getRecords($inputs,$fields){
+        $records = [];
+        if(empty($inputs)) return [[ 'data' => [], 'relations' => [] ]];
+        foreach($inputs as $record_id => $input){
+            $records[$record_id] = [ 'data' => [], 'relations' => [] ]; $relation_details = [];
+            foreach ($fields as $field){
+                $active_record = &$records[$record_id];
+                if(!$field['relation']){
+                    $value = $field['value'] ? $this->getFormDefaultValue($field['value']) : (array_key_exists($field['name'],$input) ? $input[$field['name']] : null);
+                    $active_record['data'][$field['attribute']] = $value;
+                } else {
+                    foreach(['relation','nest_relation1','nest_relation2','nest_relation3'] as $deep => $rel){
+                        if($field[$rel]){
+                            if(!array_key_exists($deep,$relation_details)) $relation_details[$deep] = [];
+                            $relation_id = (is_object($field[$rel]) || is_array($field[$rel])) ? $field[$rel]['id'] : $field[$rel];
+                            if(!array_key_exists($relation_id,$relation_details[$deep])){
+                                $properties = $this->getProperties($relation_id);
+                                $relation_details[$deep][$relation_id] = $relation_index = array_push($active_record['relations'],$properties) - 1;
+                            } else $relation_index = $relation_details[$deep][$relation_id];
+                            $active_record = &$active_record['relations'][$relation_index]['records'];
+                        } else {
+                            $values = $field['value'] ? $this->getFormDefaultValue($field['value']) : (array_key_exists($field['name'],$input) ? $input[$field['name']] : null);
+                            $active_record[0]['data'][$field['attribute']] = $values;
+                            break;
+                        }
                     }
-                    break;
                 }
             }
         }
-        if($this->collection) unset($records[0]);
         return $records;
     }
 
@@ -128,17 +160,7 @@ class FormSubmitRelationHelper
     }
 
     private function getInputValue($name){
-        if($this->collection) return $this->getCollectionInputValue($name);
         return (array_key_exists($name,$this->input)) ? $this->input[$name] : null;
-    }
-
-    private function getCollectionInputValue($name){
-        $values = [];
-        foreach($this->input as $record => $inputs){
-            if(array_key_exists($name,$inputs))
-                $values[$record] = $inputs[$name];
-        }
-        return $values;
     }
 
     private function handleCollections(){
