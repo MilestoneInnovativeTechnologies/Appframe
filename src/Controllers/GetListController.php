@@ -19,7 +19,7 @@ class GetListController extends Controller
     }
 
     private function getListORM($Data){
-        $orm = $Data['orm']; $items = $Data['items']; $last = $Data['last']; $page = $this->bag->r('item.page') ?: 1; $skip = ($page-1) * $items;
+        $orm = $Data['orm']; $items = $Data['items']; $last = $Data['last'];
         $orm['Where'] = ['updated_at' => ($last) ? date('Y-m-d H:i:s',strtotime($last)) : 0, 'updated_at:operator' => '>'];
         $orm['Take'] = $items; $orm['Page'] = $this->bag->r('item.page') ?: 0;
         return Helper::Help('GetOrm',$orm['Class'],array_except($orm,'Class'));
