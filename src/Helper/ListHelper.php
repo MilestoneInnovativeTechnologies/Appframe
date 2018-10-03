@@ -24,7 +24,8 @@ class ListHelper
         $layout = Helper::Help('ListLayout',$List->id);
         $last = 0;
         $orm = $this->getExtractORM($List);
-        return compact('orm','relations','items','last','title','layout');
+        $count = $this->getCountFromORM($orm);
+        return compact('orm','relations','items','last','title','layout','count');
     }
 
     private function getRelations($Relations){
@@ -62,6 +63,10 @@ class ListHelper
         return $Scopes->map(function($item){
             return [$item->method,collect($item)->only(['arg1','arg2','arg3'])->filter()->toArray()];
         });
+    }
+
+    private function getCountFromORM($orm){
+        return 0;
     }
 
 }
