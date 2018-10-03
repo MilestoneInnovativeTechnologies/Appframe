@@ -13,6 +13,7 @@ class GetListDetailsController extends Controller
 
         $List['orm']['Scopes'] = $List['orm']['Scopes'] ? $List['orm']['Scopes']->toArray() : null;
         $List['layout'] = $List['layout'] ?: null;
+        $List['count'] = Helper::Help('GetOrm',$List['orm']['Class'],array_except($List['orm'],'Class'))->count();
         $this->bag->push('List',$id,$List);
 
         $this->bag->store('ListData',$id,array_except($List,['orm','layout']));
