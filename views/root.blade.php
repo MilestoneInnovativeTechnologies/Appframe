@@ -74,11 +74,12 @@
                 <div class="page-inner">
                     <header class="page-title-bar">
                         <transition name="breadcrumb"><app-breadcrumb :key="$route.fullPath"></app-breadcrumb></transition>
-                        <div class="d-md-flex align-items-md-start">
-                            <transition name="pagetitle"><app-page-title :key="$store.getters['PTTL/title']($route.params.action)"></app-page-title></transition>
-                            <app-content-action></app-content-action>
-                        </div>
+                        <transition name="pagetitle"><app-page-title :key="$store.getters['PTTL/title']($route.params.action)"></app-page-title></transition>
                     </header>
+                    <div class="d-md-flex justify-content-between mb-2">
+                        <app-list-pagination></app-list-pagination>
+                        <app-content-action></app-content-action>
+                    </div>
                     <div class="page-section">
                         <div id="slow_connection_page_loading" style="height: 10rem;">
                             <style type="text/css">
