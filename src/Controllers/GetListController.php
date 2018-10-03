@@ -2,6 +2,8 @@
 
 namespace Milestone\Appframe\Controllers;
 
+use Milestone\Appframe\Helper\Helper;
+
 class GetListController extends Controller
 {
 
@@ -18,21 +20,9 @@ class GetListController extends Controller
 
     private function getListORM($Data){
         $orm = $Data['orm']; $items = $Data['items']; $last = $Data['last']; $page = $this->bag->r('item.page') ?: 1; $skip = ($page-1) * $items;
-        $ORM = $this->getORMFromAttributes($orm['Class'],$orm['With'],$orm['Scopes']);
-        if($skip === 0) $ORM = ($last) ? $ORM->where('updated_at','>',date('Y-m-d H:i:s',strtotime($last))) : $ORM->take($items);
-        else $ORM = $ORM->skip($skip)->take($items);
-        return $ORM;
-    }
-
-    private function getORMFromAttributes($Class,$With,$Scopes){
-        $ORM = ($With && !empty($With)) ? (new $Class)->with($With) : new $Class;
-        if($Scopes && !empty($Scopes)){
-            foreach($Scopes as $Scope){
-                $attrs = $Scope[1]; $method = $Scope[0];
-                $ORM = call_user_func_array([$ORM, $method], $attrs);
-            }
-        }
-        return $ORM;
+        $orm['Where'] = ['updated_at' => ($last) ? date('Y-m-d H:i:s',strtotime($last)) : 0, 'updated_at:operator' => '>'];
+        $orm['Take'] = $items; $orm['Page'] = $this->bag->r('item.page') ?: 0;
+        return Helper::Help('GetOrm',$orm['Class'],array_except($orm,'Class'));
     }
 
     private function store($id,$Data){
