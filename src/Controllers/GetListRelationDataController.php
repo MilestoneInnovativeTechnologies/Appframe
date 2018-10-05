@@ -12,7 +12,7 @@ class GetListRelationDataController extends Controller
         $list_id = $this->bag->r('list_id');
         $record_id = $this->bag->r('record_id');
         $Keys = $this->getRelationKeys($relation_id,$record_id);
-        $this->bag->keep('ListIds',$Keys);
+        //$this->bag->r('get',$Keys);
         $this->store($list_id,$relation_id,$record_id,$Keys);
     }
 

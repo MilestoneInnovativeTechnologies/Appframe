@@ -5,7 +5,7 @@ namespace Milestone\Appframe\Resolve;
 class ListRelationResolver extends Resolve
 {
     public function yes(){
-        return $this->bag->req('updated') === null;
+        return $this->bag->req('data') === null;
     }
 
     public function idns(){
@@ -16,11 +16,11 @@ class ListRelationResolver extends Resolve
         $this->bag->r('relation_id',$this->bag->r('idns')['idn1']);
         $this->bag->r('list_id',$this->bag->r('idns')['idn2']);
         $this->bag->r('record_id',$this->bag->req('id'));
-        $this->bag->r('updated',$this->bag->req('updated'));
+        $this->bag->r('get',$this->bag->req('get'));
     }
 
     public function controllers(){
-        $Controllers = ['GetListRelationDataController','GetListController'];
+        $Controllers = [($this->bag->req('get') === null) ? 'GetListRelationDataController' : 'GetListController'];
         if($this->needDetails()) array_unshift($Controllers,'GetListDetailsController');
         return $this->namespacedControllers($Controllers);
     }
