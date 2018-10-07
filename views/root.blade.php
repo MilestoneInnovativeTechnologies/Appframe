@@ -77,6 +77,7 @@
                         <transition name="pagetitle"><app-page-title :key="$store.getters['PTTL/title']($route.params.action)"></app-page-title></transition>
                     </header>
                     <div class="d-md-flex justify-content-between mb-2">
+                        <app-list-search></app-list-search>
                         <app-list-pagination></app-list-pagination>
                         <app-content-action></app-content-action>
                     </div>
