@@ -10,7 +10,7 @@ class GetListPageItemsController extends Controller
     public function index(){
         $id = $this->bag->r('list_id'); $page = $this->bag->r('page') ?: 1;
         $ORM = $this->getListORM($this->getListDetails($id),$page);
-        $items = $ORM->pluck('id');
+        $items = $ORM->get()->pluck('id');
         $this->store($id,$page,$items);
     }
 
