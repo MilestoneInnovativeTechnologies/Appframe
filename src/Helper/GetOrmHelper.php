@@ -62,13 +62,15 @@ class GetOrmHelper
     private function processSearch(){
         $search = $this->Search;
         if($search && is_array($search) && !empty($search) ){
-            $idx = 0;
-            foreach ($search as $field => $value) {
-                if(mb_substr($field,-9) === $this->operator_string) continue;
-                $operator_key = $field . $this->operator_string;
-                $operator = array_key_exists($operator_key,$search) ? $search[$operator_key] : 'like';
-                $this->orm = $this->orm->{ ($idx++) ? 'orWhere' : 'where' }($field,$operator,$value);
-            }
+            $this->orm = $this->orm->where(function($Q) use($search){
+                $idx = 0;
+                foreach ($search as $field => $value) {
+                    if(mb_substr($field,-9) === $this->operator_string) continue;
+                    $operator_key = $field . $this->operator_string;
+                    $operator = array_key_exists($operator_key,$search) ? $search[$operator_key] : 'like';
+                    $Q->{ ($idx++) ? 'orWhere' : 'where' }($field,$operator,$value);
+                }
+            });
         }
     }
 
