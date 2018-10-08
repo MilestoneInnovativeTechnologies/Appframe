@@ -6,7 +6,7 @@ class GetOrmHelper
 {
     private $class;
     private $operator_string = ':operator', $items_per_page = 25;
-    public $With = [], $Scopes = [], $Where = [], $Page = 0, $Skip = 0, $Take = 25;
+    public $With = [], $Scopes = [], $Where = [], $Search = [], $Page = 0, $Skip = 0, $Take = 25;
     protected $orm;
 
     public function __construct($class)
@@ -24,6 +24,7 @@ class GetOrmHelper
         $this->processWith();
         $this->processScopes();
         $this->processWhere();
+        $this->processSearch();
         $this->processPage();
         $this->processSkip();
         $this->processTake();
@@ -54,6 +55,19 @@ class GetOrmHelper
                 $operator_key = $field . $this->operator_string;
                 $operator = array_key_exists($operator_key,$where) ? $where[$operator_key] : '=';
                 $this->orm = $this->orm->where($field,$operator,$value);
+            }
+        }
+    }
+
+    private function processSearch(){
+        $search = $this->Search;
+        if($search && is_array($search) && !empty($search) ){
+            $idx = 0;
+            foreach ($search as $field => $value) {
+                if(mb_substr($field,-9) === $this->operator_string) continue;
+                $operator_key = $field . $this->operator_string;
+                $operator = array_key_exists($operator_key,$search) ? $search[$operator_key] : 'like';
+                $this->orm = $this->orm->{ ($idx++) ? 'orWhere' : 'where' }($field,$operator,$value);
             }
         }
     }
