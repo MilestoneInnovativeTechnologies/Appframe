@@ -2,6 +2,8 @@
 
 namespace Milestone\Appframe\Helper;
 
+use Milestone\Appframe\Model\ResourceListSearch;
+
 class GetListSearchHelper
 {
     private $id;
@@ -19,7 +21,8 @@ class GetListSearchHelper
     }
 
     private function getEloquentCollection($id){
-        return collect([
+        $Search = ResourceListSearch::whereResourceList($id)->get();
+        return ($Search->isNotEmpty()) ? $Search : collect([
             ['id' => 1, 'resource_list' => $id, 'relation' => null, 'field' => 'id']
         ]);
     }
