@@ -2,7 +2,7 @@
 
 namespace Milestone\Appframe\Helper;
 
-class GetListSearchWhereHelper
+class GetListSearchHelper
 {
     private $id;
     public $term;

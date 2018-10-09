@@ -9,7 +9,7 @@ class GetListSearchItemsController extends Controller
 
     public function index(){
         $id = $this->bag->r('list_id'); $term = $this->bag->r('term');
-        $search = Helper::Help('GetListSearchWhere',$id,compact('term'));
+        $search = Helper::Help('GetListSearch',$id,compact('term'));
         $ORM = $this->getListORM($this->getListDetails($id),$search);
         $items = $ORM->pluck('id');
         $this->store($id,$term,$items);
