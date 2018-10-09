@@ -21,4 +21,8 @@ class ResourceList extends Model
     public function Scopes(){
         return $this->belongsToMany(ResourceScope::class,'__resource_list_scopes','resource_list','scope')->withTimestamps();
     }
+
+    public function Search(){
+        return $this->hasMany(ResourceListSearch::class,'resource_list','id');
+    }
 }
