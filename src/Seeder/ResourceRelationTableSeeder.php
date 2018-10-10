@@ -60,6 +60,7 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'resource' => '15', 	'name' => 'Field', 	'description' => 'Field details', 	'method' => 'Field', 	'type' => 'belongsTo', 	'relate_resource' => '13', 										])
             ->create([	'resource' => '13', 	'name' => 'Form', 	'description' => 'Form details', 	'method' => 'Form', 	'type' => 'belongsTo', 	'relate_resource' => '12', 										])
             ->create([	'resource' => '19', 	'name' => 'List Search', 	'description' => 'Search fields for a list', 	'method' => 'Search', 	'type' => 'hasMany', 	'relate_resource' => '31', 										])
+            ->create([	'resource' => '13', 	'name' => 'Depending Fields', 	'description' => 'Dependent fields', 	'method' => 'Depends', 	'type' => 'hasMany', 	'relate_resource' => '32', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

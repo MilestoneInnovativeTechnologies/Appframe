@@ -47,6 +47,7 @@ class ResourceTableSeeder extends Seeder
             ->create([	'name' => 'ResourceDataViewSectionItem', 	'description' => 'Items of a data view section', 	'title' => 'Data View Section Items', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_data_view_section_items', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceFormCollection', 	'description' => 'Collection/Detail Form', 	'title' => 'Collection Form', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_form_collection', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceListSearch', 	'description' => 'Searchable fields in a list', 	'title' => 'List Search', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_list_search', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceFormFieldDepend', 	'description' => 'Dependent fields in a form', 	'title' => 'Dependent Fields', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_form_field_depends', 	'key' => 'id', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
