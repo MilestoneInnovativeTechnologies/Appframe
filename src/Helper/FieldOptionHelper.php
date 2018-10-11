@@ -8,7 +8,7 @@ use Milestone\Appframe\Model\ResourceFormFieldOption;
 class FieldOptionHelper
 {
     private $id, $Model;
-    public $latest = 0;
+    public $latest = 0, $orm = false;
 
 
     public function __construct($id)
@@ -34,7 +34,7 @@ class FieldOptionHelper
     private function getListOptions(){
         $model = $this->Model; $limit = 0; $latest = $this->latest;
         $list = Helper::Help('ListData',$model->detail, compact('limit','latest'));
-        return [ 'options' => $list->pluck($model->label_attr,$model->value_attr)->toArray(), 'latest' => date('Y-m-d H:i:s',strtotime($list->max('updated_at'))) ] ;
+        return ($this->orm) ? $list : [ 'options' => $list->pluck($model->label_attr,$model->value_attr)->toArray(), 'latest' => date('Y-m-d H:i:s',strtotime($list->max('updated_at'))) ] ;
     }
 
     private function getForeignOptions(){
@@ -45,9 +45,8 @@ class FieldOptionHelper
         $Foreign = Helper::Help('ForeignTableField',$table, [ 'field' => $field ]);
         $resource = Resource::where('table',$Foreign['table'])->first();
         $Class = implode("\\",[$resource->namespace,$resource->name]);
-        $Latest = $this->latest;
-        $List = (new $Class)->where('updated_at','>',$Latest)->get();
-        return [ 'options' => $List->pluck($model->label_attr,$Foreign['field'])->toArray(), 'latest' => date('Y-m-d H:i:s',strtotime($List->max('updated_at'))) ];
+        $Latest = $this->latest; $orm = (new $Class)->where('updated_at','>',$Latest);
+        return ($this->orm) ? $orm : [ 'options' => $orm->pluck($model->label_attr,$Foreign['field'])->toArray(), 'latest' => date('Y-m-d H:i:s',strtotime($orm->max('updated_at'))) ];
     }
 
     private function getMethodOptions(){
