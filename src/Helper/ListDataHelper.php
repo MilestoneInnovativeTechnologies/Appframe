@@ -6,7 +6,7 @@ class ListDataHelper
 {
     private $id;
     protected $class, $scopes, $with;
-    public $page = 1, $limit = 0, $latest = 0, $ids = [];
+    public $page = 1, $limit = 0, $latest = 0, $ids = [], $orm = false;
 
     public function __construct($id)
     {
@@ -55,7 +55,7 @@ class ListDataHelper
         if($Limit){
             $take = $Limit; $skip = ($this->page-1) * $take;
             $Model->skip($skip)->take($take);
-        } return ($Ids && !empty($Ids)) ? $Model->find($Ids) : $Model->get();
+        } return ($this->orm) ? $Model : (($Ids && !empty($Ids)) ? $Model->find($Ids) : $Model->get());
     }
 
 }
