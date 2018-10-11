@@ -12,7 +12,7 @@ class GetFieldOptionController extends Controller
         $id = $this->bag->r('option_id'); $latest = $this->bag->r('latest') ?: 0; $options = [];
         extract(Helper::Help('FieldOption',$id,['latest' => $latest]));
         $this->bag->store('FieldOption',$id,$options);
-        $this->bag->store('FieldOptionLatest',$id,$latest);
+        if(!empty($options)) $this->bag->store('FieldOptionLatest',$id,$latest);
     }
 
 }
