@@ -34,7 +34,7 @@ class FieldOptionHelper
     private function getListOptions(){
         $model = $this->Model; $limit = 0; $latest = $this->latest;
         $list = Helper::Help('ListData',$model->detail, compact('limit','latest'));
-        return [ 'options' => $list->pluck($model->label_attr,$model->value_attr), 'latest' => $list->max('updated_at') ] ;
+        return [ 'options' => $list->pluck($model->label_attr,$model->value_attr)->toArray(), 'latest' => date('Y-m-d H:i:s',strtotime($list->max('updated_at'))) ] ;
     }
 
     private function getForeignOptions(){
@@ -47,7 +47,7 @@ class FieldOptionHelper
         $Class = implode("\\",[$resource->namespace,$resource->name]);
         $Latest = $this->latest;
         $List = (new $Class)->where('updated_at','>',$Latest)->get();
-        return [ 'options' => $List->pluck($model->label_attr,$Foreign['field']), 'latest' => $List->max('updated_at') ];
+        return [ 'options' => $List->pluck($model->label_attr,$Foreign['field'])->toArray(), 'latest' => date('Y-m-d H:i:s',strtotime($List->max('updated_at'))) ];
     }
 
     private function getMethodOptions(){
