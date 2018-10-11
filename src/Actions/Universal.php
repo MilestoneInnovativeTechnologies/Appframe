@@ -9,7 +9,7 @@ class Universal
     }
 
     protected $actions = [
-        'option'
+        'option','depend'
     ];
 
 }
