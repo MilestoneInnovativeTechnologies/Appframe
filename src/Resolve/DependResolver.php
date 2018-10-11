@@ -16,7 +16,7 @@ class DependResolver extends Resolve
         $this->bag->r('field_id',$this->bag->req('form_field'));
         $this->bag->r('field_name',$this->bag->req('field_name'));
         $this->bag->r('data',$this->bag->req('data'));
-        $this->bag->r('form',$this->bag->req('form'));
+        $this->bag->r('form_id',$this->bag->req('form'));
     }
 
     public function controllers(){
