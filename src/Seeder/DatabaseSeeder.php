@@ -49,6 +49,10 @@ class DatabaseSeeder extends Seeder
             ResourceFormFieldDependTableSeeder::class,
             ResourceFormLayoutTableSeeder::class,
             ResourceFormCollectionTableSeeder::class,
+            ResourceDashboardTableSeeder::class,
+            ResourceDashboardSectionTableSeeder::class,
+            ResourceDashboardSectionItemTableSeeder::class,
+            ResourceMetricTableSeeder::class,
             OrganisationTableSeeder::class,
             OrganisationContactTableSeeder::class,
         ]);
