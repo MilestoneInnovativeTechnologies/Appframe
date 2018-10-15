@@ -24,6 +24,10 @@ class Resource extends Model
     }
 
     public function Scopes(){
-        return $this->hasMany(ResourceScope::class,'resource_list','id');
+        return $this->hasMany(ResourceScope::class,'resource','id');
+    }
+
+    public function Dashboards(){
+        return $this->hasMany(ResourceDashboard::class,'resource','id');
     }
 }

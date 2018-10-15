@@ -61,6 +61,10 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'resource' => '13', 	'name' => 'Form', 	'description' => 'Form details', 	'method' => 'Form', 	'type' => 'belongsTo', 	'relate_resource' => '12', 										])
             ->create([	'resource' => '19', 	'name' => 'List Search', 	'description' => 'Search fields for a list', 	'method' => 'Search', 	'type' => 'hasMany', 	'relate_resource' => '31', 										])
             ->create([	'resource' => '13', 	'name' => 'Depending Fields', 	'description' => 'Dependent fields', 	'method' => 'Depends', 	'type' => 'hasMany', 	'relate_resource' => '32', 										])
+            ->create([	'resource' => '4', 	'name' => 'Resource Dashboards', 	'description' => 'Dashboards of a Resource', 	'method' => 'Dashboards', 	'type' => 'hasMany', 	'relate_resource' => '33', 										])
+            ->create([	'resource' => '33', 	'name' => 'Dashboard Sections', 	'description' => 'Sections of a dashboard', 	'method' => 'Sections', 	'type' => 'hasMany', 	'relate_resource' => '34', 										])
+            ->create([	'resource' => '34', 	'name' => 'Dashboard Section Items', 	'description' => 'Items of a dashboard section', 	'method' => 'Items', 	'type' => 'hasMany', 	'relate_resource' => '35', 										])
+            ->create([	'resource' => '33', 	'name' => 'Dashboard Resource', 	'description' => 'Resource details of a dashboard', 	'method' => 'Resource', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
