@@ -48,6 +48,10 @@ class ResourceTableSeeder extends Seeder
             ->create([	'name' => 'ResourceFormCollection', 	'description' => 'Collection/Detail Form', 	'title' => 'Collection Form', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_form_collection', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceListSearch', 	'description' => 'Searchable fields in a list', 	'title' => 'List Search', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_list_search', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceFormFieldDepend', 	'description' => 'Dependent fields in a form', 	'title' => 'Dependent Fields', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_form_field_depends', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceDashboard', 	'description' => 'Dashboard details for a Resource', 	'title' => 'Resource Dashboard', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_dashboard', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceDashboardSection', 	'description' => 'Sections of a Dashboard', 	'title' => 'Dashboard Section', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_dashboard_sections', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceDashboardSectionItem', 	'description' => 'Items of a Dashboard Section', 	'title' => 'Dashboard Section Items', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_dashboard_section_items', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceMetric', 	'description' => 'Metrics defined for a resource', 	'title' => 'Resource Metrics', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_metrics', 	'key' => 'id', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
