@@ -76,7 +76,7 @@
                         <transition name="breadcrumb"><app-breadcrumb :key="$route.fullPath"></app-breadcrumb></transition>
                         <transition name="pagetitle"><app-page-title :key="$store.getters['PTTL/title']($route.params.action)"></app-page-title></transition>
                     </header>
-                    <div class="d-md-flex justify-content-between mb-2">
+                    <div class="page-section d-md-flex justify-content-between mb-2">
                         <app-list-search></app-list-search>
                         <app-list-pagination></app-list-pagination>
                         <app-content-action></app-content-action>
@@ -93,6 +93,17 @@
                         </div>
                         <transition name="appcontent"><router-view :key="$route.fullPath" name="appcontent"></router-view></transition>
                         <auth-warning></auth-warning>
+                        <!--<graph-line-dateblock
+                                :width="600"
+                                :height="400"
+                                :axis-min="10"
+                                :axis-max="40"
+                                axis-format="HH"
+                                display="all"
+                                :axis-interval="1000 * 60 * 60 * 24"
+                                :labels='[ new Date("2018-07-01 00:00:00"), new Date("2018-07-04 00:00:00") ]'
+                                :values="[ 40, 10, 30, 20 ]">
+                        </graph-line-dateblock>-->
                     </div>
                 </div>
             </div>
