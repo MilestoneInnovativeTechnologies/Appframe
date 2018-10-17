@@ -18,7 +18,7 @@ class CreateResourceMetricsTable extends Migration
             $table->unsignedInteger('resource')->index();
             $table->string('name', 64)->index();
             $table->unsignedInteger('resource_list')->index();
-            $table->enum('aggregates', ['COUNT','SUM','AVG','MAX','MIN'])->default('COUNT');
+            $table->enum('aggregate', ['COUNT','SUM','AVG','MAX','MIN'])->default('COUNT');
             $table->string('aggregate_field', 64)->nullable();
             $table->enum('aggregate_distinct', ['No','Yes'])->default('No');
             $table->string('field', 64)->nullable();
