@@ -52,6 +52,7 @@ class ResourceTableSeeder extends Seeder
             ->create([	'name' => 'ResourceDashboardSection', 	'description' => 'Sections of a Dashboard', 	'title' => 'Dashboard Section', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_dashboard_sections', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceDashboardSectionItem', 	'description' => 'Items of a Dashboard Section', 	'title' => 'Dashboard Section Items', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_dashboard_section_items', 	'key' => 'id', 										])
             ->create([	'name' => 'ResourceMetric', 	'description' => 'Metrics defined for a resource', 	'title' => 'Resource Metrics', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_metrics', 	'key' => 'id', 										])
+            ->create([	'name' => 'ResourceFormFieldDynamic', 	'description' => 'Dynamic field details', 	'title' => 'Dynamic Field', 	'namespace' => 'Milestone\Appframe\Model', 	'table' => '__resource_form_field_dynamic', 	'key' => 'id', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

@@ -29,4 +29,8 @@ class ResourceFormField extends Model
     public function Depends(){
         return $this->hasMany(ResourceFormFieldDepend::class, 'form_field', 'id');
     }
+
+    public function Dynamics(){
+        return $this->hasMany(ResourceFormFieldDynamic::class, 'form_field', 'id');
+    }
 }
