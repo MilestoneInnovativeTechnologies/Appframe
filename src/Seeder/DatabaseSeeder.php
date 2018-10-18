@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
             ResourceFormFieldValidationTableSeeder::class,
             ResourceFormFieldOptionTableSeeder::class,
             ResourceFormFieldDependTableSeeder::class,
+            ResourceFormFieldDynamicTableSeeder::class,
             ResourceFormLayoutTableSeeder::class,
             ResourceFormCollectionTableSeeder::class,
             ResourceDashboardTableSeeder::class,
