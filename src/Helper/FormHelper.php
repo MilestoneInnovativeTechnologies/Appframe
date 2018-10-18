@@ -15,11 +15,11 @@ class FormHelper
 
     public function get(){
         return ResourceForm::with([
-            'Fields' => function($Q){ $Q->with(['Attributes','Options','Validations','Depends']); },
+            'Fields' => function($Q){ $Q->with(['Attributes','Options','Validations','Depends','Dynamics']); },
             'Layout',
             'Collections' => function($Q){ $Q->with([
                 'Form' => function($Q){ $Q->with([
-                    'Fields' => function($Q){ $Q->with(['Attributes','Options','Validations','Depends']); },
+                    'Fields' => function($Q){ $Q->with(['Attributes','Options','Validations','Depends','Dynamics']); },
                     'Layout']); },
                 'Relation']); }])
             ->find($this->id);
