@@ -14,5 +14,12 @@
         "psr-4": {
             "Milestone\\Appframe\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Milestone\\Appframe\\AppframeServiceProvider"
+            ]
+        }
     }
 }
