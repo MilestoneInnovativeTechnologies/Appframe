@@ -14,6 +14,11 @@ class AppframeServiceProvider extends ServiceProvider
         'loadMigrationsFrom' => 'migrations',
         'publishes' => 'config/appframe.php',
     ];
+    protected $publishData = [
+        'config/appframe.php' => ['config_path','appframe.php'],
+        'assets' => ['public_path','appframe'],
+        'views' => ['resource_path','views/milestone/appframe'],
+    ];
 
     /**
      * Bootstrap services.
@@ -22,17 +27,22 @@ class AppframeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $bootDir = $this->bootDataDir;
         foreach ($this->bootData as $method => $data){
             $args = (array) $data;
-            $args[0] = $this->bootDataDir . $args[0];
+            $args[0] = $bootDir . $args[0];
             call_user_func_array([$this,$method],$args);
         }
 
-        $this->publishes([
-            $this->bootDataDir . 'config/appframe.php' => config_path('appframe.php'),
-            $this->bootDataDir . 'assets' => public_path('appframe'),
-            $this->bootDataDir . 'views' => resource_path('views/milestone/appframe'),
-        ], 'update');
+        $publishDataArray = [];
+        foreach ($this->publishData as $from => $data){
+            $source = $bootDir . $from;
+            $destination = call_user_func($data[0],$data[1]);
+            $publishDataArray[$source] = $destination;
+        }
+
+        $this->publishes($publishDataArray);
+        $this->publishes($publishDataArray,'update');
     }
 
     /**
@@ -45,5 +55,9 @@ class AppframeServiceProvider extends ServiceProvider
         $this->app->singleton(Bag::class, function () {
             return new Bag;
         });
+
+        $this->mergeConfigFrom(
+            $this->bootDataDir.'config/appframe.php', 'appframe'
+        );
     }
 }
