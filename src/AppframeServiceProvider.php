@@ -13,6 +13,7 @@ class AppframeServiceProvider extends ServiceProvider
         'loadViewsFrom' => ['views','Appframe'],
         'loadMigrationsFrom' => 'migrations',
     ];
+
     protected $publishData = [
         'config/appframe.php' => ['config_path','appframe.php'],
         'assets' => ['public_path','appframe'],
