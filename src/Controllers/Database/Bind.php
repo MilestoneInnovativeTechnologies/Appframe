@@ -4,6 +4,8 @@ namespace Milestone\Appframe\Controllers\Database;
 
 class Bind
 {
+    private $data;
+
     private $typeMethod = [
         'hasOne' => 'save',
         'hasMany' => 'saveMany',
@@ -26,7 +28,7 @@ class Bind
     }
 
     private function getModel($class, $id){
-        return ($id) ? new $class($id) : new $class;
+        return ($id) ? (new $class)->find($id) : new $class;
     }
 
     private function storeData($baseModel,$records){
