@@ -12,6 +12,7 @@ class AppframeServiceProvider extends ServiceProvider
         'loadRoutesFrom' => 'routes/web.php',
         'loadViewsFrom' => ['views','Appframe'],
         'loadMigrationsFrom' => 'migrations',
+        'publishes' => 'config/appframe.php',
     ];
 
     /**
@@ -26,6 +27,12 @@ class AppframeServiceProvider extends ServiceProvider
             $args[0] = $this->bootDataDir . $args[0];
             call_user_func_array([$this,$method],$args);
         }
+
+        $this->publishes([
+            $this->bootDataDir . 'config/appframe.php' => config_path('appframe.php'),
+            $this->bootDataDir . 'assets' => public_path('appframe'),
+            $this->bootDataDir . 'views' => resource_path('views/milestone/appframe'),
+        ], 'update');
     }
 
     /**
