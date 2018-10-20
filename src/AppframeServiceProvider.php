@@ -12,7 +12,6 @@ class AppframeServiceProvider extends ServiceProvider
         'loadRoutesFrom' => 'routes/web.php',
         'loadViewsFrom' => ['views','Appframe'],
         'loadMigrationsFrom' => 'migrations',
-        'publishes' => 'config/appframe.php',
     ];
     protected $publishData = [
         'config/appframe.php' => ['config_path','appframe.php'],
