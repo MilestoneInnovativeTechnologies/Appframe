@@ -115,6 +115,7 @@
         data:{!! request()->user()->load('Groups.Roles.Resources') !!},
         logout_url:'{!! route('logout') !!}',
         login_url:'{!! route('login') !!}',
+        root_path:'{{ config('appframe.root_path') }}'
     };
 </script>
 <script src="{{ asset('appframe/js/app.js') }}?_={{ mt_rand() }}"></script>
