@@ -15,7 +15,7 @@ class AppframeServiceProvider extends ServiceProvider
     ];
 
     protected $publishData = [
-        'config/appframe.php' => ['config_path','appframe.php'],
+        'config' => ['config_path','/'],
         'assets' => ['public_path','appframe'],
         'views' => ['resource_path','views/milestone/appframe'],
     ];
