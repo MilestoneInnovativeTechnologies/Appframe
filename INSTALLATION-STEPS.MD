@@ -12,6 +12,7 @@
 <li>... Assets</li>
 <li>Change config variables</li>
 <li>Change config > session > encrypt to true</li>
+<li>Set DB Parameters in .env file</li>
 <li>Run php artisan migrate</li>
 <li>Run php artisan db:seed --class=Milestone\Appframe\Seeder\DatabaseSeeder</li>
 
