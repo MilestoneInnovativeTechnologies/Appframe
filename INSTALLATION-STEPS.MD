@@ -3,7 +3,8 @@
 <ol>
 
 <li>Composer Install Laravel</li>
-<li>Composer require milestoneitnet/appframe</li>
+<li>Move to app directory</li>
+<li>Run, composer require milestone/appframe</li>
 <li>Scaffold with authentication. Run, php artisan make:auth</li>
 <li>Comment every routes in wep.php including Auth::routes</li>
 <li>Update config > auth > providers > users > model >> Milestone\Appframe\Model\User::class </li>
