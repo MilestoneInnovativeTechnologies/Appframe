@@ -7,7 +7,7 @@
 <li>Scaffold with authentication. Run, php artisan make:auth</li>
 <li>Comment every routes in wep.php including Auth::routes</li>
 <li>Update config > auth > providers > users > model >> Milestone\Appframe\Model\User::class </li>
-<li>Publishing vendor files. Run php artisan vendor:public, the select the no corresponding to Milestone\Appframe\AppframeServiceProvider</li>
+<li>Publishing vendor files. Run, php artisan vendor:public --provider=Milestone\AppframAppframeServiceProvider</li>
 <li>Change config variables like brand,favicon,root_path etc</li>
 <li>Change config > session > encrypt to true</li>
 <li>Set DB Parameters in .env file</li>
