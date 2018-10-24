@@ -7,7 +7,7 @@ use Milestone\Appframe\Model\ResourceFormFieldOption;
 
 class FieldOptionHelper
 {
-    private $id, $Model;
+    private $id, $Model, $ForeignField = null;
     public $latest = 0, $orm = false;
 
 
@@ -41,16 +41,26 @@ class FieldOptionHelper
         $model = $this->Model->load(['Field.Data','Field.Form.Resource']);
         $deepRelations = Helper::Help('DeepRelation',$model->Field->Data);
         $table = (empty($deepRelations)) ? $model->Field->Form->Resource->table : Resource::find(end($deepRelations)['relate_resource'])->table;
-        $field = $model->Field->Data->attribute;
-        $Foreign = Helper::Help('ForeignTableField',$table, [ 'field' => $field ]);
-        $resource = Resource::where('table',$Foreign['table'])->first();
+        $resource = (!empty($deepRelations) && end($deepRelations)['type'] === 'belongsToMany')
+            ? $this->getResourceFromTable($table)
+            : $this->getResourceFromForeignTable($table,$model->Field->Data->attribute);
         $Class = implode("\\",[$resource->namespace,$resource->name]);
         $Latest = $this->latest; $orm = (new $Class)->where('updated_at','>',$Latest);
-        return ($this->orm) ? $orm : [ 'options' => $orm->pluck($model->label_attr,$Foreign['field'])->toArray(), 'latest' => date('Y-m-d H:i:s',strtotime($orm->max('updated_at'))) ];
+        return ($this->orm) ? $orm : [ 'options' => $orm->pluck($model->label_attr,$this->ForeignField)->toArray(), 'latest' => date('Y-m-d H:i:s',strtotime($orm->max('updated_at'))) ];
     }
 
     private function getMethodOptions(){
         return [ 'options' => [],'latest' => 0 ];
+    }
+
+    private function getResourceFromForeignTable($table,$field){
+        $Foreign = Helper::Help('ForeignTableField',$table, [ 'field' => $field ]);
+        $this->ForeignField = $Foreign['field'];
+        return $this->getResourceFromTable($Foreign['table']);
+    }
+
+    private function getResourceFromTable($table){
+        return Resource::where('table',$table)->first();
     }
 
 }
