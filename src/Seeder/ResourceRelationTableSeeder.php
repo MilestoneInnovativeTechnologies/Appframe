@@ -66,6 +66,9 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'resource' => '34', 	'name' => 'Dashboard Section Items', 	'description' => 'Items of a dashboard section', 	'method' => 'Items', 	'type' => 'hasMany', 	'relate_resource' => '35', 										])
             ->create([	'resource' => '33', 	'name' => 'Dashboard Resource', 	'description' => 'Resource details of a dashboard', 	'method' => 'Resource', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
             ->create([	'resource' => '13', 	'name' => 'Field Dynamics', 	'description' => 'Dynamic field details', 	'method' => 'Dynamics', 	'type' => 'belongsTo', 	'relate_resource' => '37', 										])
+            ->create([	'resource' => '23', 	'name' => 'Resource Data Scopes', 	'description' => 'Scopes applied on a data view', 	'method' => 'Scopes', 	'type' => 'belongsToMany', 	'relate_resource' => '21', 										])
+            ->create([	'resource' => '19', 	'name' => 'List Actions', 	'description' => 'Actions available for a list', 	'method' => 'Actions', 	'type' => 'belongsToMany', 	'relate_resource' => '7', 										])
+            ->create([	'resource' => '23', 	'name' => 'Data Actions', 	'description' => 'Actions available for a data view', 	'method' => 'Actions', 	'type' => 'belongsToMany', 	'relate_resource' => '7', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

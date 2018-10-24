@@ -19,7 +19,11 @@ class ResourceList extends Model
     }
 
     public function Scopes(){
-        return $this->belongsToMany(ResourceScope::class,'__resource_list_scopes','resource_list','scope')->withTimestamps();
+        return $this->belongsToMany(ResourceScope::class,'__resource_list_scopes','resource_list','scope');
+    }
+
+    public function Actions(){
+        return $this->belongsToMany(ResourceAction::class,'__resource_action_lists','resource_list','resource_action');
     }
 
     public function Search(){

@@ -15,7 +15,11 @@ class ResourceData extends Model
     }
 
     public function Scopes(){
-        return $this->hasMany(ResourceDataScope::class, 'resource_data','id');
+        return $this->belongsToMany(ResourceScope::class,'__resource_data_scopes','resource_data','scope');
+    }
+
+    public function Actions(){
+        return $this->belongsToMany(ResourceAction::class,'__resource_action_data','resource_data','resource_action');
     }
 
     public function Sections(){
