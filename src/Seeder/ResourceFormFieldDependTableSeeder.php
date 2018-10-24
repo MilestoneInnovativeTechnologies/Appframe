@@ -16,6 +16,7 @@ class ResourceFormFieldDependTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceFormFieldDepend::truncate()
+            ->create([	'form_field' => '176', 	'depend_field' => 'resource_list', 	'db_field' => 'resource', 	'operator' => '=', 				'ignore_null' => 'Yes', 								])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
