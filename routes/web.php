@@ -1,20 +1,24 @@
 <?php
 
 $namespace = 'Milestone\\Appframe\\Controllers';
+function prefixPath($path){
+    $root = config('appframe.root_path');
+    return implode('/',[trim($root,'/'),trim($path,'/')]);
+}
 
 Route::group([
     'namespace' => $namespace,
     'middleware' => ['web']
 ],function(){
     Route::group([
-        'prefix' => 'setup',
+        'prefix' => prefixPath('setup'),
         'middleware' => [Milestone\Appframe\Middleware\LoginIfUserExists::class]
     ],function(){
         Route::get('/','SetupController@index');
         Route::post('/','SetupController@create');
     });
     Route::group([
-        'prefix' => 'login',
+        'prefix' => prefixPath('login'),
         'middleware' => [Milestone\Appframe\Middleware\RedirectIfLogged::class]
     ],function(){
         Route::view('/','Appframe::login')->name('login');
