@@ -42,7 +42,7 @@ class ResourceFormFieldOptionTableSeeder extends Seeder
             ->create([	'form_field' => '99', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'title', 											])
             ->create([	'form_field' => '103', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'name', 											])
             ->create([	'form_field' => '104', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'title', 											])
-            ->create([	'form_field' => '182', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'title', 											])
+            ->create([	'form_field' => '182', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'name', 											])
             ->create([	'form_field' => '183', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'method', 											])
             ->create([	'form_field' => '184', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'method', 											])
             ->create([	'form_field' => '185', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'method', 											])
