@@ -5,6 +5,7 @@
 <li>Textarea</li>
 <li>File</li>
 <li>Select</li>
+<li>Multiselect</li>
 </ol>
 
 **Supported Field Attributes**
