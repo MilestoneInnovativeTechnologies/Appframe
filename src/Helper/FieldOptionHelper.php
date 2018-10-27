@@ -7,7 +7,7 @@ use Milestone\Appframe\Model\ResourceFormFieldOption;
 
 class FieldOptionHelper
 {
-    private $id, $Model, $ForeignField = null;
+    private $id, $Model, $ForeignField = 'id';
     public $latest = 0, $orm = false;
 
 
