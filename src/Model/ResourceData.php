@@ -15,11 +15,11 @@ class ResourceData extends Model
     }
 
     public function Scopes(){
-        return $this->belongsToMany(ResourceScope::class,'__resource_data_scopes','resource_data','scope');
+        return $this->belongsToMany(ResourceScope::class,'__resource_data_scopes','resource_data','scope')->withTimestamps();
     }
 
     public function Actions(){
-        return $this->belongsToMany(ResourceAction::class,'__resource_action_data','resource_data','resource_action');
+        return $this->belongsToMany(ResourceAction::class,'__resource_action_data','resource_data','resource_action')->withTimestamps();
     }
 
     public function Sections(){
