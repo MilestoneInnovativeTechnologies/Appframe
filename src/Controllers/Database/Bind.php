@@ -99,6 +99,7 @@ class Bind
         $data = [];
         foreach($records as $id => $record)
             if(array_key_exists("",$record['data'])) $data[$record['data'][""]] = array_except($record['data'],"");
+            elseif(is_array(array_values($record['data'])) && count($records) === 1) $data = array_values($record['data'])[0];
             else $data[$id] = $record['data'];
         return $data;
     }
