@@ -15,11 +15,15 @@ class CreateResourceFormFieldDynamicTable extends Migration
     {
         Schema::create('__resource_form_field_dynamic', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('resource_form')->index();
             $table->unsignedInteger('form_field')->index();
-            $table->unsignedTinyInteger('colspan')->default(12);
+            $table->enum('type', ['disabled-enabled','enabled-disabled','hidden-visible','visible-hidden','readonly-editable','editable-readonly'])->default('disabled-enabled');
+            $table->string('depend_field', 64)->index()->nullable();
+            $table->enum('alter_on', ['not null','value','null'])->default('not null');
+            $table->string('value', 128)->nullable();
+            $table->string('values', 1024)->nullable();
+            $table->enum('operator', ['=','<','>','<=','>=','<>','In','NotIn','like'])->default('=');
+            $table->enum('on_multiple', ['and','or'])->default('and');
             $table->timestamps();
-            $table->foreign('resource_form')->references('id')->on('__resource_forms')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('form_field')->references('id')->on('__resource_form_fields')->onUpdate('cascade')->onDelete('cascade');
         });
     }
