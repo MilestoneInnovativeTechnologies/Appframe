@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResourceFormLayoutTable extends Migration
+class CreateResourceFormFieldDynamicTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateResourceFormLayoutTable extends Migration
      */
     public function up()
     {
-        Schema::create('__resource_form_layout', function (Blueprint $table) {
+        Schema::create('__resource_form_field_dynamic', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('resource_form')->index();
             $table->unsignedInteger('form_field')->index();
@@ -31,6 +31,6 @@ class CreateResourceFormLayoutTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('__resource_form_layout');
+        Schema::dropIfExists('__resource_form_field_dynamic');
     }
 }

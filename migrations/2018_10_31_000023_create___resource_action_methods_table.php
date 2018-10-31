@@ -16,7 +16,7 @@ class CreateResourceActionMethodsTable extends Migration
         Schema::create('__resource_action_methods', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('resource_action')->index();
-            $table->enum('type', ['Method','Form','List','Data','FormWithData','ListRelation','AddRelation','ManageRelations'])->default('Method');
+            $table->enum('type', ['Method','Dashboard','Form','List','Data','FormWithData','ListRelation','AddRelation','ManageRelation'])->default('Method');
             $table->string('method', 128)->nullable();
             $table->string('idn1', 64)->nullable();
             $table->string('idn2', 64)->nullable();

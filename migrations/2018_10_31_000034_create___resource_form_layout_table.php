@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRolesTable extends Migration
+class CreateResourceFormLayoutTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('__roles', function (Blueprint $table) {
+        Schema::create('__resource_form_layout', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 64)->index();
-            $table->string('description', 1024)->nullable();
-            $table->string('title', 128)->nullable();
             $table->timestamps();
-
         });
     }
 
@@ -30,6 +26,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('__roles');
+        Schema::dropIfExists('__resource_form_layout');
     }
 }
