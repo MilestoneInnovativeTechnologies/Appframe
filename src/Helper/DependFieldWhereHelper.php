@@ -40,7 +40,9 @@ class DependFieldWhereHelper
     }
 
     private function getCompareMethodApplied($method,$data){
-        return (!!$method || !$method) ? $data : $data;
+        $ControllerClass = Helper::Help('GetResourceControllerClass','ResourceFormFieldDepend',['field' => 'name']);
+        if(!$ControllerClass || !method_exists($Controller = new $ControllerClass,$method)) return null;
+        return call_user_func([$Controller,$method],$data);
     }
 
     private function getOperatorKey($field){
