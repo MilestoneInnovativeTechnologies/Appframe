@@ -83,6 +83,7 @@ class ResourceFormFieldOptionTableSeeder extends Seeder
             ->create([	'form_field' => '169', 	'type' => 'Enum', 														])
             ->create([	'form_field' => '171', 	'type' => 'Enum', 														])
             ->create([	'form_field' => '174', 	'type' => 'Enum', 														])
+            ->create([	'form_field' => '54', 	'type' => 'method', 	'detail' => 'id1List', 			'preload' => 'Yes', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

@@ -69,7 +69,7 @@ class ResourceFormFieldTableSeeder extends Seeder
             ->create([	'resource_form' => '11', 	'name' => 'icon', 	'type' => 'text', 	'label' => 'Icon', 												])
             ->create([	'resource_form' => '11', 	'name' => 'confirm', 	'type' => 'text', 	'label' => 'Confirmation Text', 												])
             ->create([	'resource_form' => '11', 	'name' => 'method_type', 	'type' => 'select', 	'label' => 'Method Type', 												])
-            ->create([	'resource_form' => '11', 	'name' => 'idn1', 	'type' => 'text', 	'label' => 'Type ID 1', 												])
+            ->create([	'resource_form' => '11', 	'name' => 'idn1', 	'type' => 'select', 	'label' => 'Type ID 1', 												])
             ->create([	'resource_form' => '11', 	'name' => 'idn2', 	'type' => 'text', 	'label' => 'Type ID 2', 												])
             ->create([	'resource_form' => '12', 	'name' => 'resource', 	'type' => 'select', 	'label' => 'Resource', 												])
             ->create([	'resource_form' => '12', 	'name' => 'name', 	'type' => 'text', 	'label' => 'Name', 												])
