@@ -4,6 +4,7 @@ namespace Milestone\Appframe\Controllers;
 
 use Milestone\Appframe\Helper\Helper;
 use Milestone\Appframe\Model\Resource;
+use Milestone\Appframe\Model\ResourceFormFieldDepend;
 
 class GetDependFieldDataController extends Controller
 {
@@ -13,10 +14,23 @@ class GetDependFieldDataController extends Controller
 
     public function index(){
         $form_id = $this->bag->r('form_id'); $field_id = $this->bag->r('field_id'); $data = $this->bag->r('data');
+        return (ResourceFormFieldDepend::where('form_field',$field_id)->whereNotNull('method')->exists())
+            ? $this->executeDependFieldMethod($form_id,$field_id,$data)
+            : $this->executeDependFieldWhere($form_id,$field_id,$data);
+    }
+
+    private function executeDependFieldWhere($form_id,$field_id,$data){
         $this->field = $field = $this->getFormFieldDetails($form_id,$field_id);
         $Where = Helper::Help('DependFieldWhere',$field_id,compact('data'));
         $orm = $this->getFieldOrm($field,$Where);
         $this->store($form_id,$orm);
+    }
+
+    private function executeDependFieldMethod($form_id,$field_id,$data){
+        $Model = ResourceFormFieldDepend::where('form_field',$field_id)->with('Field.Form.Resource')->first();
+        $Resource = $Model->Field->Form->Resource; $Method = $Model->method;
+        $class = implode("\\",[$Resource->controller_namespace,$Resource->controller]);
+        if(method_exists($Controller = new $class,$Method)) call_user_func([$Controller,$Method],$form_id,$field_id,$data);
     }
 
     private function getFormFieldDetails($form,$field){
