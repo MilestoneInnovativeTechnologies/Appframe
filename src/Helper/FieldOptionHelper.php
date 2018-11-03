@@ -50,7 +50,9 @@ class FieldOptionHelper
     }
 
     private function getMethodOptions(){
-        return [ 'options' => [],'latest' => 0 ];
+        $model = $this->Model->load(['Field.Data','Field.Form.Resource']);
+        $method = $model->detail; $resource = $model->Field->Form->Resource; $class = $this->getResourceControllerClass($resource);
+        return (method_exists($Controller = new $class,$method)) ? call_user_func([$Controller,$method]) : [ 'options' => [],'latest' => 0 ];
     }
 
     private function getResourceFromForeignTable($table,$field){
@@ -61,6 +63,11 @@ class FieldOptionHelper
 
     private function getResourceFromTable($table){
         return Resource::where('table',$table)->first();
+    }
+
+    private function getResourceControllerClass($resource){
+        $NS = $resource->controller_namespace; $C = $resource->controller;
+        return ($NS && $C) ? implode("\\",[$NS,$C]) : null;
     }
 
 }
