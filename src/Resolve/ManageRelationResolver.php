@@ -21,7 +21,7 @@ class ManageRelationResolver extends Resolve
     public function controllers(){
         $Controllers = [];
         if($this->yes()) array_push($Controllers,'GetListDetailsController');
-        elseif($this->bag->r('relations') !== null) array_push($Controllers,'UpdateRelationController','ListRelationUpdatedController');
+        elseif($this->bag->req('data') !== null) array_push($Controllers,'UpdateRelationController','ListRelationUpdatedController');
         array_push($Controllers,'GetListController','GetListRelationDataController');
         return $this->namespacedControllers($Controllers);
     }
