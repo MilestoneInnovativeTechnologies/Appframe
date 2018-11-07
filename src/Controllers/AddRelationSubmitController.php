@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Controllers;
 
+use Milestone\Appframe\Helper\Helper;
 use Milestone\Appframe\Model\ResourceForm;
 
 class AddRelationSubmitController extends Controller
@@ -14,15 +15,15 @@ class AddRelationSubmitController extends Controller
     }
 
     private function SubmitForm(){
-        dd('Need changes as per incoming data');
-        $form = $this->bag->r('form_id'); $record = $this->bag->r('record');
-        $Form = ResourceForm::with('Resource','Defaults','Fields.Data')->find($form);
-        $FieldExtractClass = (new Database\FormFieldExtract($Form))->process($record);
-        $RelationGrouped = $FieldExtractClass->relationGrouped;
-        //dd($RelationGrouped->toArray(),$FieldExtractClass->resourceModel);
-        $this->bag->r('submit_relations',$RelationGrouped->keys()->filter()->values()->toArray());
-        $Submit = new Database\Push($RelationGrouped->toArray(),$FieldExtractClass->resourceModel);
-        $this->bag->store('FormSubmit',$form,!!$Submit); $this->bag->r('submit_model',$Submit->Model);
+        $form = $this->bag->r('form_id'); $record = $this->bag->r('record'); $input = $this->bag->r('data');
+        $relation_data = Helper::Help('FormSubmitRelation',$form,compact('input'));
+        $this->bag->r('submit_relations',$this->getRelations($relation_data));
+        $response = (new Database\Bind($relation_data))->store();
+        $this->bag->store('FormSubmit',$form,!!$response); $this->bag->r('submit_model',$response[0]);
     }
 
+    private function getRelations($relation_data){
+        $relations = array_column($relation_data[0]['records'],'relations');
+        return (empty($relations) || !isset($relations[0]) || empty($relations[0])) ? [] : array_map(function($relation){ return $relation[0]['method']; },$relations);
+    }
 }
