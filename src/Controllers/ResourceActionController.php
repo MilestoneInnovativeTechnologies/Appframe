@@ -20,7 +20,7 @@ class ResourceActionController extends Controller
         'ManageRelation' => ['ResourceRelation','name','Owner','resource',null],
     ];
     private $ID2TypeModel = [
-        'FormWithData' => ['ResourceData','name','Resource'],
+        'FormWithData' => ['ResourceData','name','Resource','resource',null],
         'ListRelation' => ['ResourceList','name','Resource','idn1','getRelateRelationFromRelation'],
         'AddRelation' => ['ResourceForm','name','Resource','idn1','getRelateRelationFromRelation'],
         'ManageRelation' => ['ResourceList','name','Resource','idn1','getRelateRelationFromRelation'],
