@@ -9,11 +9,13 @@ class AddRelationResolver extends Resolve
     }
 
     public function idns(){
-        return ['idn1'];
+        return ['idn1','idn2'];
     }
 
     public function prepare(){
-        $this->bag->r('form_id',$this->bag->r('idns')['idn1']);
+        $this->bag->r('relation_id',$this->bag->r('idns')['idn1']);
+        $this->bag->r('form_id',$this->bag->r('idns')['idn2']);
+        $this->bag->r('data',$this->bag->req('data'));
         $this->bag->r('record',$this->bag->req('record'));
     }
 
