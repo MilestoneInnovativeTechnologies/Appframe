@@ -33,7 +33,7 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'resource' => '13', 	'name' => 'Field Attributes', 	'description' => 'Attributes of Field', 	'method' => 'Attributes', 	'type' => 'hasMany', 	'relate_resource' => '14', 										])
             ->create([	'resource' => '13', 	'name' => 'Field Options', 	'description' => 'Options of Field', 	'method' => 'Options', 	'type' => 'hasOne', 	'relate_resource' => '15', 										])
             ->create([	'resource' => '13', 	'name' => 'Field Validations', 	'description' => 'Validation details of field', 	'method' => 'Validations', 	'type' => 'hasMany', 	'relate_resource' => '16', 										])
-            ->create([	'resource' => '12', 	'name' => 'From Resource', 	'description' => 'Resource this form belongs to', 	'method' => 'Resource', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
+            ->create([	'resource' => '12', 	'name' => 'Form Resource', 	'description' => 'Resource this form belongs to', 	'method' => 'Resource', 	'type' => 'belongsTo', 	'relate_resource' => '4', 										])
             ->create([	'resource' => '12', 	'name' => 'Form Defaults', 	'description' => 'Predefined values for a form', 	'method' => 'Defaults', 	'type' => 'hasMany', 	'relate_resource' => '17', 										])
             ->create([	'resource' => '13', 	'name' => 'Field Data', 	'description' => 'Fields Database binding details', 	'method' => 'Data', 	'type' => 'hasOne', 	'relate_resource' => '18', 										])
             ->create([	'resource' => '4', 	'name' => 'Resource Relations', 	'description' => 'Relation of  a resource to another resource', 	'method' => 'Relations', 	'type' => 'hasMany', 	'relate_resource' => '26', 										])
