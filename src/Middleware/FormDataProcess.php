@@ -41,7 +41,7 @@ class FormDataProcess
 
     private function storeFile($file,$form,$field){
         $store = Helper::Help('StoreFile',$file,compact('form','field'));
-        return $store->code;
+        return $store->id;
     }
 
 }

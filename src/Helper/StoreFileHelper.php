@@ -40,13 +40,12 @@ class StoreFileHelper
     }
 
     private function resourceUploadAttributes($file){
-        $code = null;
         $name = $file->hashName();
         $name_client = $file->getClientOriginalName();
         $mime = $file->getMimeType();
         $mime_client = $file->getClientMimeType();
         $size = $file->getClientSize();
         $extension = $file->extension();
-        return compact('code','name','name_client','mime','mime_client','size','extension');
+        return compact('name','name_client','mime','mime_client','size','extension');
     }
 }

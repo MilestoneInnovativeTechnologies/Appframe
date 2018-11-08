@@ -17,7 +17,7 @@ class Model extends BaseModel
     public function getUploadFileDetailsAttribute(){
         $files = [];
         foreach($this->files as $field){
-            if($this->$field) $files[$field] = ResourceFormUpload::where('code',$this->$field)->first();
+            if($this->$field) $files[$field] = ResourceFormUpload::find($this->$field);
         }
         return $files;
     }
