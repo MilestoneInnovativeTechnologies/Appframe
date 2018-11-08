@@ -15,7 +15,6 @@ class CreateResourceFormUploadTable extends Migration
     {
         Schema::create('__resource_form_upload', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('code', 15)->nullable();
             $table->string('name', 256)->nullable();
             $table->string('name_client', 1024)->nullable();
             $table->string('mime', 64)->nullable();
