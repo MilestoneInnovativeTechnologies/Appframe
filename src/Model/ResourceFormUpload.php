@@ -6,8 +6,9 @@ class ResourceFormUpload extends Model
 {
     protected $table = '__resource_form_upload';
     protected $guarded = [];
+    protected $appends = ['url'];
 
-    protected function setCodeAttribute($Code = NULL){
+    public function setCodeAttribute($Code = NULL){
         $this->attributes['code'] = ($Code)?:$this->NewCode();
     }
 
@@ -16,7 +17,7 @@ class ResourceFormUpload extends Model
         $Index = intval(round($N/$Step)); return (array_key_exists($Index,$ALPAry))?$ALPAry[$Index]:$ALPAry[array_rand($ALPAry,1)];
     }
 
-    public function NewCode(){
+    private function NewCode(){
         $CodePrefixChar = date("y").$this->ALP(date("W"),1,52).$this->ALP(date("j"),1,31).str_pad(date("z"),3,"0",STR_PAD_LEFT).$this->ALP(date("G"),0,23).$this->ALP(date("i"),0,59).$this->ALP(date("s"),0,59);
         $TotalCodeLength = 12;
         $LastNum = 0; $PrefixLength = strlen($CodePrefixChar); $NumberLength = $TotalCodeLength - $PrefixLength;
@@ -24,5 +25,9 @@ class ResourceFormUpload extends Model
         $LastCode = $this->withoutGlobalScopes()->where('code',"REGEXP",$WhereValue)->max('code');
         if($LastCode) $LastNum = intval(mb_substr($LastCode,$PrefixLength));
         return ($CodePrefixChar . (str_pad(++$LastNum,$NumberLength,"0",STR_PAD_LEFT)));
+    }
+
+    public function getUrlAttribute(){
+        return \Storage::disk($this->disk)->url($this->file);
     }
 }
