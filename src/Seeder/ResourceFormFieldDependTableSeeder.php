@@ -24,6 +24,8 @@ class ResourceFormFieldDependTableSeeder extends Seeder
             ->create([	'form_field' => '55', 	'depend_field' => 'method_type', 				'method' => 'id2List', 		'ignore_null' => 'Yes', 								])
             ->create([	'form_field' => '55', 	'depend_field' => 'resource', 						'ignore_null' => 'Yes', 								])
             ->create([	'form_field' => '55', 	'depend_field' => 'idn1', 						'ignore_null' => 'Yes', 								])
+            ->create([	'form_field' => '65', 	'depend_field' => 'resource', 	'db_field' => 'resource', 	'operator' => '=', 												])
+            ->create([	'form_field' => '66', 	'depend_field' => 'relation', 	'db_field' => 'resource', 	'operator' => '=', 	'compare_method' => 'relationRelate', 											])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

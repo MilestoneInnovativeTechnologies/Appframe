@@ -9,4 +9,8 @@ class ResourceFormFieldDependController extends Controller
         return \Milestone\Appframe\Model\ResourceForm::find($form)->resource;
     }
 
+    public function relationRelate($relation){
+        return \Milestone\Appframe\Model\ResourceRelation::find($relation)->relate_resource;
+    }
+
 }
