@@ -1,6 +1,7 @@
 <b>Pre production tasks</b>
 <ol>
 <li>Remove dump-server route from web.php</li>
+<li>Modify routes - remove permanent redirects and correct welcome routes</li>
 <li>Create migrations</li>
 <li>Add migration statements</li>
 <li>Create Main Model - In src which extends Laravel Model</li>
