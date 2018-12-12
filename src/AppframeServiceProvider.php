@@ -3,6 +3,7 @@
 namespace Milestone\Appframe;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Schema\Blueprint;
 
 class AppframeServiceProvider extends ServiceProvider
 {
@@ -52,12 +53,18 @@ class AppframeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Bag::class, function () {
-            return new Bag;
-        });
+        $this->app->singleton(Bag::class, function () { return new Bag; });
+        $this->mergeConfigFrom($this->bootDataDir.'config/appframe.php', 'appframe' );
+        $this->registerBlueprintMacro();
+    }
 
-        $this->mergeConfigFrom(
-            $this->bootDataDir.'config/appframe.php', 'appframe'
-        );
+    private function registerBlueprintMacro(){
+        Blueprint::macro('audit',function(){
+            $this->unsignedInteger('created_by')->nullable();
+            $this->unsignedInteger('updated_by')->nullable();
+            $this->timestamps();
+            $this->foreign('created_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+            $this->foreign('updated_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+        });
     }
 }
