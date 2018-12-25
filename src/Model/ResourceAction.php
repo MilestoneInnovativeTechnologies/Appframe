@@ -17,4 +17,8 @@ class ResourceAction extends Model
     public function Data(){
         return $this->hasMany(ResourceActionData::class,'resource_action','id');
     }
+
+    public function Resource(){
+        return $this->belongsTo(Resource::class,'resource','id');
+    }
 }
