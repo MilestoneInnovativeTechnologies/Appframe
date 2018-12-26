@@ -13,4 +13,8 @@ class ResourceFormCollection extends Model
     public function Relation(){
         return $this->belongsTo(ResourceRelation::class,'relation','id');
     }
+
+    public function Field(){
+        return $this->belongsTo(ResourceFormField::class,'foreign_field','id');
+    }
 }
