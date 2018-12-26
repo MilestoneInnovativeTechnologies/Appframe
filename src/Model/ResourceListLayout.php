@@ -9,4 +9,8 @@ class ResourceListLayout extends Model
     public function List(){
         return $this->belongsTo(ResourceList::class,'resource_list','id');
     }
+
+    public function Relation(){
+        return $this->belongsTo(ResourceRelation::class,'relation','id');
+    }
 }
