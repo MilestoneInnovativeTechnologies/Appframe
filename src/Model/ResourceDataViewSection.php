@@ -13,4 +13,8 @@ class ResourceDataViewSection extends Model
     public function Relation(){
         return $this->belongsTo(ResourceRelation::class, 'relation','id');
     }
+
+    public function Data(){
+        return $this->belongsTo(ResourceData::class,'resource_data','id');
+    }
 }
