@@ -28,8 +28,8 @@ class ResourceActionController extends Controller
 
     public function id1List($form = null, $field = null, $data = null){
         if($form){
-            if(array_key_exists($data['method_type'],$this->TypeModel))
-                $this->getOptions($this->TypeModel[$data['method_type']], $field, $data);
+            if(array_key_exists($data['type'],$this->TypeModel))
+                $this->getOptions($this->TypeModel[$data['type']], $field, $data);
             return null;
         } else {
             return [ 'options' => [],'latest' => 0 ];
@@ -38,8 +38,8 @@ class ResourceActionController extends Controller
 
     public function id2List($form = null, $field = null, $data = null){
         if($form){
-            if(array_key_exists($data['method_type'],$this->ID2TypeModel))
-                $this->getOptions($this->ID2TypeModel[$data['method_type']], $field, $data);
+            if(array_key_exists($data['type'],$this->ID2TypeModel))
+                $this->getOptions($this->ID2TypeModel[$data['type']], $field, $data);
             return null;
         } else {
             return [ 'options' => [],'latest' => 0 ];
