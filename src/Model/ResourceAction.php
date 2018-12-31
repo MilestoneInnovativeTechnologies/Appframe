@@ -21,4 +21,8 @@ class ResourceAction extends Model
     public function Resource(){
         return $this->belongsTo(Resource::class,'resource','id');
     }
+
+    public function Attrs(){
+        return $this->hasMany(ResourceActionAttr::class, 'resource_action','id');
+    }
 }
