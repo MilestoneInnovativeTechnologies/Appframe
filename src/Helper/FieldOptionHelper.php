@@ -45,7 +45,7 @@ class FieldOptionHelper
             ? $this->getResourceFromTable($table)
             : $this->getResourceFromForeignTable($table,$model->Field->Data->attribute);
         $Class = implode("\\",[$resource->namespace,$resource->name]);
-        $Latest = $this->latest; $orm = (new $Class)->where('updated_at','>',$Latest)->orWhereNull('updated_at');
+        $Latest = $this->latest; $orm = (new $Class)->where(function($Q) use($Latest){ $Q->where('updated_at','>',$Latest)->orWhereNull('updated_at'); });
         return ($this->orm) ? $orm : [ 'options' => $orm->pluck($model->label_attr,$this->ForeignField)->toArray(), 'latest' => date('Y-m-d H:i:s',strtotime($orm->max('updated_at'))) ];
     }
 
