@@ -16,8 +16,7 @@ class ResourceDataTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceData::truncate()
-            ->create([	'resource' => '1', 	'name' => 'ViewAdministrator', 	'description' => 'Record of user administrator', 	'title_field' => 'name', 												])
-            ->create([	'resource' => '1', 	'name' => 'ViewDeveloper', 	'description' => 'Record of user developer', 	'title_field' => 'name', 												])
+            ->create([	'id' => '1', 	'resource' => '1', 	'name' => 'UserDetailsData', 	'description' => 'View details of a user', 	'title_field' => 'name', 											])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

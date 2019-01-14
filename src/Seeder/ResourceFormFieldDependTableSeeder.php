@@ -16,16 +16,15 @@ class ResourceFormFieldDependTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceFormFieldDepend::truncate()
-            ->create([	'form_field' => '176', 	'depend_field' => 'resource_list', 	'db_field' => 'resource', 	'operator' => '=', 				'ignore_null' => 'Yes', 								])
-            ->create([	'form_field' => '127', 	'depend_field' => 'resource_form', 	'db_field' => 'resource', 	'operator' => '=', 	'compare_method' => 'formResource', 			'ignore_null' => 'Yes', 								])
-            ->create([	'form_field' => '128', 	'depend_field' => 'collection_form', 	'db_field' => 'resource_form', 	'operator' => 'In', 				'ignore_null' => 'Yes', 								])
-            ->create([	'form_field' => '54', 	'depend_field' => 'method_type', 				'method' => 'id1List', 		'ignore_null' => 'Yes', 								])
-            ->create([	'form_field' => '54', 	'depend_field' => 'resource', 						'ignore_null' => 'Yes', 								])
-            ->create([	'form_field' => '55', 	'depend_field' => 'method_type', 				'method' => 'id2List', 		'ignore_null' => 'Yes', 								])
-            ->create([	'form_field' => '55', 	'depend_field' => 'resource', 						'ignore_null' => 'Yes', 								])
-            ->create([	'form_field' => '55', 	'depend_field' => 'idn1', 						'ignore_null' => 'Yes', 								])
-            ->create([	'form_field' => '65', 	'depend_field' => 'resource', 	'db_field' => 'resource', 	'operator' => '=', 												])
-            ->create([	'form_field' => '66', 	'depend_field' => 'relation', 	'db_field' => 'resource', 	'operator' => '=', 	'compare_method' => 'relationRelate', 											])
+            ->create([	'id' => '1', 	'form_field' => '23', 	'depend_field' => 'type', 				'method' => 'id1List', 		'ignore_null' => 'Yes', 							])
+            ->create([	'id' => '2', 	'form_field' => '23', 	'depend_field' => 'resource', 				'method' => 'id1List', 		'ignore_null' => 'Yes', 							])
+            ->create([	'id' => '3', 	'form_field' => '24', 	'depend_field' => 'type', 				'method' => 'id2List', 		'ignore_null' => 'Yes', 							])
+            ->create([	'id' => '4', 	'form_field' => '24', 	'depend_field' => 'resource', 				'method' => 'id2List', 		'ignore_null' => 'Yes', 							])
+            ->create([	'id' => '5', 	'form_field' => '31', 	'depend_field' => 'type', 				'method' => 'id1List', 		'ignore_null' => 'Yes', 							])
+            ->create([	'id' => '6', 	'form_field' => '31', 	'depend_field' => 'resource', 				'method' => 'id1List', 		'ignore_null' => 'Yes', 							])
+            ->create([	'id' => '7', 	'form_field' => '32', 	'depend_field' => 'type', 				'method' => 'id2List', 		'ignore_null' => 'Yes', 							])
+            ->create([	'id' => '8', 	'form_field' => '32', 	'depend_field' => 'resource', 				'method' => 'id2List', 		'ignore_null' => 'Yes', 							])
+            ->create([	'id' => '9', 	'form_field' => '47', 	'depend_field' => 'resource', 	'db_field' => 'resource', 	'operator' => '=', 				'ignore_null' => 'Yes', 							])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

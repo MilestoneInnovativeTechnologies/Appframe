@@ -16,8 +16,8 @@ class ResourceScopeTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceScope::truncate()
-            ->create([	'resource' => '1',	'name' => 'Administrators',	'description' => 'List of users of administrator group',	'method' => 'administrators',												])
-            ->create([	'resource' => '1',	'name' => 'Developers',	'description' => 'List all users of developer group',	'method' => 'developers',												])
+            ->create([	'id' => '1', 	'resource' => '1', 	'name' => 'AdministratorsScope', 	'description' => 'Users where has group Administrator', 	'method' => 'administrators', 											])
+            ->create([	'id' => '2', 	'resource' => '1', 	'name' => 'DevelopersScope', 	'description' => 'Users where has group Developers', 	'method' => 'developers', 											])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

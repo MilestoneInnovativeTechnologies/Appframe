@@ -16,6 +16,7 @@ class ResourceDataRelationTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceDataRelation::truncate()
+            ->create([	'id' => '1', 	'resource_data' => '1', 	'relation' => '1', 													])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
