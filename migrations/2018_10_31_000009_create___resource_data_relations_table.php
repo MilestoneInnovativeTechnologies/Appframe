@@ -22,7 +22,7 @@ class CreateResourceDataRelationsTable extends Migration
             $table->unsignedInteger('nest_relation3')->index()->nullable();
             $table->unsignedInteger('nest_relation4')->index()->nullable();
             $table->unsignedInteger('nest_relation5')->index()->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource_data')->references('id')->on('__resource_data')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('relation')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');
             $table->foreign('nest_relation1')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');

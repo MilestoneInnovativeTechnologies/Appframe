@@ -18,7 +18,7 @@ class CreateResourceFormLayoutTable extends Migration
             $table->unsignedInteger('resource_form')->index();
             $table->unsignedInteger('form_field')->index();
             $table->unsignedTinyInteger('colspan')->default(12);
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource_form')->references('id')->on('__resource_forms')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('form_field')->references('id')->on('__resource_form_fields')->onUpdate('cascade')->onDelete('cascade');
         });

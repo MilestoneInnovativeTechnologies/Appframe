@@ -17,7 +17,7 @@ class CreateResourceDataScopesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('resource_data')->index();
             $table->unsignedInteger('scope')->index();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource_data')->references('id')->on('__resource_data')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('scope')->references('id')->on('__resource_scopes')->onUpdate('cascade')->onDelete('cascade');
         });

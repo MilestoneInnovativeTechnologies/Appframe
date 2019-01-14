@@ -23,7 +23,7 @@ class CreateResourceFormFieldDependsTable extends Migration
             $table->string('method', 128)->nullable();
             $table->string('value_db_field', 64)->nullable();
             $table->enum('ignore_null', ['Yes','No'])->default('Yes');
-            $table->timestamps();
+            $table->audit();
             $table->foreign('form_field')->references('id')->on('__resource_form_fields')->onUpdate('cascade')->onDelete('cascade');
         });
     }

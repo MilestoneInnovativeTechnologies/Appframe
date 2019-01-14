@@ -20,7 +20,7 @@ class CreateResourceDashboardTable extends Migration
             $table->string('description', 1024)->nullable();
             $table->string('title', 128)->nullable();
             $table->string('method', 128)->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource')->references('id')->on('__resources')->onUpdate('cascade')->onDelete('cascade');
         });
     }

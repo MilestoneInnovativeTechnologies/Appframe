@@ -26,7 +26,7 @@ class CreateResourceActionsTable extends Migration
             $table->string('on', 256)->nullable();
             $table->string('confirm', 256)->nullable();
             $table->string('handler', 128)->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource')->references('id')->on('__resources')->onUpdate('cascade')->onDelete('cascade');
         });
     }

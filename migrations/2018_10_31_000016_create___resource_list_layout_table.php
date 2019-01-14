@@ -21,7 +21,7 @@ class CreateResourceListLayoutTable extends Migration
             $table->unsignedInteger('relation')->index()->nullable();
             $table->unsignedInteger('nest_relation1')->index()->nullable();
             $table->unsignedInteger('nest_relation2')->index()->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource_list')->references('id')->on('__resource_lists')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('relation')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');
             $table->foreign('nest_relation1')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');

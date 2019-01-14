@@ -17,7 +17,7 @@ class CreateGroupRolesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('group');
             $table->unsignedInteger('role');
-            $table->timestamps();
+            $table->audit();
             $table->foreign('group')->references('id')->on('__groups')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('role')->references('id')->on('__roles')->onUpdate('cascade')->onDelete('cascade');
         });

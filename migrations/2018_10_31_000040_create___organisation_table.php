@@ -22,7 +22,7 @@ class CreateOrganisationTable extends Migration
             $table->string('address_line2', 1024)->nullable();
             $table->string('address_short', 512)->nullable();
             $table->string('address_long', 1024)->nullable();
-            $table->timestamps();
+            $table->audit();
         });
     }
 

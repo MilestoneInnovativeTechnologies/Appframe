@@ -21,7 +21,7 @@ class CreateResourceDashboardSectionItemsTable extends Migration
             $table->enum('item', ['Metric','List','ListRelation'])->default('Metric');
             $table->string('item_id', 64)->nullable();
             $table->string('item_id2', 64)->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('section')->references('id')->on('__resource_dashboard_sections')->onUpdate('cascade')->onDelete('cascade');
         });
     }

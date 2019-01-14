@@ -24,7 +24,7 @@ class CreateResourceFormUploadTable extends Migration
             $table->string('path', 512)->nullable();
             $table->string('file', 2048)->nullable();
             $table->string('extension', 32)->nullable();
-            $table->timestamps();
+            $table->audit();
         });
     }
 

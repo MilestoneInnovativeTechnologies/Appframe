@@ -20,10 +20,10 @@ class CreateResourcesTable extends Migration
             $table->string('title', 128)->nullable();
             $table->string('namespace', 512)->nullable()->default('Milestone\Appframe');
             $table->string('table', 64)->nullable();
-            $table->string('key', 64)->nullable()->default('id');
             $table->string('controller', 128)->nullable();
             $table->string('controller_namespace', 512)->nullable();
-            $table->timestamps();
+            $table->enum('development', ['No','Yes'])->default('No');
+            $table->audit();
         });
     }
 

@@ -19,7 +19,7 @@ class CreateResourceFormCollectionTable extends Migration
             $table->unsignedInteger('collection_form')->index();
             $table->unsignedInteger('relation')->index()->nullable();
             $table->unsignedInteger('foreign_field')->index()->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource_form')->references('id')->on('__resource_forms')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('collection_form')->references('id')->on('__resource_forms')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('relation')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');

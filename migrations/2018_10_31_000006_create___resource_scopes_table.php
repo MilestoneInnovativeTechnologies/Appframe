@@ -22,7 +22,7 @@ class CreateResourceScopesTable extends Migration
             $table->string('arg1', 64)->nullable();
             $table->string('arg2', 64)->nullable();
             $table->string('arg3', 64)->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource')->references('id')->on('__resources')->onUpdate('cascade')->onDelete('cascade');
         });
     }

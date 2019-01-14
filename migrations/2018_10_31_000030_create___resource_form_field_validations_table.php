@@ -23,7 +23,7 @@ class CreateResourceFormFieldValidationsTable extends Migration
             $table->string('arg3', 64)->nullable();
             $table->string('arg4', 64)->nullable();
             $table->string('arg5', 64)->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('form_field')->references('id')->on('__resource_form_fields')->onUpdate('cascade')->onDelete('cascade');
         });
     }

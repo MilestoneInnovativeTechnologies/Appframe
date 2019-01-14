@@ -26,7 +26,7 @@ class CreateResourceMetricsTable extends Migration
             $table->string('field_sub', 64)->nullable();
             $table->unsignedTinyInteger('cache')->default(0);
             $table->string('method', 128)->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource')->references('id')->on('__resources')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('resource_list')->references('id')->on('__resource_lists')->onUpdate('cascade')->onDelete('cascade');
         });

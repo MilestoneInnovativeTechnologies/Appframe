@@ -19,7 +19,7 @@ class CreateResourceDashboardSectionsTable extends Migration
             $table->string('name', 64)->index();
             $table->string('title', 128)->nullable();
             $table->unsignedSmallInteger('height')->default(300);
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource_dashboard')->references('id')->on('__resource_dashboard')->onUpdate('cascade')->onDelete('cascade');
         });
     }

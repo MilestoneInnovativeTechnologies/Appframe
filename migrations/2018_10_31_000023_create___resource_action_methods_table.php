@@ -23,7 +23,7 @@ class CreateResourceActionMethodsTable extends Migration
             $table->string('idn3', 64)->nullable();
             $table->string('idn4', 64)->nullable();
             $table->string('idn5', 64)->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource_action')->references('id')->on('__resource_actions')->onUpdate('cascade')->onDelete('cascade');
         });
     }

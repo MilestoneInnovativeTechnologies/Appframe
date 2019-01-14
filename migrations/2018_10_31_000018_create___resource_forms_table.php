@@ -20,7 +20,7 @@ class CreateResourceFormsTable extends Migration
             $table->string('description', 1024)->nullable();
             $table->string('title', 128)->nullable();
             $table->string('action_text', 64)->default('Submit');
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource')->references('id')->on('__resources')->onUpdate('cascade')->onDelete('cascade');
         });
     }

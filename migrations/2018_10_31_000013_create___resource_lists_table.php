@@ -21,7 +21,7 @@ class CreateResourceListsTable extends Migration
             $table->string('title', 128)->nullable();
             $table->unsignedSmallInteger('items_per_page')->default('25');
             $table->string('method', 128)->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource')->references('id')->on('__resources')->onUpdate('cascade')->onDelete('cascade');
         });
     }

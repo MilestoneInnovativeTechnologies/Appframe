@@ -19,7 +19,7 @@ class CreateOrganisationContactsTable extends Migration
             $table->enum('type', ['number','email','address'])->default('number');
             $table->string('type_name', 64)->nullable();
             $table->string('detail', 256)->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('organisation')->references('id')->on('__organisation')->onUpdate('cascade')->onDelete('cascade');
         });
     }

@@ -18,7 +18,7 @@ class CreateResourceFormFieldAttrsTable extends Migration
             $table->unsignedInteger('form_field')->index();
             $table->string('name', 64)->nullable();
             $table->string('value', 128)->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('form_field')->references('id')->on('__resource_form_fields')->onUpdate('cascade')->onDelete('cascade');
         });
     }

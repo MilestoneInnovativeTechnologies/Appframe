@@ -17,7 +17,7 @@ class CreateResourceActionListsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('resource_action')->index();
             $table->unsignedInteger('resource_list')->index();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource_action')->references('id')->on('__resource_actions')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('resource_list')->references('id')->on('__resource_lists')->onUpdate('cascade')->onDelete('cascade');
         });

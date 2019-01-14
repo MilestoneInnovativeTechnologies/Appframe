@@ -21,7 +21,7 @@ class CreateResourceFormFieldOptionsTable extends Migration
             $table->string('value_attr', 64)->nullable();
             $table->string('label_attr', 128)->nullable();
             $table->enum('preload', ['Yes','No'])->default('Yes');
-            $table->timestamps();
+            $table->audit();
             $table->foreign('form_field')->references('id')->on('__resource_form_fields')->onUpdate('cascade')->onDelete('cascade');
         });
     }

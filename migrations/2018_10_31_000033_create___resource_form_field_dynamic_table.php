@@ -23,7 +23,7 @@ class CreateResourceFormFieldDynamicTable extends Migration
             $table->string('values', 1024)->nullable();
             $table->enum('operator', ['=','<','>','<=','>=','<>','In','NotIn','like'])->default('=');
             $table->enum('on_multiple', ['and','or'])->default('and');
-            $table->timestamps();
+            $table->audit();
             $table->foreign('form_field')->references('id')->on('__resource_form_fields')->onUpdate('cascade')->onDelete('cascade');
         });
     }

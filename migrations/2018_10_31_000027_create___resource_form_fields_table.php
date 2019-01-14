@@ -19,8 +19,7 @@ class CreateResourceFormFieldsTable extends Migration
             $table->string('name', 64)->index();
             $table->string('type', 128)->nullable();
             $table->string('label', 256)->nullable();
-            $table->string('collection', 64)->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource_form')->references('id')->on('__resource_forms')->onUpdate('cascade')->onDelete('cascade');
         });
     }

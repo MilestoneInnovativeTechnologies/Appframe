@@ -20,7 +20,7 @@ class CreateResourceDataViewSectionsTable extends Migration
             $table->string('title_field', 128)->nullable();
             $table->unsignedInteger('relation')->index()->nullable();
             $table->unsignedTinyInteger('colspan')->default(12);
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource_data')->references('id')->on('__resource_data')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('relation')->references('id')->on('__resource_relations')->onUpdate('cascade')->onDelete('set null');
         });

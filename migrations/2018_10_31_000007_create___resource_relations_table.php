@@ -21,7 +21,7 @@ class CreateResourceRelationsTable extends Migration
             $table->string('method', 128)->nullable();
             $table->enum('type', ['hasOne','hasMany','belongsTo','belongsToMany'])->default('hasMany');
             $table->unsignedInteger('relate_resource')->index()->nullable();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('resource')->references('id')->on('__resources')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('relate_resource')->references('id')->on('__resources')->onUpdate('cascade')->onDelete('set null');
         });
