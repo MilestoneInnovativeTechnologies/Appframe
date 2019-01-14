@@ -92,33 +92,6 @@ class FormSubmitRelationHelper
         $this->relations[0]['records'] = $this->getRecords($input,$this->fields);
     }
 
-//    private function getRecords($fields){
-//        $records = [[ 'data' => [], 'relations' => [] ]]; $relation_details = [];
-//        foreach ($fields as $field){
-//            $base = &$records;
-//            foreach(['relation','nest_relation1','nest_relation2','nest_relation3'] as $deep => $rel){
-//                if($field[$rel]) {
-//                    if(!isset($relation_details[$deep])) $relation_details[$deep] = [];
-//                    $relation_id = (is_object($field[$rel]) || is_array($field[$rel])) ? $field[$rel]['id'] : $field[$rel];
-//                    if(!isset($relation_details[$deep][$relation_id])){
-//                        $properties = $this->getProperties($relation_id);
-//                        $relations_index = array_push($base[0]['relations'],$properties)-1;
-//                        $relation_details[$deep][$relation_id] = $relations_index;
-//                    } else $relations_index = $relation_details[$deep][$relation_id];
-//                    $base = &$base[0]['relations'][$relations_index]['records'];
-//                } else {
-//                    $values = $field['value'] ? $this->getFormDefaultValue($field['value']) : $this->getInputValue($field['name']);
-//                    foreach ((array) $values as $record => $value){
-//                        $base[$record]['data'][$field['attribute']] = $value;
-//                        if($record !== 0) $base[$record]['relations'] = $base[0]['relations'];
-//                    }
-//                    break;
-//                }
-//            }
-//        }
-//        return $records;
-//    }
-
     private function getRecords($inputs,$fields){
         $records = [];
         if(empty($inputs)) return [[ 'data' => [], 'relations' => [] ]];
