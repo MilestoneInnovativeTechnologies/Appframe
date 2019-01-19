@@ -29,6 +29,9 @@ class ResourceFormTableSeeder extends Seeder
             ->create([	'id' => '11', 	'resource' => '20', 	'name' => 'AddResourceList', 	'description' => 'Add a list to a selected resource', 	'title' => 'Add a list', 	'action_text' => 'Add List', 										])
             ->create([	'id' => '12', 	'resource' => '25', 	'name' => 'CreateDataForm', 	'description' => 'Form to create a data', 	'title' => 'Create Data', 	'action_text' => 'Create Data', 										])
             ->create([	'id' => '13', 	'resource' => '25', 	'name' => 'AddDataForm', 	'description' => 'Add a data to a selected resource', 	'title' => 'Add Data', 	'action_text' => 'Add Data', 										])
+            ->create([	'id' => '14', 	'resource' => '2', 	'name' => 'NewGroupForm', 	'description' => 'Form to create a user group', 	'title' => 'Create Group', 	'action_text' => 'Create Group', 										])
+            ->create([	'id' => '15', 	'resource' => '3', 	'name' => 'NewRoleForm', 	'description' => 'Form to create a new role', 	'title' => 'Create Role', 	'action_text' => 'Create Role', 										])
+            ->create([	'id' => '16', 	'resource' => '5', 	'name' => 'AddRoleResourceForm', 	'description' => 'Form to add a resource to a role', 	'title' => 'Add Resource', 	'action_text' => 'Add Resource', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

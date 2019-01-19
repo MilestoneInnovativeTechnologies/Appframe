@@ -50,6 +50,16 @@ class ResourceFormLayoutTableSeeder extends Seeder
             ->create([	'id' => '32', 	'resource_form' => '12', 	'form_field' => '60', 	'colspan' => '6', 												])
             ->create([	'id' => '33', 	'resource_form' => '12', 	'form_field' => '61', 	'colspan' => '6', 												])
             ->create([	'id' => '34', 	'resource_form' => '12', 	'form_field' => '62', 	'colspan' => '12', 												])
+            ->create([	'id' => '35', 	'resource_form' => '14', 	'form_field' => '67', 	'colspan' => '6', 												])
+            ->create([	'id' => '36', 	'resource_form' => '14', 	'form_field' => '68', 	'colspan' => '6', 												])
+            ->create([	'id' => '37', 	'resource_form' => '14', 	'form_field' => '69', 	'colspan' => '12', 												])
+            ->create([	'id' => '38', 	'resource_form' => '15', 	'form_field' => '70', 	'colspan' => '6', 												])
+            ->create([	'id' => '39', 	'resource_form' => '15', 	'form_field' => '71', 	'colspan' => '6', 												])
+            ->create([	'id' => '40', 	'resource_form' => '15', 	'form_field' => '72', 	'colspan' => '12', 												])
+            ->create([	'id' => '41', 	'resource_form' => '16', 	'form_field' => '73', 	'colspan' => '12', 												])
+            ->create([	'id' => '42', 	'resource_form' => '16', 	'form_field' => '74', 	'colspan' => '12', 												])
+            ->create([	'id' => '43', 	'resource_form' => '16', 	'form_field' => '75', 	'colspan' => '4', 												])
+            ->create([	'id' => '44', 	'resource_form' => '16', 	'form_field' => '76', 	'colspan' => '8', 												])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

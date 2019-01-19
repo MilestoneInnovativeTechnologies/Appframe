@@ -38,6 +38,9 @@ class ResourceListTableSeeder extends Seeder
             ->create([	'id' => '20', 	'resource' => '13', 	'name' => 'FieldValidationsList', 	'description' => 'List all field validations', 	'title' => 'Field Validations', 	'items_per_page' => '10', 										])
             ->create([	'id' => '21', 	'resource' => '14', 	'name' => 'FieldDependsList', 	'description' => 'List all field dependents', 	'title' => 'Field Depends', 	'items_per_page' => '5', 										])
             ->create([	'id' => '22', 	'resource' => '15', 	'name' => 'FieldDynamicsList', 	'description' => 'List all field dynamics', 	'title' => 'Field Dynamics', 	'items_per_page' => '5', 										])
+            ->create([	'id' => '23', 	'resource' => '2', 	'name' => 'GroupsList', 	'description' => 'List all groups', 	'title' => 'Groups', 	'items_per_page' => '20', 										])
+            ->create([	'id' => '24', 	'resource' => '3', 	'name' => 'RolesList', 	'description' => 'List all roles', 	'title' => 'Roles', 	'items_per_page' => '20', 										])
+            ->create([	'id' => '25', 	'resource' => '5', 	'name' => 'RoleResourcesList', 	'description' => 'List all resources of a role', 	'title' => 'Resources', 	'items_per_page' => '30', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

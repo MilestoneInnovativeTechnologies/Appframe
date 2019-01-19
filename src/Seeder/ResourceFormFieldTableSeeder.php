@@ -82,6 +82,16 @@ class ResourceFormFieldTableSeeder extends Seeder
             ->create([	'id' => '64', 	'resource_form' => '13', 	'name' => 'name', 	'type' => 'text', 	'label' => 'Name', 											])
             ->create([	'id' => '65', 	'resource_form' => '13', 	'name' => 'title_field', 	'type' => 'text', 	'label' => 'Title Field', 											])
             ->create([	'id' => '66', 	'resource_form' => '13', 	'name' => 'description', 	'type' => 'textarea', 	'label' => 'Description', 											])
+            ->create([	'id' => '67', 	'resource_form' => '14', 	'name' => 'name', 	'type' => 'text', 	'label' => 'Name', 											])
+            ->create([	'id' => '68', 	'resource_form' => '14', 	'name' => 'title', 	'type' => 'text', 	'label' => 'Title', 											])
+            ->create([	'id' => '69', 	'resource_form' => '14', 	'name' => 'description', 	'type' => 'textarea', 	'label' => 'Description', 											])
+            ->create([	'id' => '70', 	'resource_form' => '15', 	'name' => 'name', 	'type' => 'text', 	'label' => 'Name', 											])
+            ->create([	'id' => '71', 	'resource_form' => '15', 	'name' => 'title', 	'type' => 'text', 	'label' => 'Title', 											])
+            ->create([	'id' => '72', 	'resource_form' => '15', 	'name' => 'description', 	'type' => 'textarea', 	'label' => 'Description', 											])
+            ->create([	'id' => '73', 	'resource_form' => '16', 	'name' => 'role', 	'type' => 'select', 	'label' => 'Select Role', 											])
+            ->create([	'id' => '74', 	'resource_form' => '16', 	'name' => 'resource', 	'type' => 'select', 	'label' => 'Select Resource', 											])
+            ->create([	'id' => '75', 	'resource_form' => '16', 	'name' => 'actions_availability', 	'type' => 'select', 	'label' => 'Actions Availability', 											])
+            ->create([	'id' => '76', 	'resource_form' => '16', 	'name' => 'actions', 	'type' => 'multiselect', 	'label' => 'Select Actions', 											])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

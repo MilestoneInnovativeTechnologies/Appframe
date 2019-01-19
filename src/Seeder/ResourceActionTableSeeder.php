@@ -58,6 +58,14 @@ class ResourceActionTableSeeder extends Seeder
             ->create([	'id' => '40', 	'resource' => '9', 	'name' => 'ListFieldDepends', 	'description' => 'Action to list all depends of a selected field', 	'title' => 'View Depends', 	'type' => 'primary', 										])
             ->create([	'id' => '41', 	'resource' => '9', 	'name' => 'ListFieldDynamics', 	'description' => 'Action to list all dynamics of a selected field', 	'title' => 'View Dynamics', 	'type' => 'primary', 										])
             ->create([	'id' => '42', 	'resource' => '20', 	'name' => 'AddListActionsAction', 	'description' => 'Action to manage Actions assigned to a list', 	'title' => 'Manage Actions', 	'type' => 'primary', 										])
+            ->create([	'id' => '43', 	'resource' => '2', 	'name' => 'CreateGroupAction', 	'description' => 'Action to create a new group', 	'title' => 'New Group', 		'menu' => 'New Group', 									])
+            ->create([	'id' => '44', 	'resource' => '2', 	'name' => 'ListGroupsAction', 	'description' => 'Action to lists all groups', 	'title' => 'Groups', 		'menu' => 'Groups', 									])
+            ->create([	'id' => '45', 	'resource' => '3', 	'name' => 'CreateRoleAction', 	'description' => 'Action to create a new role', 	'title' => 'New Role', 		'menu' => 'New Role', 									])
+            ->create([	'id' => '46', 	'resource' => '3', 	'name' => 'ListRolesAction', 	'description' => 'Action to list all roles', 	'title' => 'Roles', 		'menu' => 'Roles', 									])
+            ->create([	'id' => '47', 	'resource' => '2', 	'name' => 'ManageRolesAction', 	'description' => 'Action to manage roles for a group', 	'title' => 'Add/Remove Roles', 	'type' => 'primary', 										])
+            ->create([	'id' => '48', 	'resource' => '3', 	'name' => 'ManageGroupAction', 	'description' => 'Action to manage groups of a role', 	'title' => 'Add/Remove Groups', 	'type' => 'primary', 										])
+            ->create([	'id' => '49', 	'resource' => '3', 	'name' => 'AddRoleResource', 	'description' => 'Action to add a resource', 	'title' => 'Add Resource', 	'type' => 'primary', 										])
+            ->create([	'id' => '50', 	'resource' => '3', 	'name' => 'ListRoleResources', 	'description' => 'Action to list all resources of a role', 	'title' => 'List Resources', 	'type' => 'primary', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
