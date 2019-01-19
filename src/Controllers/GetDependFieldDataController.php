@@ -10,7 +10,7 @@ class GetDependFieldDataController extends Controller
 {
 
     private $form, $field, $resource, $value_attr, $label_attr, $text_attr;
-    protected $optionTypes = ['select','checkbox','radio'];
+    protected $optionTypes = ['multiselect','select','checkbox','radio'];
 
     public function index(){
         $form_id = $this->bag->r('form_id'); $field_id = $this->bag->r('field_id'); $data = $this->bag->r('data');
