@@ -21,7 +21,7 @@ class FormWithDataResolver extends Resolve
     }
 
     public function controllers(){
-        $Controllers = []; if($this->yes()) array_push($Controllers,'GetFormController','GetDataDetailsController');
+        $Controllers = []; if($this->yes()) array_push($Controllers,'GetFormController','GetDataDetailsController','GetFormDataMapController');
         if($this->bag->r('update')) array_push($Controllers,'ValidationController','FormSubmitController','FormSubmitDataController');
         else array_push($Controllers,'GetFormDataController');
         return array_map(function($controller){ return 'Milestone\\Appframe\\Controllers\\' . $controller; },$Controllers);
