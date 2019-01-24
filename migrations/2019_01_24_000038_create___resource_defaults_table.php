@@ -22,10 +22,10 @@ class CreateResourceDefaultsTable extends Migration
             $table->unsignedInteger('update')->index()->nullable();
             $table->audit();
             $table->foreign('resource')->references('id')->on('__resources')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('list')->references('id')->on('__resource_lists')->onUpdate('cascade')->onDelete('set null');
-            $table->foreign('create')->references('id')->on('__resource_forms')->onUpdate('cascade')->onDelete('set null');
-            $table->foreign('read')->references('id')->on('__resource_data')->onUpdate('cascade')->onDelete('set null');
-            $table->foreign('update')->references('id')->on('__resource_forms')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('list')->references('id')->on('__resource_actions')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('create')->references('id')->on('__resource_actions')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('read')->references('id')->on('__resource_actions')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('update')->references('id')->on('__resource_actions')->onUpdate('cascade')->onDelete('set null');
         });
     }
 
