@@ -19,13 +19,13 @@ class ListHelper
     }
 
     private function getListExtracts($List){
-        $items = $List->items_per_page; $title = $List->title;
+        $items = $List->items_per_page; $title = $List->title; $identity = $List->identity;
         $relations = $this->getRelations($List->Relations);
         $layout = Helper::Help('ListLayout',$List->id);
         $last = 0;
         $orm = $this->getExtractORM($List);
         $count = $this->getCountFromORM($orm);
-        return compact('orm','relations','items','last','title','layout','count');
+        return compact('orm','relations','items','last','title','identity','layout','count');
     }
 
     private function getRelations($Relations){
