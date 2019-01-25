@@ -19,6 +19,7 @@ class CreateResourceListsTable extends Migration
             $table->string('name', 64)->index();
             $table->string('description', 1024)->nullable();
             $table->string('title', 128)->nullable();
+            $table->string('identity', 64)->nullable();
             $table->unsignedSmallInteger('items_per_page')->default('25');
             $table->string('method', 128)->nullable();
             $table->audit();
