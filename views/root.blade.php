@@ -74,6 +74,7 @@
                 <div class="page-inner">
                     <header class="page-title-bar">
                         <transition name="breadcrumb"><app-breadcrumb :key="$route.fullPath"></app-breadcrumb></transition>
+                        <f-a-b></f-a-b>
                         <transition name="pagetitle"><app-page-title :key="$store.getters['PTTL/title']($route.params.action)"></app-page-title></transition>
                     </header>
                     <div class="page-section d-md-flex justify-content-between mb-2">
