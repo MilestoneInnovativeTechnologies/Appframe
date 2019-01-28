@@ -92,6 +92,12 @@ class ResourceRelationTableSeeder extends Seeder
             ->create([	'id' => '74', 	'resource' => '27', 	'name' => 'Data scope to Scope', 	'description' => 'Scope details of a data scope', 	'method' => 'Scope', 	'type' => 'belongsTo', 	'relate_resource' => '7', 									])
             ->create([	'id' => '75', 	'resource' => '28', 	'name' => 'Data section to Data', 	'description' => 'Data details of a data view section', 	'method' => 'Data', 	'type' => 'belongsTo', 	'relate_resource' => '25', 									])
             ->create([	'id' => '76', 	'resource' => '30', 	'name' => 'Action Attributes', 	'description' => 'Attributes of a action', 	'method' => 'Attrs', 	'type' => 'hasMany', 	'relate_resource' => '32', 									])
+            ->create([	'id' => '77', 	'resource' => '4', 	'name' => 'Resource Defaults', 	'description' => 'Default action of a resource', 	'method' => 'Defaults', 	'type' => 'hasOne', 	'relate_resource' => '35', 									])
+            ->create([	'id' => '78', 	'resource' => '35', 	'name' => 'Defaults Resource', 	'description' => 'Resource details of a default record', 	'method' => 'Resource', 	'type' => 'belongsTo', 	'relate_resource' => '4', 									])
+            ->create([	'id' => '79', 	'resource' => '35', 	'name' => 'Defaults List Action', 	'description' => 'List action details of a default record', 	'method' => 'List', 	'type' => 'belongsTo', 	'relate_resource' => '30', 									])
+            ->create([	'id' => '80', 	'resource' => '35', 	'name' => 'Defaults Form Action', 	'description' => 'Create form action details of a default record', 	'method' => 'Form', 	'type' => 'belongsTo', 	'relate_resource' => '30', 									])
+            ->create([	'id' => '81', 	'resource' => '35', 	'name' => 'Defaults Data Action', 	'description' => 'Read data action details of a default record', 	'method' => 'Data', 	'type' => 'belongsTo', 	'relate_resource' => '30', 									])
+            ->create([	'id' => '82', 	'resource' => '35', 	'name' => 'Defaults Form With Data Action', 	'description' => 'Update record action details of a default record', 	'method' => 'FormWithData', 	'type' => 'belongsTo', 	'relate_resource' => '30', 									])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

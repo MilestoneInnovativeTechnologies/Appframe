@@ -16,4 +16,5 @@ class Resource extends Model
     public function Actions(){ return $this->hasMany(ResourceAction::class,'resource','id'); }
     public function Metrics(){ return $this->hasMany(ResourceMetric::class,'resource','id'); }
     public function Dashboards(){ return $this->hasMany(ResourceDashboard::class,'resource','id'); }
+    public function Defaults(){ return $this->hasOne(ResourceDefault::class,'resource','id'); }
 }
