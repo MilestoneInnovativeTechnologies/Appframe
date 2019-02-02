@@ -9,7 +9,7 @@ class Universal
     }
 
     protected $actions = [
-        'option','depend'
+        'option','depend','getaddrelations'
     ];
 
 }
