@@ -74,7 +74,7 @@
                 <div class="page-inner">
                     <header class="page-title-bar">
                         <transition name="breadcrumb"><app-breadcrumb :key="$route.fullPath"></app-breadcrumb></transition>
-                        <f-a-b></f-a-b>
+                        <router-view :key="$route.fullPath" name="fabcontent"></router-view>
                         <transition name="pagetitle"><app-page-title :key="$store.getters['PTTL/title']($route.params.action)"></app-page-title></transition>
                     </header>
                     <div class="page-section d-md-flex justify-content-between mb-2">
@@ -113,7 +113,7 @@
 </div>
 <script>
     window.VuexStoreState = {
-        data:{!! request()->user()->load('Groups.Roles.Resources') !!},
+        data:{!! request()->user()->load('Groups.Roles.Resources.Resource.Defaults') !!},
         logout_url:'{!! route('logout') !!}',
         login_url:'{!! route('login') !!}',
         root_path:'{{ config('appframe.root_path') }}'
