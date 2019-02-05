@@ -10,7 +10,7 @@ class LoginController extends NativeLoginController
 
     protected function loggedOut(Request $request)
     {
-        return redirect()->route('login');
+        return redirect()->route(config('appframe.logged_out_route') ?: 'login');
     }
 
     public function redirectTo(){
