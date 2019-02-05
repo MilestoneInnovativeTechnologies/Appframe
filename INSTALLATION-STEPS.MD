@@ -9,7 +9,7 @@
 <li>Comment every routes in wep.php including Auth::routes</li>
 <li>Update config > auth > providers > users > model >> Milestone\Appframe\Model\User::class </li>
 <li>Publishing vendor files. Run, php artisan vendor:publish --provider=Milestone\Appframe\AppframeServiceProvider</li>
-<li>Change config variables like brand,favicon,root_path etc</li>
+<li>Change config variables like brand,favicon,root_path,index_route,logged_out_route etc</li>
 <li>Change config > session > encrypt to true</li>
 <li>Set DB Parameters in .env file</li>
 <li>If MySQL is older than the 5.7.7, then call \Illuminate\Support\Facades\Schema::defaultStringLength(191); in the boot method of AppServiceProvider</li>
