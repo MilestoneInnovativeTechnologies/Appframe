@@ -15,9 +15,10 @@ class AppframeServiceProvider extends ServiceProvider
         'loadMigrationsFrom' => 'migrations',
     ];
 
-    protected $publishData = [
+	protected $publishDataDir = __DIR__ . '/../';
+	protected $publishData = [
         'config' => ['config_path','/'],
-        'assets' => ['public_path','appframe'],
+        'assets' => ['public_path','/'],
         'views' => ['resource_path','views/milestone/appframe'],
     ];
 
@@ -29,6 +30,7 @@ class AppframeServiceProvider extends ServiceProvider
     public function boot()
     {
         $bootDir = $this->bootDataDir;
+        $publishDir = $this->publishDataDir;
         foreach ($this->bootData as $method => $data){
             $args = (array) $data;
             $args[0] = $bootDir . $args[0];
@@ -37,7 +39,7 @@ class AppframeServiceProvider extends ServiceProvider
 
         $publishDataArray = [];
         foreach ($this->publishData as $from => $data){
-            $source = $bootDir . $from;
+            $source = $publishDir . $from;
             $destination = call_user_func($data[0],$data[1]);
             $publishDataArray[$source] = $destination;
         }
