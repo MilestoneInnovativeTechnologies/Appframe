@@ -52,4 +52,6 @@ Route::group([
     });
 });
 
-Route::redirect('/','root',301);
+Route::get('/',function(){
+	return redirect()->route(config('appframe.index_route') ?: 'root');
+});
