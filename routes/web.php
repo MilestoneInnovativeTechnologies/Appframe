@@ -34,8 +34,8 @@ Route::group([
         Route::group([
             'prefix' => 'server',
             'middleware' => [
-                //Milestone\Appframe\Middleware\ValidateAppframeToken::class,
-                //Milestone\Appframe\Middleware\RenewAppframeToken::class,
+                Milestone\Appframe\Middleware\ValidateAppframeToken::class,
+                Milestone\Appframe\Middleware\RenewAppframeToken::class,
                 Milestone\Appframe\Middleware\FillBagWithSession::class,
                 Milestone\Appframe\Middleware\FormDataProcess::class,
                 Milestone\Appframe\Middleware\ResolveAction::class,
@@ -47,7 +47,7 @@ Route::group([
             Route::post('fresh','TokenController@fresh');
             Route::post('next','TokenController@next');
         });
-        Route::view('dump-server','dump-server');
+        //Route::view('dump-server','dump-server');
         Route::view('{slug?}','Appframe::root')->where('slug', '(.*)?')->name('root');
     });
 });
