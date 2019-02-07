@@ -22,7 +22,7 @@ class AppInitController extends Controller
     }
 
     private function getActions(){
-        $Collection = request()->user()->load('Groups.Roles.Resources');
+        $Collection = request()->user()->load(['Groups' => function($Q){ $Q->withoutGlobalScope('withoutSetup')->with('Roles.Resources'); }]);
         $Actions = $this->extractActions($Collection);
         return $this->extractMethods($Actions);
     }

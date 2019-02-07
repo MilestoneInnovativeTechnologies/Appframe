@@ -113,7 +113,7 @@
 </div>
 <script>
     window.VuexStoreState = {
-        data:{!! request()->user()->load('Groups.Roles.Resources.Resource.Defaults') !!},
+        data:{!! request()->user()->load(['Groups' => function($Q){ $Q->withoutGlobalScope('withoutSetup')->with('Roles.Resources.Resource.Defaults'); }]) !!},
         logout_url:'{!! route('logout') !!}',
         login_url:'{!! route('login') !!}',
         root_path:'{{ config('appframe.root_path') }}'
