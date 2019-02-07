@@ -15,11 +15,11 @@ class User extends NativeUser
         return $this->belongsToMany(Group::class, '__group_users', 'user', 'group')->withTimestamps();
     }
 
-    public function scopeAdministrators($Q){
-        return $Q->whereHas('Groups',function($Q){ $Q->where('name','administrators'); });
+    public function scopeSetupUser($Q){
+        return $Q->whereHas('Groups',function($Q){ $Q->whereIn('name',['developers','administrators']); });
     }
 
-    public function scopeDevelopers($Q){
-        return $Q->whereHas('Groups',function($Q){ $Q->where('name','developers'); });
+    public function scopeAdministratorUser($Q){
+        return $Q->whereHas('Groups',function($Q){ $Q->whereNotIn('name',['developers','setup_user']); });
     }
 }
