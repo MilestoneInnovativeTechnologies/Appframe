@@ -16,7 +16,7 @@ class ResourceRoleTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceRole::truncate()
-            ->create([	'id' => '1', 	'resource' => '1', 	'role' => '1', 													])
+            ->create([	'id' => '1', 	'resource' => '1', 	'role' => '1', 	'actions_availability' => 'Only', 	'actions' => '1,2,4,6,7', 											])
             ->create([	'id' => '2', 	'resource' => '4', 	'role' => '2', 													])
             ->create([	'id' => '3', 	'resource' => '6', 	'role' => '2', 													])
             ->create([	'id' => '4', 	'resource' => '7', 	'role' => '2', 													])
@@ -52,7 +52,7 @@ class ResourceRoleTableSeeder extends Seeder
             ->create([	'id' => '34', 	'resource' => '37', 	'role' => '2', 													])
             ->create([	'id' => '35', 	'resource' => '38', 	'role' => '2', 													])
             ->create([	'id' => '36', 	'resource' => '39', 	'role' => '2', 													])
-            ->create([	'id' => '37', 	'resource' => '1', 	'role' => '3', 													])
+            ->create([	'id' => '37', 	'resource' => '1', 	'role' => '3', 	'actions_availability' => 'Except', 	'actions' => '1,2,4,6,7', 											])
             ->create([	'id' => '38', 	'resource' => '2', 	'role' => '3', 													])
             ->create([	'id' => '39', 	'resource' => '3', 	'role' => '3', 													])
             ->create([	'id' => '40', 	'resource' => '5', 	'role' => '3', 													])

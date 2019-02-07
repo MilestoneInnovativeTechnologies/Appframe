@@ -16,7 +16,7 @@ class ResourceFormDataMapTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceFormDataMap::truncate()
-            ->create([	'id' => '1', 	'resource_form' => '2', 	'resource_data' => '1', 	'form_field' => '7', 		'relation' => '1', 										])
+            ->create([	'id' => '1', 	'resource_form' => '4', 	'resource_data' => '1', 	'form_field' => '13', 		'relation' => '1', 										])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

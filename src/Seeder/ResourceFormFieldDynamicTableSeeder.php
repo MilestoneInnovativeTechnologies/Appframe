@@ -16,7 +16,7 @@ class ResourceFormFieldDynamicTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceFormFieldDynamic::truncate()
-            ->create([	'id' => '1', 	'form_field' => '24', 	'type' => 'disabled-enabled', 	'depend_field' => 'type', 	'alter_on' => 'value', 		'values' => 'FormWithData,AddRelation,ListRelation,ManageRelation', 	'operator' => 'In', 								])
+            ->create([	'id' => '1', 	'form_field' => '30', 	'type' => 'disabled-enabled', 	'depend_field' => 'type', 	'alter_on' => 'value', 		'values' => 'FormWithData,AddRelation,ListRelation,ManageRelation', 	'operator' => 'In', 								])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
