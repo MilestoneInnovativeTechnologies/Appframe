@@ -16,10 +16,10 @@ class ResourceActionListTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceActionList::truncate()
-            ->create([	'id' => '1', 	'resource_action' => '6', 	'resource_list' => '2', 													])
-            ->create([	'id' => '2', 	'resource_action' => '7', 	'resource_list' => '2', 													])
-            ->create([	'id' => '3', 	'resource_action' => '6', 	'resource_list' => '1', 													])
-            ->create([	'id' => '4', 	'resource_action' => '7', 	'resource_list' => '1', 													])
+            ->create([	'id' => '1', 	'resource_action' => '6', 	'resource_list' => '1', 													])
+            ->create([	'id' => '2', 	'resource_action' => '7', 	'resource_list' => '1', 													])
+            ->create([	'id' => '3', 	'resource_action' => '6', 	'resource_list' => '2', 													])
+            ->create([	'id' => '4', 	'resource_action' => '7', 	'resource_list' => '2', 													])
             ->create([	'id' => '5', 	'resource_action' => '11', 	'resource_list' => '3', 													])
             ->create([	'id' => '6', 	'resource_action' => '15', 	'resource_list' => '3', 													])
             ->create([	'id' => '7', 	'resource_action' => '18', 	'resource_list' => '3', 													])
