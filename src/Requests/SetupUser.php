@@ -34,6 +34,6 @@ class SetupUser extends FormRequest
 
     public function store_setupuser(){
         $user = User::create($this->only(['name','email','password']));
-        $user->Groups()->attach(Group::where('name','setup_user')->first());
+        $user->Groups()->attach(Group::withoutGlobalScopes()->where('name','setup_user')->first());
     }
 }
