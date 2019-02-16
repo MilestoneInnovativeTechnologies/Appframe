@@ -3,7 +3,7 @@
 namespace Milestone\Appframe\Middleware;
 
 use Closure;
-use Milestone\Appframe\Model\User;
+use Milestone\Appframe\Model\GroupUser;
 
 class LoginIfUserExists
 {
@@ -16,6 +16,6 @@ class LoginIfUserExists
      */
     public function handle($request, Closure $next)
     {
-        return (User::all()->isEmpty()) ? $next($request) : redirect()->route('login');
+        return (GroupUser::whereIn('group',[1])->exists()) ? redirect()->route('login') : $next($request);
     }
 }
