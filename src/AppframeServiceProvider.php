@@ -46,6 +46,8 @@ class AppframeServiceProvider extends ServiceProvider
 
         $this->publishes($publishDataArray);
         $this->publishes($publishDataArray,'update');
+
+        $this->setObservers();
     }
 
     /**
@@ -68,5 +70,9 @@ class AppframeServiceProvider extends ServiceProvider
             $this->foreign('created_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
             $this->foreign('updated_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
         });
+    }
+
+    private function setObservers(){
+        Model\Model::observe(Observers\ModelObserver::class);
     }
 }
