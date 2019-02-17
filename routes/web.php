@@ -54,7 +54,6 @@ Route::group([
         Route::prefix('action')->group(function(){
 	        Route::view('{slug?}','Appframe::root')->where('slug', '(.*)?');
         });
-//        Route::view('dump-server','dump-server');
     });
 });
 
