@@ -4,9 +4,12 @@ namespace Milestone\Appframe;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Event;
 
 class AppframeServiceProvider extends ServiceProvider
 {
+
+    use Traits\AddSignatureTrait;
 
     protected $bootDataDir = __DIR__ . '/../';
     protected $bootData = [
@@ -47,7 +50,8 @@ class AppframeServiceProvider extends ServiceProvider
         $this->publishes($publishDataArray);
         $this->publishes($publishDataArray,'update');
 
-        $this->setObservers();
+        Event::listen(['eloquent.creating: *'], function($name,$data) { $this->setModelDataSignature('created_by',$data); });
+        Event::listen(['eloquent.updating: *'], function($name,$data) { $this->setModelDataSignature('updated_by',$data); });
     }
 
     /**
@@ -72,7 +76,10 @@ class AppframeServiceProvider extends ServiceProvider
         });
     }
 
-    private function setObservers(){
-        Model\Model::observe(Observers\ModelObserver::class);
+    private function setModelDataSignature($Signature,$data){
+        if(!empty($data) && !!($User = Request()->user()))
+            foreach($data as $Model)
+                if($this->hasSignatureAble($Model,$Signature))
+                    $this->setModelAttribute($Model,$Signature,$User->id);
     }
 }
