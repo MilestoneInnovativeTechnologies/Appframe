@@ -47,7 +47,9 @@ class Resolver extends Resolve
     private function responseResolveData(){
         if($this->res->yes()){
             $action = $this->bag->req('action');
-            $type = $this->bag->r('type'); $method = $this->bag->r('method'); $idns = array_only($this->bag->r('idns'),$this->res->idns());
+            $type = $this->bag->r('type'); $method = $this->bag->r('method');
+            $idns = array_fill_keys($this->res->idns(),null);
+            array_walk($idns,function(&$value,$key,$array){ $value = array_key_exists($key,$array) ? $array[$key] : $value; },$this->bag->r('idns'));
             $compact = array_merge(compact('type','method'),$idns);
             $this->bag->store('Resolve',$action,array_filter($compact));
         }
