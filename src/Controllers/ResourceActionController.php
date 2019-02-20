@@ -25,6 +25,9 @@ class ResourceActionController extends Controller
         'AddRelation' => ['ResourceForm','name','Resource','idn1','getRelateRelationFromRelation'],
         'ManageRelation' => ['ResourceList','name','Resource','idn1','getRelateRelationFromRelation'],
     ];
+    private $ID3TypeModel = [
+        'AddRelation' => ['ResourceFormField','name','Form','idn2',null],
+    ];
 
     public function id1List($form = null, $field = null, $data = null){
         if($form){
@@ -40,6 +43,16 @@ class ResourceActionController extends Controller
         if($form){
             if(array_key_exists($data['type'],$this->ID2TypeModel))
                 $this->getOptions($this->ID2TypeModel[$data['type']], $field, $data);
+            return null;
+        } else {
+            return [ 'options' => [],'latest' => 0 ];
+        }
+    }
+
+    public function id3List($form = null, $field = null, $data = null){
+        if($form){
+            if(array_key_exists($data['type'],$this->ID3TypeModel))
+                $this->getOptions($this->ID3TypeModel[$data['type']], $field, $data);
             return null;
         } else {
             return [ 'options' => [],'latest' => 0 ];
