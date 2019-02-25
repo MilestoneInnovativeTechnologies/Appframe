@@ -9,52 +9,59 @@
     <meta name="description" content="{{ config('appframe.page_description') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{ asset('appframe/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('appframe/css/theme.css') }}">
-    <link rel="stylesheet" href="{{ asset('appframe/css/select2.min.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('appframe/css/iconic.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('appframe/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('appframe/css/theme.min.css') }}" data-skin="default">
+    <link rel="stylesheet" href="{{ asset('appframe/css/theme-dark.min.css') }}" data-skin="dark">
+    <script> var skin = localStorage.getItem('skin') || 'default';
+        var unusedLink = document.querySelector('link[data-skin]:not([data-skin="'+ skin +'"])');
+        unusedLink.setAttribute('rel', '');
+        unusedLink.setAttribute('disabled', true);
+    </script>
+
+    {{--<link rel="stylesheet" href="{{ asset('appframe/css/app.css') }}">--}}
+    {{--<link rel="stylesheet" href="{{ asset('appframe/css/select2.min.css') }}">--}}
 
 </head>
 <body>
 
 <div class="app" id="app">
+    <!--[if lt IE 10]>
+    <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
+    <![endif]-->
     <app-loading></app-loading>
-    <header class="app-header">
+    <header class="app-header app-header-dark">
         <div class="top-bar">
             <div class="top-bar-brand">
                 <a href="{{ route('root') }}">{!! config('appframe.brand')?'<img src="'.config('appframe.brand').'" height="32" alt="'.config('appframe.brand_text').'">':config('appframe.brand_text') !!}</a>
             </div>
             <div class="top-bar-list">
-                <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
-                    <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu"
-                            aria-controls="navigation">
-                        <span class="hamburger-box">
-                          <span class="hamburger-inner"></span>
-                        </span>
-                    </button>
-                </div>
+                <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none"><button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu" aria-controls="navigation"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button></div>
                 <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
                     <div class="dropdown">
                         <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <user-avatar size="md"></user-avatar>
                             <account-summary class="pr-lg-4 d-none d-lg-block"></account-summary>
                         </button>
                         <div class="dropdown-arrow dropdown-arrow-left"></div>
                         <account-options class="dropdown-menu"></account-options>
-
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <aside class="app-aside">
+    <aside class="app-aside app-aside-expand-md app-aside-light">
         <div class="aside-content">
             <header class="aside-header d-block d-md-none">
                 <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside">
+                    <user-avatar size="lg"></user-avatar>
                     <span class="account-icon"><span class="fa fa-caret-down fa-lg"></span></span>
                     <account-summary></account-summary>
                 </button>
                 <div id="dropdown-aside" class="dropdown-aside collapse">
-                    <account-options class="pb-3"></account-options>
+                    <account-options area="pb-3"></account-options>
                 </div>
             </header>
 
@@ -63,6 +70,9 @@
                     <app-navs></app-navs>
                 </nav>
             </section>
+            <div class="aside-footer border-top p-3">
+                <button class="btn btn-light btn-block" data-toggle="skin">Night mode <i class="fas fa-moon ml-1"></i></button>
+            </div>
 
         </div>
 
