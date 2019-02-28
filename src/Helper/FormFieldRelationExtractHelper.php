@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Helper;
 
+use Illuminate\Support\Str;
 use Milestone\Appframe\Model\ResourceForm;
 
 class FormFieldRelationExtractHelper
@@ -68,7 +69,7 @@ class FormFieldRelationExtractHelper
 
     private function handleCollections($collections){
         foreach($collections as $no => $collection){
-            $method = $collection->Relation->method; $name = snake_case($method); $type = $collection->Relation->type;
+            $method = $collection->Relation->method; $name = Str::snake($method); $type = $collection->Relation->type;
             $input = $this->input[$name];
             $relations = Helper::Help('FormFieldRelationExtract', $collection->collection_form, [ 'input' => $input, 'collection' => true ]);
             $relations[""]['method'] = $relations[""]['path'] = $method; $relations[""]['type'] = $type; $this->relations['_'.$no] = $relations[""]; unset($relations[""]);

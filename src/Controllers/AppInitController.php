@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Controllers;
 
+use Illuminate\Support\Str;
 use Milestone\Appframe\Model\ResourceActionMethod;
 
 class AppInitController extends Controller
@@ -42,7 +43,7 @@ class AppInitController extends Controller
     }
 
     public function setTokenSalt(){
-        $token_salt = implode('-',[request()->user()->id,str_random(8),time()]);
+        $token_salt = implode('-',[request()->user()->id,Str::random(8),time()]);
         $token_sqno = random_int(111,333);
         session(compact('token_salt','token_sqno'));
     }

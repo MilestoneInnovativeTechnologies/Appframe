@@ -2,6 +2,8 @@
 
 namespace Milestone\Appframe\Helper;
 
+use Illuminate\Support\Str;
+
 class ChainRelationHelper
 {
     private $relations;
@@ -23,7 +25,7 @@ class ChainRelationHelper
     }
 
     private function modifier($text){
-        return ($this->json) ? snake_case($text) : $text;
+        return ($this->json) ? Str::snake($text) : $text;
     }
 
 }

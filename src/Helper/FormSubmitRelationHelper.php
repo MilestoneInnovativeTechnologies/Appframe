@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Helper;
 
+use Illuminate\Support\Str;
 use Milestone\Appframe\Model\ResourceForm;
 use Milestone\Appframe\Model\ResourceRelation;
 
@@ -151,7 +152,7 @@ class FormSubmitRelationHelper
         foreach($Collections as $Collection){
             $relation_index = array_push($relations,$this->getProperties($Collection->relation))-1;
             $method = $Collection->Relation->method;
-            $input = $this->getInputValue(snake_case($method)); $collection = true; $skip = $Collection->foreign_field;
+            $input = $this->getInputValue(Str::snake($method)); $collection = true; $skip = $Collection->foreign_field;
             $collection_relations = Helper::Help('FormSubmitRelation',$Collection->collection_form,compact('input','collection','skip'));
             $relations[$relation_index]['records'] = $collection_relations[0]['records'];
         }
