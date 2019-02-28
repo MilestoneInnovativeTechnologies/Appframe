@@ -3,6 +3,7 @@
 namespace Milestone\Appframe;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class Bag
 {
@@ -44,11 +45,11 @@ class Bag
     }
 
     public function req($key){
-        return array_get($this->request, $key);
+        return Arr::get($this->request, $key);
     }
 
     public function r($key,$value = null){
-        return ($value) ? $this->storeResolve($key,$value) : array_get($this->resolve, $key);
+        return ($value) ? $this->storeResolve($key,$value) : Arr::get($this->resolve, $key);
     }
 
     private function storeResolve($key,$value){
@@ -56,7 +57,7 @@ class Bag
     }
 
     public function session($key, $value = NULL){
-        return ($value || is_array($key)) ? $this->setSession($key, $value) : array_get($this->session,$key);
+        return ($value || is_array($key)) ? $this->setSession($key, $value) : Arr::get($this->session,$key);
     }
 
     public function setSession($key, $value = NULL){

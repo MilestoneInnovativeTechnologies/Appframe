@@ -4,6 +4,7 @@ namespace Milestone\Appframe\Controllers\Database;
 
 use Milestone\Appframe\Bag;
 use Milestone\Appframe\Model\ResourceRelation;
+use Illuminate\Support\Arr;
 
 class FormFieldExtract
 {
@@ -98,9 +99,9 @@ class FormFieldExtract
     private function groupByPath($Fields){
         return $Fields->groupBy->path->map(function($fields){
             $field = $fields[0];
-            $data = array_only($field,['path','type','class']);
+            $data = Arr::only($field,['path','type','class']);
             $data['data'] = $fields->map(function($field){
-                return array_only($field,['attribute','value']);
+                return Arr::only($field,['attribute','value']);
             })->toArray();
             return $data;
         });

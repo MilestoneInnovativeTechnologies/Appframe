@@ -2,6 +2,8 @@
 
 namespace Milestone\Appframe\Controllers\Database;
 
+use Illuminate\Support\Arr;
+
 class PushRelation
 {
     protected $baseModel, $path, $type, $class;
@@ -75,7 +77,7 @@ class PushRelation
     private function getMany2Data($data){
         $value = [];
         foreach($data as $key => $saveData){
-            if(array_key_exists("",$saveData)) $value[$saveData[""]] = array_except($saveData,"");
+            if(array_key_exists("",$saveData)) $value[$saveData[""]] = Arr::except($saveData,"");
             else $value[$key] = $saveData;
         }
         return $value;

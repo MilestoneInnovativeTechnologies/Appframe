@@ -2,6 +2,8 @@
 
 namespace Milestone\Appframe\Resolve;
 
+use Illuminate\Support\Arr;
+
 class Resolver extends Resolve
 {
     protected $type, $idns, $method;
@@ -15,9 +17,9 @@ class Resolver extends Resolve
     }
 
     static public function Resolve($array){
-        $type = array_get($array,'type');
-        $method = array_get($array,'method');
-        $idns = array_except($array,['type','method']);
+        $type = Arr::get($array,'type');
+        $method = Arr::get($array,'method');
+        $idns = Arr::except($array,['type','method']);
         new self($type,$idns,$method);
     }
 

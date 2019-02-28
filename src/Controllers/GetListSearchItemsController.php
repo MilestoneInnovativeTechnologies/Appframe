@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Controllers;
 
+use Illuminate\Support\Arr;
 use Milestone\Appframe\Helper\Helper;
 
 class GetListSearchItemsController extends Controller
@@ -21,7 +22,7 @@ class GetListSearchItemsController extends Controller
 
     private function getListORM($Data,$Search){
         $orm = $Data['orm']; $orm['Search'] = $Search; $orm['Take'] = 0;
-        return Helper::Help('GetOrm',$orm['Class'],array_except($orm,'Class'));
+        return Helper::Help('GetOrm',$orm['Class'],Arr::except($orm,'Class'));
     }
 
     private function store($id, $term, $items){

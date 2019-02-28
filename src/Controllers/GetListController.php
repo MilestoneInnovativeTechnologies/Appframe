@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Controllers;
 
+use Illuminate\Support\Arr;
 use Milestone\Appframe\Helper\Helper;
 
 class GetListController extends Controller
@@ -25,7 +26,7 @@ class GetListController extends Controller
             $orm['Where'] = ['updated_at' => ($last) ? date('Y-m-d H:i:s',strtotime($last)) : 0, 'updated_at:operator' => '>'];
             $orm['Take'] = $Data['items']; $orm['Page'] = 0;
         }
-        return Helper::Help('GetOrm',$orm['Class'],array_except($orm,'Class'));
+        return Helper::Help('GetOrm',$orm['Class'],Arr::except($orm,'Class'));
     }
 
     private function store($id,$Data){

@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Helper;
 
+use Illuminate\Support\Arr;
 use Milestone\Appframe\Model\ResourceForm;
 use Milestone\Appframe\Model\ResourceFormUpload;
 
@@ -28,8 +29,8 @@ class StoreFileHelper
     private function setPathAndDisk($form,$field){
         $Form = ResourceForm::with('Resource','Fields.Data')->find($form); $Resource = $Form->Resource; $Field = $Form->Fields->where('name',$field)->first();
         $Relation = Helper::Help('DeepRelation',$Field->Data);
-        $RelationResource = (!empty($Relation)) ? Resource::find(array_last($Relation)['relate_resource']) : null;
-        $attribute = (!empty($Relation)) ? array_last($Relation)['attribute'] : $Field->Data->attribute;
+        $RelationResource = (!empty($Relation)) ? Resource::find(Arr::last($Relation)['relate_resource']) : null;
+        $attribute = (!empty($Relation)) ? Arr::last($Relation)['attribute'] : $Field->Data->attribute;
 
         $storage = null;
         if($RelationResource) $storage = Helper::Help('GetResourceStorage',$RelationResource,compact('form','field','attribute'));

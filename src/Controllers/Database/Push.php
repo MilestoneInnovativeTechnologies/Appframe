@@ -1,6 +1,7 @@
 <?php
 
 namespace Milestone\Appframe\Controllers\Database;
+use Illuminate\Support\Arr;
 
 class Push
 {
@@ -12,7 +13,7 @@ class Push
     public function __construct($Array, $Model)
     {
         $this->Group = $Array; $this->baseModel = $Model;
-        $this->Native = array_key_exists("",$Array) ? $Array[""] : null; $this->Relation = array_except($Array,"");
+        $this->Native = array_key_exists("",$Array) ? $Array[""] : null; $this->Relation = Arr::except($Array,"");
         $this->push();
     }
 

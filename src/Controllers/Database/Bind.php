@@ -1,6 +1,7 @@
 <?php
 
 namespace Milestone\Appframe\Controllers\Database;
+use Illuminate\Support\Arr;
 
 class Bind
 {
@@ -98,7 +99,7 @@ class Bind
     private function getbelongsToManyData($records,$class){
         $data = [];
         foreach($records as $id => $record)
-            if(array_key_exists("",$record['data'])) $data[$record['data'][""]] = array_except($record['data'],"");
+            if(array_key_exists("",$record['data'])) $data[$record['data'][""]] = Arr::except($record['data'],"");
             elseif(is_array(array_values($record['data'])) && count($records) === 1) $data = array_values($record['data'])[0];
             else $data[$id] = $record['data'];
         return $data;

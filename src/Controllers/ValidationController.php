@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Controllers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 
 class ValidationController extends Controller
@@ -57,7 +58,7 @@ class ValidationController extends Controller
     private function getArgumentsArray($Ary){
         return array_map(function($arg){
             return (mb_substr($arg,0,1) !== "-") ? $arg : $this->getDynamicRuleArg($arg);
-        },array_filter(array_only($Ary,['arg1','arg2','arg3','arg4','arg5'])));
+        },array_filter(Arr::only($Ary,['arg1','arg2','arg3','arg4','arg5'])));
     }
 
     private function getDynamicRuleArg($arg){

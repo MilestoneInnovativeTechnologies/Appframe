@@ -2,6 +2,8 @@
 
 namespace Milestone\Appframe\Resolve;
 
+use Illuminate\Support\Arr;
+
 class AddRelationResolver extends Resolve
 {
     public function yes(){
@@ -14,9 +16,9 @@ class AddRelationResolver extends Resolve
 
     public function prepare(){
         $idns = $this->bag->r('idns');
-        $this->bag->r('relation_id',array_get($idns,'idn1'));
-        $this->bag->r('form_id',array_get($idns,'idn2'));
-        $this->bag->r('field_id',array_get($idns,'idn3'));
+        $this->bag->r('relation_id',Arr::get($idns,'idn1'));
+        $this->bag->r('form_id',Arr::get($idns,'idn2'));
+        $this->bag->r('field_id',Arr::get($idns,'idn3'));
         $this->bag->r('data',$this->bag->req('data'));
         $this->bag->r('record',$this->bag->req('record'));
     }
