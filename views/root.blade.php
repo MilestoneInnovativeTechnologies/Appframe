@@ -132,7 +132,6 @@
 <script src="{{ asset('appframe/js/app.js') }}?_={{ mt_rand() }}"></script>
 <script src="{{ asset('appframe/js/stacked-menu.min.js') }}"></script>
 <script src="{{ asset('appframe/js/perfect-scrollbar.min.js') }}"></script>
-<script src="{{ asset('appframe/js/select2.min.js') }}"></script>
 <script src="{{ asset('appframe/js/main.min.js') }}"></script>
 </body>
 </html>
