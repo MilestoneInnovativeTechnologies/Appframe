@@ -1,4 +1,4 @@
-<?php //dd(session()->all()); ?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -19,10 +19,6 @@
         unusedLink.setAttribute('rel', '');
         unusedLink.setAttribute('disabled', true);
     </script>
-
-    {{--<link rel="stylesheet" href="{{ asset('appframe/css/app.css') }}">--}}
-    {{--<link rel="stylesheet" href="{{ asset('appframe/css/select2.min.css') }}">--}}
-
 </head>
 <body>
 
@@ -104,17 +100,6 @@
                         </div>
                         <transition name="appcontent"><router-view :key="$route.fullPath" name="appcontent"></router-view></transition>
                         <auth-warning></auth-warning>
-                        <!--<graph-line-dateblock
-                                :width="600"
-                                :height="400"
-                                :axis-min="10"
-                                :axis-max="40"
-                                axis-format="HH"
-                                display="all"
-                                :axis-interval="1000 * 60 * 60 * 24"
-                                :labels='[ new Date("2018-07-01 00:00:00"), new Date("2018-07-04 00:00:00") ]'
-                                :values="[ 40, 10, 30, 20 ]">
-                        </graph-line-dateblock>-->
                     </div>
                 </div>
             </div>
@@ -129,7 +114,7 @@
         root_path:'{{ config('appframe.root_path') }}'
     };
 </script>
-<script src="{{ asset('appframe/js/app.js') }}?_={{ mt_rand() }}"></script>
+<script src="{{ asset('appframe/js/app.js') }}"></script>
 <script src="{{ asset('appframe/js/stacked-menu.min.js') }}"></script>
 <script src="{{ asset('appframe/js/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('appframe/js/main.min.js') }}"></script>
