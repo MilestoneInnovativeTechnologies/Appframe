@@ -67,12 +67,18 @@ class AppframeServiceProvider extends ServiceProvider
     }
 
     private function registerBlueprintMacro(){
+        Blueprint::macro('foreignCascade',function($field,$table){
+            $this->unsignedBigInteger($field)->index();
+            $this->foreign($field)->references('id')->on($table)->onUpdate('cascade')->onDelete('cascade');
+        });
+        Blueprint::macro('foreignNullable',function($field,$table){
+            $this->unsignedBigInteger($field)->nullable()->index();
+            $this->foreign($field)->references('id')->on($table)->onUpdate('cascade')->onDelete('set null');
+        });
         Blueprint::macro('audit',function(){
-            $this->unsignedBigInteger('created_by')->nullable();
-            $this->unsignedBigInteger('updated_by')->nullable();
+            $this->foreignNullable('created_by','users');
+            $this->foreignNullable('updated_by','users');
             $this->timestamps();
-            $this->foreign('created_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
-            $this->foreign('updated_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
         });
     }
 
