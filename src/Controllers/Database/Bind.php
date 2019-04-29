@@ -11,7 +11,7 @@ class Bind
         'hasOne' => 'save',
         'hasMany' => 'saveMany',
         'belongsTo' => 'associate',
-        'belongsToMany' => 'sync',
+        'belongsToMany' => 'attach',
     ];
 
     public function __construct($data)
