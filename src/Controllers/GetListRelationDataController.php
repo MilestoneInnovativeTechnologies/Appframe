@@ -2,6 +2,8 @@
 
 namespace Milestone\Appframe\Controllers;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Milestone\Appframe\Helper\Helper;
 
 class GetListRelationDataController extends Controller
@@ -18,9 +20,10 @@ class GetListRelationDataController extends Controller
 
     private function getRelationKeys($relation_id,$record_id){
         $Relations = Helper::Help('ResourceRelationData',$relation_id,[ 'record' => $record_id ]);
-        return ($Relations && $Relations->isNotEmpty())
+        if(!$Relations) return null;
+        return ($Relations instanceof Collection && $Relations->isNotEmpty())
             ? $Relations->pluck('id')->toArray()
-            : null;
+            : [Arr::get($Relations,'id')];
     }
 
     private function store($list,$relation,$record,$data){
