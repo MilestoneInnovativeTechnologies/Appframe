@@ -23,7 +23,7 @@ class GetListRelationDataController extends Controller
         if(!$Relations) return null;
         return ($Relations instanceof Collection && $Relations->isNotEmpty())
             ? $Relations->pluck('id')->toArray()
-            : [Arr::get($Relations,'id')];
+            : (array) Arr::get($Relations,'id');
     }
 
     private function store($list,$relation,$record,$data){
