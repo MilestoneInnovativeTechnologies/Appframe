@@ -15,7 +15,7 @@ class FormSubmitRelationHelper
     public function __construct($form_id)
     {
         $this->form_id = $form_id;
-        $this->form = $form = ResourceForm::with(['Resource','Defaults','Fields.Data','Collections.Relation'])->find($form_id);
+        $this->form = $form = ResourceForm::with(['Resource','Defaults','Fields' => function($Q){ $Q->with('Data')->whereHas('Data'); },'Collections.Relation'])->find($form_id);
         $this->relations = [$this->getProperties(null,$form->Resource)];
     }
 
