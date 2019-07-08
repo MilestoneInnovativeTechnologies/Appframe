@@ -15,13 +15,13 @@ class CreateOrganisationTable extends Migration
     {
         Schema::create('__organisation', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 512)->index();
-            $table->string('name_short', 128)->nullable();
-            $table->string('name_long', 512)->nullable();
-            $table->string('address_line1', 1024)->nullable();
-            $table->string('address_line2', 1024)->nullable();
-            $table->string('address_short', 512)->nullable();
-            $table->string('address_long', 1024)->nullable();
+            $table->string('name', '128')->index();
+            $table->string('name_short', '128')->nullable();
+            $table->string('name_long', '512')->nullable();
+            $table->string('address_line1', '1024')->nullable();
+            $table->string('address_line2', '1024')->nullable();
+            $table->string('address_short', '512')->nullable();
+            $table->string('address_long', '1024')->nullable();
             $table->audit();
         });
     }
