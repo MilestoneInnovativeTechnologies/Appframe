@@ -11,7 +11,7 @@ class UpdateRelationController extends Controller
         $relation_id = $this->bag->r('relation_id'); $relations = $this->bag->r('relations'); $record_id = $this->bag->r('record_id');
         $Relation = ResourceRelation::with(['Owner','Resource'])->find($relation_id);
         $Model = $this->getResourceModel($Relation->Owner,$record_id); $Method = $Relation->method;
-        $Submit = $Model->$Method()->sync($relations); $Method->touch();
+        $Submit = $Model->$Method()->sync($relations); $Model->$Method()->touch();
         $this->bag->keep('Submit',$Submit);
     }
 
