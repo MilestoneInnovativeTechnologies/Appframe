@@ -2,6 +2,7 @@
 
 namespace Milestone\Appframe\Controllers;
 
+use Illuminate\Support\Arr;
 use Milestone\Appframe\Helper\Helper;
 use Milestone\Appframe\Model\Resource;
 use Milestone\Appframe\Model\ResourceFormFieldDepend;
@@ -29,8 +30,12 @@ class GetDependFieldDataController extends Controller
     private function executeDependFieldMethod($form_id,$field_id,$data){
         $Model = ResourceFormFieldDepend::where('form_field',$field_id)->with('Field.Form.Resource')->first();
         $Resource = $Model->Field->Form->Resource; $Method = $Model->method;
+        if(!Arr::has($Resource,'controller_namespace') || !Arr::has($Resource,'controller')) return null;
         $class = implode("\\",[$Resource->controller_namespace,$Resource->controller]);
-        if(method_exists($Controller = new $class,$Method)) call_user_func([$Controller,$Method],$form_id,$field_id,$data);
+        if(!method_exists($Controller = new $class,$Method)) return null;
+        $DependValue = call_user_func([$Controller,$Method],$form_id,$field_id,$data);
+        if(!$DependValue) return; $field_name = $this->bag->r('field_name');
+        return $this->bag->store('DependValue',$form_id,is_array($DependValue) ? $DependValue : [$field_name => $DependValue],true);
     }
 
     private function getFormFieldDetails($form,$field){
