@@ -6,6 +6,8 @@
 <li>File</li>
 <li>Select</li>
 <li>Multiselect</li>
+<li>Static</li>
+<li>Statictextarea</li>
 </ol>
 
 **Supported Field Attributes**
