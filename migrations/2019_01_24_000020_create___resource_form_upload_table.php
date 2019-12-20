@@ -15,15 +15,15 @@ class CreateResourceFormUploadTable extends Migration
     {
         Schema::create('__resource_form_upload', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 256)->nullable();
-            $table->string('name_client', 1024)->nullable();
-            $table->string('mime', 64)->nullable();
-            $table->string('mime_client', 256)->nullable();
+            $table->string('name', '256')->nullable();
+            $table->string('name_client', '1024')->nullable();
+            $table->string('mime', '256')->nullable();
+            $table->string('mime_client', '256')->nullable();
             $table->unsignedInteger('size')->default(1);
-            $table->string('disk', 64)->nullable();
-            $table->string('path', 512)->nullable();
-            $table->string('file', 2048)->nullable();
-            $table->string('extension', 32)->nullable();
+            $table->string('disk', '64')->nullable();
+            $table->string('path', '512')->nullable();
+            $table->string('file', '2048')->nullable();
+            $table->string('extension', '32')->nullable();
             $table->audit();
         });
     }
