@@ -111,6 +111,7 @@
         data:{!! request()->user()->load(['Groups' => function($Q){ $Q->withoutGlobalScope('withoutSetup')->with('Roles.Resources.Resource.Defaults'); }]) !!},
         logout_url:'{!! route('logout') !!}',
         login_url:'{!! route('login') !!}',
+        profile_url:'{!! route('profile',['id' => \Illuminate\Support\Facades\Auth::id()]) !!}',
         root_path:'{{ config('appframe.root_path') }}'
     };
 </script>

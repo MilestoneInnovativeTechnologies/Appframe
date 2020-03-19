@@ -1,5 +1,5 @@
 const state = {
-    title: {},
+    title: { profile:{ '*':'Update Profile'} },
     handler: {
         Resolve: 'addResolveTitle',
         Data: 'changeDataTitle',
@@ -66,6 +66,7 @@ const mutations = {
         if(!state.title[action]) state.title = Object.assign({},state.title,_.fromPairs([[action,{'*':null}]]));
         let title = _.values(data0)[0].title; state.title[action]['*'] = title;
     },
+    setProfileTitle(state,payload){},
 };
 
 const getters = {
@@ -92,6 +93,7 @@ const titleFetchProperty = {
     ListRelation: 'ListData',
     AddRelation: 'Form',
     ManageRelation: 'ListData',
+    Profile: 'Form',
 };
 
 function getDataActionObj(action,data,id){

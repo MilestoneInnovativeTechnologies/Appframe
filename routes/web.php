@@ -25,6 +25,11 @@ Route::group([
         Route::post('/','LoginController@login');
     });
     Route::group([
+        'prefix' => prefixPath('action'),
+    ],function(){
+        Route::post('profile/record/{id}',function(){ return 'profile'; })->name('profile');
+    });
+    Route::group([
         'middleware' => [Milestone\Appframe\Middleware\LoginIfGuest::class]
     ],function(){
         Route::prefix('logout')->group(function(){
