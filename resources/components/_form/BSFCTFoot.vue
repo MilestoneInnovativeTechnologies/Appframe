@@ -15,6 +15,9 @@
             add(){ this.addCollectionValue({ parent:this.parent,form:this.form,collection:this.name,id:this.id() }) },
             del(id){ this.delCollectionValue({ form:this.form,collection:this.name,id }) },
             id(){ return new Date().getTime()%(Math.pow(10,10)) }
+        },
+        created(){
+            if(parseInt(this.count)) this.$nextTick(() => _.last(document.getElementsByName(_.sortBy(this.fields,({id}) => id)[0].name)).focus())
         }
     }
 </script>
