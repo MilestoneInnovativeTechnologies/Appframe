@@ -6,6 +6,6 @@
     export default {
         name: "BSFormFieldFile",
         props: ['name'],
-        mixins: [require('./../../../js/common/BSFormFieldValueMixin').fieldValueMixin],
+        mixins: [require('./../../../js/common/BSFormFieldValueMixin').fieldValueMixin,require('./../../../js/common/BSFormFieldDependMixin').fieldDependMixin],
     }
 </script>

@@ -5,7 +5,7 @@
 <script>
     export default {
         name: "BSFormFieldStatictextarea",
-        mixins: [require('./../../../js/common/BSFormFieldValueMixin').fieldValueMixin],
+        mixins: [require('./../../../js/common/BSFormFieldValueMixin').fieldValueMixin,require('./../../../js/common/BSFormFieldDependMixin').fieldDependMixin],
         inheritAttrs: false,
     }
 </script>
