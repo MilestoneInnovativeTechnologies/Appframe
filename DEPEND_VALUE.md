@@ -3,6 +3,11 @@
 A form field value can be fetched dynamically on depending on another field of the same form. If no depended field given, then on page load, it fetch automatically.
 
 If depend value should be generated from a method, then this method should be in controller, where the controller must be defined for the resource.
+This method is invoked with four arguments
+Arg1: The form ID where the respective field exists
+Arg2: The ID of the field to be filled (field who is depend of other field/s)
+Arg3: An array with keys, name of each field which whom this field depends on
+Arg4: Name of the field who is depend on others fields(field to be filled)
 
 This controller should return either of any value
 1. A plain string or integer, that should be the value to be filled in requested field

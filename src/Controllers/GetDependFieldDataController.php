@@ -14,9 +14,9 @@ class GetDependFieldDataController extends Controller
     protected $optionTypes = ['multiselect','select','checkbox','radio'];
 
     public function index(){
-        $form_id = $this->bag->r('form_id'); $field_id = $this->bag->r('field_id'); $data = $this->bag->r('data');
+        $form_id = $this->bag->r('form_id'); $field_id = $this->bag->r('field_id'); $data = $this->bag->r('data'); $field_name = $this->bag->r('field_name');
         return (ResourceFormFieldDepend::where('form_field',$field_id)->whereNotNull('method')->exists())
-            ? $this->executeDependFieldMethod($form_id,$field_id,$data)
+            ? $this->executeDependFieldMethod($form_id,$field_id,$data,$field_name)
             : $this->executeDependFieldWhere($form_id,$field_id,$data);
     }
 
@@ -27,14 +27,14 @@ class GetDependFieldDataController extends Controller
         $this->store($form_id,$orm);
     }
 
-    private function executeDependFieldMethod($form_id,$field_id,$data){
+    private function executeDependFieldMethod($form_id,$field_id,$data,$field_name){
         $Model = ResourceFormFieldDepend::where('form_field',$field_id)->with('Field.Form.Resource')->first();
         $Resource = $Model->Field->Form->Resource; $Method = $Model->method;
         if(!Arr::has($Resource,'controller_namespace') || !Arr::has($Resource,'controller')) return null;
         $class = implode("\\",[$Resource->controller_namespace,$Resource->controller]);
         if(!method_exists($Controller = new $class,$Method)) return null;
-        $DependValue = call_user_func([$Controller,$Method],$form_id,$field_id,$data);
-        if(!$DependValue) return; $field_name = $this->bag->r('field_name');
+        $DependValue = call_user_func([$Controller,$Method],$form_id,$field_id,$data,$field_name);
+        if(!$DependValue) return;
         return $this->bag->store('DependValue',$form_id,is_array($DependValue) ? $DependValue : [$field_name => $DependValue],true);
     }
 
