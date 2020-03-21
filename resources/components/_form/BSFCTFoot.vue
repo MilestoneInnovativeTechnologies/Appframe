@@ -20,7 +20,7 @@
             id(){ return new Date().getTime()%(Math.pow(10,10)) },
         },
         created(){
-            if(parseInt(this.count)) this.$nextTick(() => _.last(document.getElementsByName(_.sortBy(this.fields,({id}) => id)[0].name)).focus())
+            if(parseInt(this.count)) this.$nextTick(() => document.getElementsByClassName("tftd-1")[0].children[0].focus())
         }
     }
 </script>
