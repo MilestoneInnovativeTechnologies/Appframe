@@ -39,6 +39,11 @@
             },
             select2Destroy(){ try { this.select2Jq.select2('destroy'); } catch(e){ } },
             select2Reload(){ this.select2Destroy(); this.select2Init(); },
+            optionsChanged(options){
+                if(this.option.type === 'Enum' && _.isEmpty(this.value)) { this.value = _.head(_.keys(options)); this.updateDefaultData({ form:this.dataFormId,field:this.name,value:this.value }) }
+                else if(!_.isEmpty(this.value)) $(`select#${this.control_id}`).val(this.value).trigger('change');
+                if(this.depends_has) this.select2Reload();
+            }
         },
         created(){
             if(!$('script[name="select2"]').length) $('head:first').append([$('<script>').attr({ name:'select2',src:this.asset_root+'js/select2.min.js' }),$('<link>').attr({ name:'select2',rel:'stylesheet',href:this.asset_root+'css/select2.min.css' })]);
@@ -51,10 +56,8 @@
             this.select2Init();
         },
         watch: {
-            options(options){
-                if(this.option.type === 'Enum' && _.isEmpty(this.value)) { this.value = _.head(_.keys(options)); this.updateDefaultData({ form:this.dataFormId,field:this.name,value:this.value }) }
-                else if(!_.isEmpty(this.value)) $(`select#${this.control_id}`).val(this.value).trigger('change');
-                if(this.depends_has) this.select2Reload();
+            options: {
+                immediate: true, deep: true, handler: 'optionsChanged'
             }
         }
     }
