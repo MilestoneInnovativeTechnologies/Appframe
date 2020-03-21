@@ -25,17 +25,17 @@
         props: ['rslv','action','record','instance'],
         data(){ return {
             true: true, dlu: null,
-            rslvId: { form: { Form:'idn1',FormWithData:'idn1',AddRelation:'idn2' },data: { FormWithData:'idn2' },relation:{ AddRelation:'idn1' } },
+            rslvId: { form: { Form:'idn1',FormWithData:'idn1',AddRelation:'idn2' },data: { FormWithData:'idn2' },relation:{ AddRelation:'idn1' },foreign:{ AddRelation:'idn3' } },
             map: {
                 Form: { c:'BSForm',b:{ name:'formName',fields:'formFields',layout:'layout','data-form-id':'formId','class':'formClass' },a:{ action:'routeAction',update:'true' } },
                 FormWithData: { c:'FABFormWithData',b:{ name:'formName',fields:'formFields',layout:'layout','data-form-id':'formId','class':'formClass',rslv:'rslv',recordId:'record',key:'instance' },a:{ action:'routeAction',data:'dataId',id:'record',last_updated:'dlu' } },
-                AddRelation: { c:'FABAddRelation',b:{ name:'formName',fields:'formFields',layout:'layout','data-form-id':'formId','sclass':'formClass',record:'record',key:'instance' },a:{ action:'routeAction',id:'record',data:'true' } },
+                AddRelation: { c:'FABAddRelation',b:{ name:'formName',fields:'formFields',layout:'layout','data-form-id':'formId','sclass':'formClass',record:'record',key:'instance',foreign:'foreignId' },a:{ action:'routeAction',id:'record',data:'true' } },
             },
         }},
         computed: {
             ...mapGetters({ getForm:'form',getLayout:'layout',getSubmit:'getSubmit' }),
             routeAction(){ return _.get(this.$route,['params','action']) },
-            type(){ return _.get(this.rslv,'type') }, formId(){ return _.get(this.rslv,_.get(this.rslvId,['form',this.type])) }, dataId(){ return _.get(this.rslv,_.get(this.rslvId,['data',this.type])) }, relationId(){ return _.get(this.rslv,_.get(this.rslvId,['relation',this.type])) },
+            type(){ return _.get(this.rslv,'type') }, formId(){ return _.get(this.rslv,_.get(this.rslvId,['form',this.type])) }, dataId(){ return _.get(this.rslv,_.get(this.rslvId,['data',this.type])) }, relationId(){ return _.get(this.rslv,_.get(this.rslvId,['relation',this.type])) }, foreignId(){ return _.get(this.rslv,_.get(this.rslvId,['foreign',this.type])) },
             form(){ return this.getForm(this.formId) }, formName(){ return _.get(this.form,'name') }, formFields(){ return _.get(this.form,'fields') }, layout(){ return this.getLayout(this.formId) },
             formActionText(){ return _.get(this.form,'action_text') }, formClass(){ return ['w-100'] },
             title(){ return _.get(this.form,'title') },
